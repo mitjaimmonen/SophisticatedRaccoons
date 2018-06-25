@@ -10,11 +10,15 @@ public class Tile : MonoBehaviour
     public bool current = false;
     public bool target = false;
     public bool selectable = false;
+    public bool occupied = false;
+    public bool isCorner = false;
+    public bool active = false;
+    public GameObject thingOnTopOfIt = null;
     Vector3 playerDirection;
 
     public List<Tile> adjacencyList = new List<Tile>();
 
-    //Needed BFS (breadth first search)
+    //Needed 4 BFS (breadth first search)
     public bool visited = false;
     public Tile parent = null;
     public int distance = 0;
@@ -25,34 +29,43 @@ public class Tile : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Reset();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (selectable)
+        {
+            GetComponent<Renderer>().enabled = true;
+
+            if (target)
+            {
+                GetComponent<Renderer>().material.color = Color.green;
+
+            }
+            else if (pushable)
+            {
+                GetComponent<Renderer>().material.color = Color.red;
+            }
+            else
+            {
+                GetComponent<Renderer>().material.color = Color.yellow;
+            }
+        
+        }
+   
         if (current)
         {
+            GetComponent<Renderer>().enabled = true;
+
             GetComponent<Renderer>().material.color = Color.magenta;
         }
-        else if (target)
+        else if (!selectable)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            GetComponent<Renderer>().enabled = false;
+        }
 
-        }
-        else if (selectable)
-        {
-            GetComponent<Renderer>().material.color = Color.yellow;
-
-        }
-        else if (pushable)
-        {
-            GetComponent<Renderer>().material.color = Color.red;
-        }
-        else
-        {
-            GetComponent<Renderer>().material.color = Color.gray;
-        }
     }
 
     public void Reset()
@@ -63,7 +76,8 @@ public class Tile : MonoBehaviour
         target = false;
         selectable = false;
         pushable = false;
-        playerDirection = Vector3.zero;
+        walkable = true;
+        thingOnTopOfIt = null; 
 
         visited = false;
         parent = null;
@@ -73,7 +87,6 @@ public class Tile : MonoBehaviour
     public void FindNeighbors()
     {
         Reset();
-       
 
         CheckTile(Vector3.forward);
         CheckTile(-Vector3.forward);
@@ -82,15 +95,24 @@ public class Tile : MonoBehaviour
 
     }
 
+    
     public Vector3 CheckPlayerDirection()
     {
-        //return player's forward
-        return Vector3.zero;
+        if (thingOnTopOfIt)
+        {  //return player's forward
+            Debug.Log("returnign vector forward");
+            return thingOnTopOfIt.transform.forward;
+        }
+        else
+        {
+            return Vector3.zero;
+
+        }
     }
 
     public void CheckTile(Vector3 direction)
     {
-        Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
+        Vector3 halfExtents = new Vector3(0.1f, 0.1f, 0.1f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
         foreach (Collider item in colliders)
@@ -98,25 +120,58 @@ public class Tile : MonoBehaviour
             Tile tile = item.GetComponent<Tile>();
             if (tile != null)
             {
-                RaycastHit hit;
+                tile.CheckTop();
 
-                if (Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                if (tile.thingOnTopOfIt != null)
                 {
-                    if (hit.transform.gameObject.tag == "Player" && hit.transform.gameObject.transform.forward == -CheckPlayerDirection())
-                    {
-                        //check if can push, if other thing isn't looking at you
-                        tile.pushable = false;
-                        tile.walkable = false;
-                    }
-
-                    else
-                    {
-                        tile.pushable = true;
-                    }
+                    tile.walkable = false;
+                    //CheckOcuppiedTile(tile);
                 }
-                if (tile.walkable)
-                adjacencyList.Add(tile);
+                if (tile.walkable || tile.pushable)
+                {
+
+                }                    
+                    adjacencyList.Add(tile);                    
             }
         }
+    }  
+
+    public void CheckTop()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1))
+        {
+            Debug.Log("found obstacle");
+            thingOnTopOfIt = hit.transform.gameObject;
+            if (thingOnTopOfIt.tag == "Booty")
+            {                
+                pushable = true;
+            }
+            else if (thingOnTopOfIt.GetComponent<PlayerMove>())
+            {
+                pushable = true;               
+            }
+        }
+
+        else
+        {
+            thingOnTopOfIt = null;
+
+        }
+    }
+
+    public void CheckIfCorner()
+    {
+        FindNeighbors();
+        if (adjacencyList.Count <=3)
+        {
+            isCorner = true;
+        }
+        else
+        {
+            isCorner = false;
+        }
+     
     }
 }

@@ -28,4 +28,17 @@ public class MenuScript {
         }
     }
 
+    [MenuItem("Tools/Assign Corner Tiles")]
+    public static void AssignCornerTiles()
+    {
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+
+        foreach (GameObject t in tiles)
+        {
+            if (t.GetComponent<Tile>())
+            {
+                t.GetComponent<Tile>().CheckIfCorner();
+            }
+        }
+    }
 }

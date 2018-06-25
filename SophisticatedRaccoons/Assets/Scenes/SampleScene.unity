@@ -199,7 +199,7 @@ Transform:
   m_Children:
   - {fileID: 1463960966}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &60085202
 MonoBehaviour:
@@ -217,6 +217,34 @@ MonoBehaviour:
   moveSpeed: 2
   moving: 0
   active: 1
+--- !u!1 &87003861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 87003862}
+  m_Layer: 0
+  m_Name: Game Master
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87003862
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87003861}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2470732, y: -1.9107463, z: 2.2786705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100040557
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +284,7 @@ Transform:
   m_Children:
   - {fileID: 282840814}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
@@ -321,7 +349,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &177719615
 GameObject:
@@ -383,7 +411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &282840810
 GameObject:
@@ -593,7 +621,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1817900563}
+  - {fileID: 763731164}
+  - {fileID: 1824809885}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -773,7 +808,13 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1960293999}
+  - {fileID: 763731164}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -912,7 +953,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 2127822590}
+  - {fileID: 2077944941}
+  - {fileID: 1015404766}
+  - {fileID: 2000642422}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1018,7 +1067,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1824809885}
+  - {fileID: 1574494247}
+  - {fileID: 1817900563}
+  - {fileID: 1642835252}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1053,7 +1110,7 @@ Transform:
   - {fileID: 1552442451}
   - {fileID: 1230090552}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &763731159
 GameObject:
@@ -1157,7 +1214,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1002492880}
+  - {fileID: 507990661}
+  - {fileID: 336934359}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1263,7 +1327,13 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 2105526106}
+  - {fileID: 1881801870}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1369,7 +1439,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 763731164}
+  - {fileID: 2127822590}
+  - {fileID: 1960293999}
+  - {fileID: 1817900563}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1475,7 +1553,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1733890896}
+  - {fileID: 1612993609}
+  - {fileID: 650573472}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1576,12 +1661,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3999c8e6f7455a943b371021fa06fceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkable: 1
-  pushable: 0
+  walkable: 0
+  pushable: 1
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1817900563}
+  - {fileID: 2000642422}
+  - {fileID: 2127822590}
+  - {fileID: 1574494247}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1687,7 +1780,13 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1642835252}
+  - {fileID: 1824809885}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -1929,7 +2028,7 @@ Transform:
   m_LocalScale: {x: 5.85209, y: 1, z: 8.979976}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1463960965
 GameObject:
@@ -2211,7 +2310,7 @@ RectTransform:
   - {fileID: 1318369197}
   - {fileID: 1752460480}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2320,7 +2419,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 684079808}
+  - {fileID: 1865324926}
+  - {fileID: 1122871006}
+  - {fileID: 1916035998}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -2426,7 +2533,13 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1015404766}
+  - {fileID: 2077944941}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -2532,7 +2645,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1219755991}
+  - {fileID: 1916035998}
+  - {fileID: 684079808}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -2638,7 +2758,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1960293999}
+  - {fileID: 1015404766}
+  - {fileID: 2127822590}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -2866,7 +2993,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 336934359}
+  - {fileID: 1122871006}
+  - {fileID: 1002492880}
+  - {fileID: 684079808}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3005,7 +3140,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 684079808}
+  - {fileID: 336934359}
+  - {fileID: 1219755991}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3111,7 +3253,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1574494247}
+  - {fileID: 1881801870}
+  - {fileID: 2000642422}
+  - {fileID: 2105526106}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3217,7 +3367,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1865324926}
+  - {fileID: 2015152430}
+  - {fileID: 854517953}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3323,7 +3480,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1642835252}
+  - {fileID: 2105526106}
+  - {fileID: 1574494247}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3429,7 +3593,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 507990661}
+  - {fileID: 1733890896}
+  - {fileID: 1002492880}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3535,7 +3706,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1122871006}
+  - {fileID: 2015152430}
+  - {fileID: 650573472}
+  - {fileID: 1865324926}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3636,12 +3815,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3999c8e6f7455a943b371021fa06fceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkable: 1
+  walkable: 0
   pushable: 0
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 2000642422}
+  - {fileID: 2077944941}
+  - {fileID: 1881801870}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3747,7 +3933,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 650573472}
+  - {fileID: 1612993609}
+  - {fileID: 2015152430}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3853,7 +4046,14 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 1
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1916035998}
+  - {fileID: 854517953}
+  - {fileID: 1865324926}
   visited: 0
   parent: {fileID: 0}
   distance: 0
@@ -3868,9 +4068,10 @@ GameObject:
   - component: {fileID: 2116055066}
   - component: {fileID: 2116055065}
   - component: {fileID: 2116055064}
+  - component: {fileID: 2116055068}
   m_Layer: 0
   m_Name: Treasure
-  m_TagString: Untagged
+  m_TagString: Booty
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3937,12 +4138,27 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2116055063}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 9.62}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 0.7, y: 0.8, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116055068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116055063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bdc74f2a5100b47a405083a9121986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beingPushed: 0
+  moveSpeed: 2
+  target: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1 &2127822585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4045,7 +4261,15 @@ MonoBehaviour:
   current: 0
   target: 0
   selectable: 0
-  adjacencyList: []
+  occupied: 0
+  isCorner: 0
+  active: 0
+  thingOnTopOfIt: {fileID: 0}
+  adjacencyList:
+  - {fileID: 1002492880}
+  - {fileID: 650573472}
+  - {fileID: 1733890896}
+  - {fileID: 1122871006}
   visited: 0
   parent: {fileID: 0}
   distance: 0

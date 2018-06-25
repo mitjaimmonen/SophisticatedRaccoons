@@ -71,8 +71,9 @@ public class TacticsMove : MonoBehaviour
         {
             Tile t = process.Dequeue();
 
-            selectableTiles.Add(t);
-            t.selectable = true;
+            selectableTiles.Add(t);            
+                t.selectable = true;            
+
             if (t.distance < move)
             {
                 foreach (Tile tile in t.adjacencyList)
@@ -80,14 +81,13 @@ public class TacticsMove : MonoBehaviour
                     if (!tile.visited)
                     {
                         tile.parent = t;
-                        tile.visited = true;
+                        tile.visited = true;                
                         tile.distance = 1 + t.distance;
                         process.Enqueue(tile);
                     }
                 }
             }
         }
-
     }
 
     public void MoveToTile(Tile tile)
@@ -103,7 +103,6 @@ public class TacticsMove : MonoBehaviour
             path.Push(next);
             next = next.parent;
         }
-
     }
 
     public void Move()
@@ -124,13 +123,11 @@ public class TacticsMove : MonoBehaviour
                 transform.forward = heading;
                 transform.position += velocity * Time.deltaTime;
             }
-
             else
             {
                 transform.position = target;
                 path.Pop();
             }
-
         }
 
         else
@@ -166,5 +163,10 @@ public class TacticsMove : MonoBehaviour
     void SetHorizontalVelocity()
     {
         velocity = heading * moveSpeed;
+    }
+
+    public void BeginTurn()
+    {
+
     }
 }

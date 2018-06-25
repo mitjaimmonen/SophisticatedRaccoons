@@ -6,7 +6,7 @@ public class PlayerMove : TacticsMove
 {
 
     public bool active = true;
-    
+
 
     private void Start()
     {
@@ -30,11 +30,7 @@ public class PlayerMove : TacticsMove
         {
             Move();
         }
-      
 
-
-        //else
-        //nothing
     }
 
     void CheckControl()
@@ -53,17 +49,39 @@ public class PlayerMove : TacticsMove
                     if (t.selectable)
                     {
                         if (t == currentSelectedTile)
-                            MoveToTile(t);
-                        else
-                            currentSelectedTile = t;                   
+                        {
+                            if (t.walkable)
+                            {
+                                MoveToTile(t);
+                            }
+                            else if (t.pushable)
+                            {
+                                TryToPush(t.thingOnTopOfIt);
+                                MoveToTile(t);
+                            }
+                            else
+                            {
+                                //nothing
+                            }
 
+                        }
+                        else
+                            currentSelectedTile = t;
                     }
-                    //else if (t == currentSelectedTile)
-                    //{
-                    //   
-                    //}
                 }
             }
+        }
+    }
+
+    void TryToPush(GameObject pushee)
+    {
+        if (pushee.tag == "Booty")
+        {
+            pushee.GetComponent<Booty>().BePushed(transform.forward);
+        }
+        else
+        {
+
         }
     }
 
