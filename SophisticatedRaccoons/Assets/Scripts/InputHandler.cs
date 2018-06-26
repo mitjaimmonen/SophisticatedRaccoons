@@ -6,6 +6,7 @@ using XInputDotNetPure;
 public class InputHandler : MonoBehaviour {
 
 	// List<Player> players = new List<Player>();
+	MainMenuController menuControl;
 	GamepadStateHandler gamepad;
 	StateHandler stateHandler; 
 
@@ -22,8 +23,15 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (stateHandler.gamestate == GameState.game)
 		{
-			// if (gamepadData.characterIndex != -1)
-			// 	players[gamepadData.characterIndex].HandleInput(gamepadData.state, gamepadData.prevState);
+			// if (gamepadData.characterIndex == 0 && playerOne turn)
+			{
+				//Handle p1 input
+			}
+			// if (gamepadData.characterIndex == 1 && !playerOne turn)
+			{
+				//Handle p2 input
+
+			}
 		}
 
 		return gamepadData;
@@ -46,73 +54,42 @@ public class InputHandler : MonoBehaviour {
 		if (gamepadData.prevState.Buttons.Y == ButtonState.Released && gamepadData.state.Buttons.Y == ButtonState.Pressed)
 		{
 			//Invert active bool
-			Debug.Log("GAMEPAD characterIndex:" + gamepadData.characterIndex + ", gamepadPlayerIndex: " + gamepadData.gamepadPlayerIndex + ", active: " + gamepadData.active);
+
 			gamepadData.active = !gamepadData.active;
-			Debug.Log("After toggling active state, Gamepad active: "+gamepadData.active);
+
 			if (gamepadData.active)
 			{
-				// Playerdata newPlayerdata = new Playerdata();
+				bool firstJoined = false, secondJoined = false;
+				for(int j = 0; j < gamepad.playerGamepadData.Length; j++)
+				{
+					if (gamepad.playerGamepadData[j].characterIndex == 0)
+						firstJoined = true;
+					if (gamepad.playerGamepadData[j].characterIndex == 1)
+						secondJoined = true;
 
-				// //Index should be first null
-				// for(int j = 0; j < gamepad.playerDataArray.Length; j++)
-				// {
-				// 	Debug.Log(gamepad.playerDataArray[j].characterIndex);
-				// 	if (gamepad.playerDataArray[j].characterIndex == -1)
-				// 	{
-				// 		Debug.Log("Activated gamepad's characterIndex: " + j);
-				// 		newPlayerdata.characterIndex = j;
-				// 		gamepadData.characterIndex = newPlayerdata.characterIndex;
-				// 		newPlayerdata.gamepadPlayerIndex = gamepadData.gamepadPlayerIndex;
-				// 		gamepad.playerDataArray[j] = newPlayerdata;
-				// 		Debug.Log("Added to array");
-				// 		break;
-				// 	}
-				// }
-					
-				// stateHandler.menuControl.AddPlayer(newPlayerdata.characterIndex);
+				}
 				
+				if (firstJoined && secondJoined)
+				{
+					gamepadData.active = false;
+					return gamepadData;
+				}
+
+				gamepadData.characterIndex = firstJoined ? 1 : 0;			
+				stateHandler.menuControl.AddPlayer(gamepadData.characterIndex);
 			}
 			else
 			{
-				// bool removed = false;
-				// for (int j = 0; j < gamepad.playerDataArray.Length; j++)
-				// {
-				// 	if (!removed && gamepad.playerDataArray[j].gamepadPlayerIndex == gamepadData.gamepadPlayerIndex)
-				// 	{
-				// 		stateHandler.menuControl.RemovePlayer(gamepad.playerDataArray[j].characterIndex);
-				// 		removed = true;
-				// 		Debug.Log("deactivation of gamepad: " + gamepad.playerDataArray[j].gamepadPlayerIndex + ", characterIndex: " + gamepad.playerDataArray[j].characterIndex);
-				// 		gamepad.playerDataArray[j].characterIndex = -1;
-				// 	}
-				// }
+				stateHandler.menuControl.RemovePlayer(gamepadData.characterIndex);
+				gamepadData.characterIndex = -1;
 			}
 		}
 
-		// if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
-		// {
-		// 	stateHandler.menuControl.ToggleReady(gamepadData.characterIndex);
-		// }
-		// if (gamepadData.active && gamepadData.prevState.ThumbSticks.Left.X < 0.1f && gamepadData.state.ThumbSticks.Left.X > 0.1f)
-		// {
-		// 	if (stateHandler.menuControl.avatars)
-		// 		stateHandler.menuControl.avatars.ChangeAvatar(gamepadData.characterIndex, 1);
-		// }
-		// if (gamepadData.active && gamepadData.prevState.ThumbSticks.Left.X > -0.1f && gamepadData.state.ThumbSticks.Left.X < -0.1f)
-		// {
-		// 	if (stateHandler.menuControl.avatars)
-		// 		stateHandler.menuControl.avatars.ChangeAvatar(gamepadData.characterIndex, -1);
-		// }
+		if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
+		{
+			stateHandler.menuControl.ToggleReady(gamepadData.characterIndex);
+		}
+
 		return gamepadData;
 	}
-
-
-    public void ConnectToPlayers(List<GameObject> _players)
-    {
-        // for (int i = 0; i < _players.Count; i++)
-        // {
-        //     Debug.Log("connecting player " + _players[i].GetComponent<Player>().playerNumber);
-        //     Player temp = _players[i].GetComponent<Player>();
-        //     players.Add(temp);
-        // }       
-    }
 }

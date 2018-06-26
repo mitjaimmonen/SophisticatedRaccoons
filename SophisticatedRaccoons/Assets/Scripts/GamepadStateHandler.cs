@@ -12,20 +12,16 @@ public struct PlayerGamepadData
 	public GamePadState state; //Button states etc
 	public GamePadState prevState; //Button states etc from last frame
 	public PlayerIndex gamepadPlayerIndex; //Each gamepad gets assigned a number
-	public int characterIndex; //Each player gets assign
+	public int characterIndex; //Each player gets assigned in the order of joining
 	public bool active; //When joined game, gamepad becomes active
 
 }
 
 public class GamepadStateHandler : MonoBehaviour {
 
-	// [HideInInspector]public Playerdata[] playerDataArray = new Playerdata[4];
 	[HideInInspector]public PlayerGamepadData[] playerGamepadData = new PlayerGamepadData[4];
 	[HideInInspector]public StateHandler stateHandler;
-	// [HideInInspector]public Avatars avatars;
 
-
-	public GameObject[] testObj = new GameObject[4];
 	InputHandler inputHandler;
 
 
@@ -34,7 +30,6 @@ public class GamepadStateHandler : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-		stateHandler = GetComponent<StateHandler>();
 		inputHandler = GetComponent<InputHandler>();
 		FindGamepads();
 
@@ -69,7 +64,7 @@ public class GamepadStateHandler : MonoBehaviour {
     void Update()
     {
 		//Go through all gamepads
-		for (int i = 0; i < playerGamepadData.Length; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			//Save old state for button press checking
        		playerGamepadData[i].prevState = playerGamepadData[i].state;

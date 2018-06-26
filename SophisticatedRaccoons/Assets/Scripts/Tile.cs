@@ -141,7 +141,7 @@ public class Tile : MonoBehaviour
                 {
 
                 }         
-                Debug.Log(tile.transform.parent.gameObject.name.ToString() + ", " + tile.gameObject.name.ToString()+ ", " + (tile.thingOnTopOfIt != null).ToString() + ", isSpawn: " + tile.isSpawn);
+                // Debug.Log(tile.transform.parent.gameObject.name.ToString() + ", " + tile.gameObject.name.ToString()+ ", " + (tile.thingOnTopOfIt != null).ToString() + ", isSpawn: " + tile.isSpawn);
                 if (!tile.isSpawn)           
                 {
                     adjacencyList.Add(tile);
@@ -204,7 +204,7 @@ public class Tile : MonoBehaviour
             thingOnTopOfIt = hit.transform.gameObject;
             if (thingOnTopOfIt.tag == "Booty")
             {
-                Debug.Log("found booty");
+                // Debug.Log("found booty");
                 pushable = true;
             }
             else if (thingOnTopOfIt.GetComponent<PlayerMove>())
