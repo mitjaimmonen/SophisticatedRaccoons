@@ -17,6 +17,7 @@ public class Tile : MonoBehaviour
     Vector3 playerDirection;
 
     public List<Tile> adjacencyList = new List<Tile>();
+    public Dictionary<string, Tile> adjacencyDict = new Dictionary<string, Tile>();
 
     //Needed 4 BFS (breadth first search)
     public bool visited = false;
@@ -52,9 +53,9 @@ public class Tile : MonoBehaviour
             {
                 GetComponent<Renderer>().material.color = Color.yellow;
             }
-        
+
         }
-   
+
         if (current)
         {
             GetComponent<Renderer>().enabled = true;
@@ -64,7 +65,7 @@ public class Tile : MonoBehaviour
         else if (!selectable)
         {
             GetComponent<Renderer>().enabled = false;
-        }
+        }    
 
     }
 
@@ -77,7 +78,7 @@ public class Tile : MonoBehaviour
         selectable = false;
         pushable = false;
         walkable = true;
-        thingOnTopOfIt = null; 
+        thingOnTopOfIt = null;
 
         visited = false;
         parent = null;
@@ -93,9 +94,15 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.right);
         CheckTile(-Vector3.right);
 
+        CheckTile("Up",Vector3.forward);
+        CheckTile("Down", -Vector3.forward);
+        CheckTile("Right", Vector3.right);
+        CheckTile("Left", -Vector3.right);
+        CheckTop();
+
     }
 
-    
+
     public Vector3 CheckPlayerDirection()
     {
         if (thingOnTopOfIt)
@@ -130,27 +137,72 @@ public class Tile : MonoBehaviour
                 if (tile.walkable || tile.pushable)
                 {
 
-                }                    
-                    adjacencyList.Add(tile);                    
+                }
+                adjacencyList.Add(tile);               
             }
         }
-    }  
+    }
+
+    public void CheckTile(string directionKey, Vector3 direction)
+    {
+        Vector3 halfExtents = new Vector3(0.1f, 0.1f, 0.1f);
+        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+
+        foreach (Collider item in colliders)
+        {
+            Tile tile = item.GetComponent<Tile>();
+            if (tile != null)
+            {
+                tile.CheckTop();
+
+                if (tile.thingOnTopOfIt != null)
+                {
+                    tile.walkable = false;
+                    //CheckOcuppiedTile(tile);
+                }
+                if (tile.walkable || tile.pushable)
+                {
+
+                }
+                adjacencyDict.Add(directionKey,tile);
+            }
+        }
+    }
+
+
+    public Tile ReturnTile(Vector3 direction)
+    {
+        Vector3 halfExtents = new Vector3(0.1f, 0.1f, 0.1f);
+        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+
+        foreach (Collider item in colliders)
+        {
+            Tile tile = item.GetComponent<Tile>();
+            if (tile != null)
+            {
+                return tile;
+            }
+        }
+
+        return null;
+    }
 
     public void CheckTop()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1))
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 3))
         {
-            Debug.Log("found obstacle");
+            walkable = false;
             thingOnTopOfIt = hit.transform.gameObject;
             if (thingOnTopOfIt.tag == "Booty")
-            {                
+            {
+                Debug.Log("found booty");
                 pushable = true;
             }
             else if (thingOnTopOfIt.GetComponent<PlayerMove>())
             {
-                pushable = true;               
+                pushable = true;
             }
         }
 
@@ -164,7 +216,7 @@ public class Tile : MonoBehaviour
     public void CheckIfCorner()
     {
         FindNeighbors();
-        if (adjacencyList.Count <=3)
+        if (adjacencyList.Count <= 3)
         {
             isCorner = true;
         }
@@ -172,6 +224,6 @@ public class Tile : MonoBehaviour
         {
             isCorner = false;
         }
-     
+
     }
 }
