@@ -95,10 +95,10 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.right);
         CheckTile(-Vector3.right);
 
-        CheckTile("Up",Vector3.forward);
-        CheckTile("Down", -Vector3.forward);
-        CheckTile("Right", Vector3.right);
-        CheckTile("Left", -Vector3.right);
+        //CheckTile("Up",Vector3.forward);
+        //CheckTile("Down", -Vector3.forward);
+        //CheckTile("Right", Vector3.right);
+        //CheckTile("Left", -Vector3.right);
         CheckTop();
 
     }
@@ -215,6 +215,7 @@ public class Tile : MonoBehaviour
 
         else
         {
+            walkable = true;
             thingOnTopOfIt = null;
 
         }
