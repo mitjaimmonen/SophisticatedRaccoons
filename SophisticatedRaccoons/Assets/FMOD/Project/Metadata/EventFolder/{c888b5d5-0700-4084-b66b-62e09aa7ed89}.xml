@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EventFolder" id="{c888b5d5-0700-4084-b66b-62e09aa7ed89}">
+        <property name="name">
+            <value>Raccoon Sounds</value>
+        </property>
+        <relationship name="folder">
+            <destination>{f3516427-9d25-4481-889f-72818518c03d}</destination>
+        </relationship>
+    </object>
+</objects>
