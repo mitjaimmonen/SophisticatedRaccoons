@@ -14,7 +14,7 @@ public class TacticsMove : MonoBehaviour
     public bool moving = false;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    public Tile currentTile;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
