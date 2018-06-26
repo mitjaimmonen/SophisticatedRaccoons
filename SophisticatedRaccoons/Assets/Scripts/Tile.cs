@@ -12,6 +12,7 @@ public class Tile : MonoBehaviour
     public bool selectable = false;
     public bool occupied = false;
     public bool isCorner = false;
+    public bool isSpawn = false;
     public bool active = false;
     public GameObject thingOnTopOfIt = null;
     Vector3 playerDirection;
@@ -77,8 +78,8 @@ public class Tile : MonoBehaviour
         target = false;
         selectable = false;
         pushable = false;
-        walkable = true;
-        thingOnTopOfIt = null;
+        walkable = false;
+        thingOnTopOfIt = null; 
 
         visited = false;
         parent = null;
@@ -128,17 +129,23 @@ public class Tile : MonoBehaviour
             if (tile != null)
             {
                 tile.CheckTop();
-
                 if (tile.thingOnTopOfIt != null)
                 {
                     tile.walkable = false;
                     //CheckOcuppiedTile(tile);
                 }
+                else if (!tile.isSpawn)
+                    tile.walkable = true;
+
                 if (tile.walkable || tile.pushable)
                 {
 
+                }         
+                Debug.Log(tile.transform.parent.gameObject.name.ToString() + ", " + tile.gameObject.name.ToString()+ ", " + (tile.thingOnTopOfIt != null).ToString() + ", isSpawn: " + tile.isSpawn);
+                if (!tile.isSpawn)           
+                {
+                    adjacencyList.Add(tile);
                 }
-                adjacencyList.Add(tile);               
             }
         }
     }
