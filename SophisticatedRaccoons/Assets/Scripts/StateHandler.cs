@@ -67,6 +67,11 @@ public class StateHandler : MonoBehaviour
 
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            gamestate = GameState.menu;
+        else
+            gamestate = GameState.game;
+            
         Instantiate();
     }
 
