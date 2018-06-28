@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{b270f761-9f6d-436a-94fe-ecd5cc3ba04d}">
+        <property name="assetPath">
+            <value>sword melee clank hit 12.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.7240816326530612</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{19bec2a8-b900-4ad8-a2aa-9f88b337c4f2}</destination>
+        </relationship>
+    </object>
+</objects>

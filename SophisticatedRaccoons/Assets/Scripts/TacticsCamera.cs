@@ -15,6 +15,7 @@ public class TacticsCamera : MonoBehaviour {
     IEnumerator ChangeCamera(bool playerOne)
     {
         float time = Time.time;
+        float t;
         float smoothLerp;
         Vector3 oldAngle = transform.eulerAngles;
         Vector3 newAngle = oldAngle;
@@ -22,7 +23,7 @@ public class TacticsCamera : MonoBehaviour {
 
         while (time+lerpTime > Time.time)
         {
-            float t = (Time.time-time)/lerpTime;
+            t = (Time.time-time)/lerpTime;
             smoothLerp = t*t * (3f - 2f*t);
             transform.eulerAngles = Vector3.Lerp(oldAngle, newAngle, smoothLerp);
             yield return null;
