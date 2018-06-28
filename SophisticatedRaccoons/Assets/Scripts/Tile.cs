@@ -66,20 +66,21 @@ public class Tile : MonoBehaviour
         else if (!selectable)
         {
             GetComponent<Renderer>().enabled = false;
-        }    
+        }
 
     }
 
     public void Reset()
     {
         adjacencyList.Clear();
+        adjacencyDict.Clear();
 
         current = false;
         target = false;
         selectable = false;
         pushable = false;
         walkable = false;
-        thingOnTopOfIt = null; 
+        thingOnTopOfIt = null;
 
         visited = false;
         parent = null;
@@ -95,10 +96,10 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.right);
         CheckTile(-Vector3.right);
 
-        //CheckTile("Up",Vector3.forward);
-        //CheckTile("Down", -Vector3.forward);
-        //CheckTile("Right", Vector3.right);
-        //CheckTile("Left", -Vector3.right);
+        CheckTile("Up", Vector3.forward);
+        CheckTile("Down", -Vector3.forward);
+        CheckTile("Right", Vector3.right);
+        CheckTile("Left", -Vector3.right);
         CheckTop();
 
     }
@@ -131,8 +132,7 @@ public class Tile : MonoBehaviour
                 tile.CheckTop();
                 if (tile.thingOnTopOfIt != null)
                 {
-                    tile.walkable = false;
-                    //CheckOcuppiedTile(tile);
+                    tile.walkable = false;                    
                 }
                 else if (!tile.isSpawn)
                     tile.walkable = true;
@@ -165,13 +165,20 @@ public class Tile : MonoBehaviour
                 if (tile.thingOnTopOfIt != null)
                 {
                     tile.walkable = false;
-                    //CheckOcuppiedTile(tile);
+                
                 }
+                else if (!tile.isSpawn)
+                    tile.walkable = true;
+
                 if (tile.walkable || tile.pushable)
                 {
 
                 }
-                adjacencyDict.Add(directionKey,tile);
+                if (!tile.isSpawn)
+                {
+                    adjacencyDict.Add(directionKey, tile);
+                }
+
             }
         }
     }

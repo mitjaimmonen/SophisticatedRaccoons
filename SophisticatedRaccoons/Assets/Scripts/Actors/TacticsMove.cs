@@ -18,6 +18,10 @@ public class TacticsMove : MonoBehaviour
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
+    public ArrowHolder arrowHolder;
+    public GameObject arrowHolderPrefab;
+    public bool keyReleased = true;
+
 
 
 
@@ -127,6 +131,7 @@ public class TacticsMove : MonoBehaviour
             {
                 transform.position = target;
                 path.Pop();
+                
             }
         }
 
@@ -134,6 +139,7 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
+            ToggleArrows(true);
         }
 
     }
@@ -168,5 +174,11 @@ public class TacticsMove : MonoBehaviour
     public void BeginTurn()
     {
 
+    }
+
+    public void ToggleArrows(bool toggle)
+    {
+        arrowHolder.gameObject.SetActive(toggle);
+        arrowHolder.haveSelected = toggle;
     }
 }

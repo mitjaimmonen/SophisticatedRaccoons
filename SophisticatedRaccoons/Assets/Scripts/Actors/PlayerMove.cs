@@ -10,10 +10,17 @@ public class PlayerMove : TacticsMove
     public bool beingPushed = false;
     public Vector3 target;
     public Vector3 direction;
+    public bool skipMove = false;
 
     private void Start()
     {
         Init();
+
+        GameObject aHolder = Instantiate(arrowHolderPrefab, transform.position, Quaternion.identity);
+        arrowHolder = aHolder.AddComponent<ArrowHolder>();
+        arrowHolder.owner = this;
+        ToggleArrows(false);
+
     }
 
     private void Update()
@@ -41,53 +48,198 @@ public class PlayerMove : TacticsMove
 
     }
 
-    void CheckControl()
+
+
+    void KeyBoardControl()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (!turnPhase)
             {
-                if (hit.collider.tag == "Tile")
+                //check camera state
+                Tile t = new Tile();
+
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    Tile t = hit.collider.GetComponent<Tile>();
+                    t = currentTile.adjacencyDict["Left"];
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    t = currentTile.adjacencyDict["Right"];
+                }
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    t = currentTile.adjacencyDict["Up"];
+                }
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    t = currentTile.adjacencyDict["Down"];
+                }
 
-                    if (t.selectable)
+                if (t == currentSelectedTile)
+                {
+                    //nothing
+                }
+
+                else
+                {
+                    currentSelectedTile = t;
+                }
+            }
+
+            else
+            {
+                Arrow a = new Arrow();
+
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+
+                    a = arrowHolder.GetArrow("Left");
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    a = arrowHolder.GetArrow("Right");
+
+                }
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    a = arrowHolder.GetArrow("Up");
+
+                }
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    a = arrowHolder.GetArrow("Down");
+
+                }
+
+                if (a == arrowHolder.currentArrow)
+                {
+                    //nothing
+                }
+
+                else
+                {
+                    arrowHolder.ClearSelectedArrows();
+                    arrowHolder.currentArrow = null;
+                    arrowHolder.currentArrow = a;
+                    a.selected = true;
+
+                }
+
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (!turnPhase)
+            {
+                if (currentSelectedTile)
+                {
+                    Debug.Log("it came here??");
+                    if (currentSelectedTile.walkable)
                     {
-                        if (t == currentSelectedTile)
-                        {
-                            if (!turnPhase)
-                            {
-                                if (t.walkable)
-                                {
-                                    MoveToTile(t);
-                                }
-                                else if (t.pushable)
-                                {
-                                    TryToPush();
-                                }
-                                else
-                                {
-                                    //nothing
-                                }
+                        MoveToTile(currentSelectedTile);
+                    }
+                    else if (currentSelectedTile.pushable)
+                    {
+                        TryToPush();
+                    }
+                    else
+                    {
+                        //nothing
+                    }
 
-                                turnPhase = !turnPhase;
-                            }
-                            else
-                            {
-                                TurnTo(t);
-                                turnPhase = !turnPhase;
-                            }
+                    turnPhase = !turnPhase;
+                }
 
-                        }
-                        else
-                            currentSelectedTile = t;
+                else
+                {
+                    if (!skipMove)
+                    {
+                        skipMove = !skipMove;
+                    }
+                    else
+                    {
+                        skipMove = !skipMove;
+                        turnPhase = !turnPhase;
+                        ToggleArrows(true);
                     }
                 }
             }
+
+            else
+            {
+                TurnTo(arrowHolder.currentArrow);
+                arrowHolder.currentArrow = null;
+                turnPhase = !turnPhase;
+            }
         }
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            if (currentSelectedTile)
+            {
+                currentSelectedTile = null;
+            }
+        }
+    }
+
+
+
+    void CheckControl()
+    {
+        if (Input.anyKeyDown)
+        {
+            KeyBoardControl();
+        }
+
+
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        if (hit.collider.tag == "Tile")
+        //        {
+        //            Tile t = hit.collider.GetComponent<Tile>();
+
+        //            if (t.selectable)
+        //            {
+        //                if (t == currentSelectedTile)
+        //                {
+        //                    if (!turnPhase)
+        //                    {
+        //                        if (t.walkable)
+        //                        {
+        //                            MoveToTile(t);
+        //                        }
+        //                        else if (t.pushable)
+        //                        {
+        //                            TryToPush();
+        //                        }
+        //                        else
+        //                        {
+        //                            //nothing
+        //                        }
+
+        //                        turnPhase = !turnPhase;
+        //                    }
+        //                    else
+        //                    {
+        //                        TurnTo(t);
+        //                        turnPhase = !turnPhase;
+        //                    }
+
+        //                }
+        //                else
+        //                    currentSelectedTile = t;
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     void TryToPush()
@@ -187,11 +339,12 @@ public class PlayerMove : TacticsMove
         }
     }
 
-    void TurnTo(Tile turnDir)
+    void TurnTo(Arrow turnDir)
     {
         Vector3 lookAt = turnDir.gameObject.transform.position;
         lookAt.y = transform.position.y;
         transform.LookAt(lookAt);
+        ToggleArrows(false);
     }
 
     public void BePushed(Vector3 _direction)
