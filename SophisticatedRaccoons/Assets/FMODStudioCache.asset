@@ -13,15 +13,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114903132035418714}
-  - {fileID: 114114794255940334}
+  - {fileID: 114452709850148222}
   EditorEvents:
   - {fileID: 114587000497662934}
   - {fileID: 114355620910433086}
   - {fileID: 114008172040032650}
   - {fileID: 114540370257200260}
-  MasterBankRef: {fileID: 114114794255940334}
+  MasterBankRef: {fileID: 114452709850148222}
   StringsBankRef: {fileID: 114903132035418714}
-  stringsBankWriteTime: 636657128899631787
+  stringsBankWriteTime: 636657838491598005
   cacheVersion: 2
 --- !u!114 &114008172040032650
 MonoBehaviour:
@@ -37,7 +37,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/Audio_Background_GetHit
   guid: 6d114edd3788b5469b2cc9b19a7dd585
   Banks:
-  - {fileID: 114114794255940334}
+  - {fileID: 114452709850148222}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/SFX_Background_GetHit
   guid: 4e1246cfff1fb24f90397cf90737cb7d
   Banks:
-  - {fileID: 114114794255940334}
+  - {fileID: 114452709850148222}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -142,6 +142,25 @@ MonoBehaviour:
   - Name: Desktop
     Value: 12474
   Exists: 1
+--- !u!114 &114452709850148222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\c4arodri.WPK\Documents\SophisticatedRaccoons\SophisticatedRaccoons\Assets\FMOD\Project\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636657838491638108
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 614784
+  Exists: 1
 --- !u!114 &114540370257200260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +175,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/Audio_Background_Default
   guid: eba2da1d4fc85a47ac82d791359e7689
   Banks:
-  - {fileID: 114114794255940334}
+  - {fileID: 114452709850148222}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -197,7 +216,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/SFX_Background_HitEnemy
   guid: 088ab2a82b3629438f29e125af0f7422
   Banks:
-  - {fileID: 114114794255940334}
+  - {fileID: 114452709850148222}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -236,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD\Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636657128899631787
+  lastModified: 636657838491598005
   LoadResult: 0
   FileSizes:
   - Name: Desktop

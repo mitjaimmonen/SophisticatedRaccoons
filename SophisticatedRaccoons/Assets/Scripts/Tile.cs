@@ -18,7 +18,10 @@ public class Tile : MonoBehaviour
     Vector3 playerDirection;
 
     public List<Tile> adjacencyList = new List<Tile>();
+
     public Dictionary<string, Tile> adjacencyDict = new Dictionary<string, Tile>();
+    [SerializeField]
+    public Dictionary<string, Tile> spawnAdjacencyDict = new Dictionary<string, Tile>();
 
     //Needed 4 BFS (breadth first search)
     public bool visited = false;
@@ -72,15 +75,20 @@ public class Tile : MonoBehaviour
 
     public void Reset()
     {
-        adjacencyList.Clear();
-        adjacencyDict.Clear();
 
-        current = false;
-        target = false;
-        selectable = false;
         pushable = false;
         walkable = false;
         thingOnTopOfIt = null;
+        adjacencyList.Clear();
+        adjacencyDict.Clear();
+
+        if (!GameMaster.Instance.entryMode)
+        {
+            current = false;
+            target = false;
+            selectable = false;
+            spawnAdjacencyDict.Clear();
+        }
 
         visited = false;
         parent = null;
@@ -89,21 +97,35 @@ public class Tile : MonoBehaviour
 
     public void FindNeighbors()
     {
+
         Reset();
+        if (!GameMaster.Instance.entryMode)
+        {
+            CheckTile(Vector3.forward);
+            CheckTile(-Vector3.forward);
+            CheckTile(Vector3.right);
+            CheckTile(-Vector3.right);
 
-        CheckTile(Vector3.forward);
-        CheckTile(-Vector3.forward);
-        CheckTile(Vector3.right);
-        CheckTile(-Vector3.right);
+            CheckTile("Up", Vector3.forward);
+            CheckTile("Down", -Vector3.forward);
+            CheckTile("Right", Vector3.right);
+            CheckTile("Left", -Vector3.right);
+            CheckTop();
+        }
+        else
+        {
 
-        CheckTile("Up", Vector3.forward);
-        CheckTile("Down", -Vector3.forward);
-        CheckTile("Right", Vector3.right);
-        CheckTile("Left", -Vector3.right);
-        CheckTop();
+            if (spawnAdjacencyDict.Count < 1)
+            {
+                CheckSpawnTile("Up", Vector3.forward);
+                CheckSpawnTile("Down", -Vector3.forward);
+                CheckSpawnTile("Right", Vector3.right);
+                CheckSpawnTile("Left", -Vector3.right);
+                CheckTop();
+            }
+        }
 
     }
-
 
     public Vector3 CheckPlayerDirection()
     {
@@ -132,7 +154,7 @@ public class Tile : MonoBehaviour
                 tile.CheckTop();
                 if (tile.thingOnTopOfIt != null)
                 {
-                    tile.walkable = false;                    
+                    tile.walkable = false;
                 }
                 else if (!tile.isSpawn)
                     tile.walkable = true;
@@ -140,9 +162,9 @@ public class Tile : MonoBehaviour
                 if (tile.walkable || tile.pushable)
                 {
 
-                }         
+                }
                 // Debug.Log(tile.transform.parent.gameObject.name.ToString() + ", " + tile.gameObject.name.ToString()+ ", " + (tile.thingOnTopOfIt != null).ToString() + ", isSpawn: " + tile.isSpawn);
-                if (!tile.isSpawn)           
+                if (!tile.isSpawn)
                 {
                     adjacencyList.Add(tile);
                 }
@@ -165,7 +187,7 @@ public class Tile : MonoBehaviour
                 if (tile.thingOnTopOfIt != null)
                 {
                     tile.walkable = false;
-                
+
                 }
                 else if (!tile.isSpawn)
                     tile.walkable = true;
@@ -183,6 +205,27 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public void CheckSpawnTile(string directionKey, Vector3 direction)
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 50);
+
+        foreach (RaycastHit hit in hits)
+        {
+            Tile tile = hit.transform.gameObject.GetComponent<Tile>();
+
+            if (tile.isSpawn && tile != this && !spawnAdjacencyDict.ContainsKey(directionKey))
+            {
+                spawnAdjacencyDict.Add(directionKey, tile);
+                break;
+
+            }
+        }
+
+        //while (looking for spawn)
+        //{
+
+        //}
+    }
 
     public Tile ReturnTile(Vector3 direction)
     {
@@ -231,6 +274,7 @@ public class Tile : MonoBehaviour
     public void CheckIfCorner()
     {
         FindNeighbors();
+
         if (adjacencyList.Count <= 3)
         {
             isCorner = true;

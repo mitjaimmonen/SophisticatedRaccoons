@@ -8,6 +8,7 @@ public class PlayerMove : TacticsMove
     public bool active = true;
     public bool turnPhase = false;
     public bool beingPushed = false;
+    public bool settingPhase = true;
     public Vector3 target;
     public Vector3 direction;
     public bool skipMove = false;
@@ -20,172 +21,235 @@ public class PlayerMove : TacticsMove
         arrowHolder = aHolder.AddComponent<ArrowHolder>();
         arrowHolder.owner = this;
         ToggleArrows(false);
+        FindEntryTiles();
 
     }
 
     private void Update()
     {
-        //if selected & not moving
-        if (!moving && active)
+        if (active)
         {
-            FindSelectableTiles();
-            CheckControl(); //mouse for now
-            if (currentSelectedTile)
+            if (!GameMaster.Instance.entryMode)
             {
-                currentSelectedTile.target = true;
-            }
-
-        }
-        else if (!beingPushed)
-        {
-            Move();
-        }
-
-        else
-        {
-            GetPushed();
-        }
-
-    }
-
-
-
-    void KeyBoardControl()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
-        {
-
-            if (!turnPhase)
-            {
-                //check camera state
-                Tile t = new Tile();
-
-                if (Input.GetKey(KeyCode.LeftArrow))
+                //if selected & not moving
+                if (!moving)
                 {
-                    t = currentTile.adjacencyDict["Left"];
+                    FindSelectableTiles();
+                    CheckControl();
+                    //mouse for now
+                    if (currentSelectedTile)
+                    {
+                        currentSelectedTile.target = true;
+                    }
+
                 }
-                if (Input.GetKey(KeyCode.RightArrow))
+                else if (!beingPushed)
                 {
-                    t = currentTile.adjacencyDict["Right"];
-                }
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    t = currentTile.adjacencyDict["Up"];
-                }
-                if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    t = currentTile.adjacencyDict["Down"];
-                }
-
-                if (t == currentSelectedTile)
-                {
-                    //nothing
+                    Move();
                 }
 
                 else
                 {
-                    currentSelectedTile = t;
+                    GetPushed();
                 }
             }
 
             else
             {
-                Arrow a = new Arrow();
 
-                if (Input.GetKey(KeyCode.LeftArrow))
-                {
-
-                    a = arrowHolder.GetArrow("Left");
-                }
-                if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    a = arrowHolder.GetArrow("Right");
-
-                }
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    a = arrowHolder.GetArrow("Up");
-
-                }
-                if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    a = arrowHolder.GetArrow("Down");
-
-                }
-
-                if (a == arrowHolder.currentArrow)
-                {
-                    //nothing
-                }
-
-                else
-                {
-                    arrowHolder.ClearSelectedArrows();
-                    arrowHolder.currentArrow = null;
-                    arrowHolder.currentArrow = a;
-                    a.selected = true;
-
-                }
+                CheckControl();
 
             }
         }
+    }
 
-        if (Input.GetKey(KeyCode.Space))
+    void KeyBoardControl()
+    {
+        if (!GameMaster.Instance.entryMode)
         {
-            if (!turnPhase)
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
             {
-                if (currentSelectedTile)
+
+                if (!turnPhase)
                 {
-                    Debug.Log("it came here??");
-                    if (currentSelectedTile.walkable)
+                    //check camera state
+                    Tile t = new Tile();
+
+                    if (Input.GetKey(KeyCode.LeftArrow))
                     {
-                        MoveToTile(currentSelectedTile);
+                        t = currentTile.adjacencyDict["Left"];
                     }
-                    else if (currentSelectedTile.pushable)
+                    if (Input.GetKey(KeyCode.RightArrow))
                     {
-                        TryToPush();
+                        t = currentTile.adjacencyDict["Right"];
                     }
-                    else
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        t = currentTile.adjacencyDict["Up"];
+                    }
+                    if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        t = currentTile.adjacencyDict["Down"];
+                    }
+
+                    if (t == currentSelectedTile)
                     {
                         //nothing
                     }
 
-                    turnPhase = !turnPhase;
+                    else
+                    {
+                        currentSelectedTile = t;
+                    }
                 }
 
                 else
                 {
-                    if (!skipMove)
+                    Arrow a = new Arrow();
+
+                    if (Input.GetKey(KeyCode.LeftArrow))
                     {
-                        skipMove = !skipMove;
+
+                        a = arrowHolder.GetArrow("Left");
                     }
+                    if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        a = arrowHolder.GetArrow("Right");
+
+                    }
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        a = arrowHolder.GetArrow("Up");
+
+                    }
+                    if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        a = arrowHolder.GetArrow("Down");
+
+                    }
+
+                    if (a == arrowHolder.currentArrow)
+                    {
+                        //nothing
+                    }
+
                     else
                     {
-                        skipMove = !skipMove;
-                        turnPhase = !turnPhase;
-                        ToggleArrows(true);
+                        arrowHolder.ClearSelectedArrows();
+                        arrowHolder.currentArrow = null;
+                        arrowHolder.currentArrow = a;
+                        a.selected = true;
+
                     }
+
                 }
             }
 
-            else
+            if (Input.GetKey(KeyCode.Space))
             {
-                TurnTo(arrowHolder.currentArrow);
-                arrowHolder.currentArrow = null;
-                turnPhase = !turnPhase;
+                if (!turnPhase)
+                {
+                    if (currentSelectedTile)
+                    {
+                        Debug.Log("it came here??");
+                        if (currentSelectedTile.walkable)
+                        {
+                            MoveToTile(currentSelectedTile);
+                        }
+                        else if (currentSelectedTile.pushable)
+                        {
+                            TryToPush();
+                        }
+                        else
+                        {
+                            //nothing
+                        }
+
+                        turnPhase = !turnPhase;
+                    }
+
+                    else
+                    {
+                        if (!skipMove)
+                        {
+                            skipMove = !skipMove;
+                        }
+                        else
+                        {
+                            skipMove = !skipMove;
+                            turnPhase = !turnPhase;
+                            ToggleArrows(true);
+                        }
+                    }
+                }
+
+                else
+                {
+                    TurnTo(arrowHolder.currentArrow);
+                    arrowHolder.currentArrow = null;
+                    turnPhase = !turnPhase;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.Z))
+            {
+                if (currentSelectedTile)
+                {
+                    currentSelectedTile = null;
+                }
             }
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        else
         {
-            if (currentSelectedTile)
+            //check camera state
+       
+
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                currentSelectedTile = null;
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
+                {                  
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Left"];
+                    currentTile.current = true;
+                }
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
+                {                  
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Right"];
+                    currentTile.current = true;
+                }
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
+                {
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Up"];
+                    currentTile.current = true;
+                }
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
+                {
+                
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Down"];
+                    currentTile.current = true;
+                }
+            }       
+
+            else
+            {
+            
+
             }
         }
     }
-
-
 
     void CheckControl()
     {
@@ -244,15 +308,11 @@ public class PlayerMove : TacticsMove
 
     void TryToPush()
     {
-        //if looking at thing
-        //{
         List<Tile> pushableTiles = new List<Tile>();
         Tile thisTile = currentTile;
         bool done = false;
 
         GetCurrentTile();
-
-
 
         while (!done)
         {
@@ -301,7 +361,6 @@ public class PlayerMove : TacticsMove
         }
 
 
-        //}
     }
 
     bool CalculatePush(List<Tile> list)
