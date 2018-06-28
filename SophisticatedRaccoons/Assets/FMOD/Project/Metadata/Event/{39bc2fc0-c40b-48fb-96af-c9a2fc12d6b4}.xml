@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{39bc2fc0-c40b-48fb-96af-c9a2fc12d6b4}">
         <property name="name">
-            <value>Start Horn</value>
+            <value>General_StartGame-Horn</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
         </property>
         <relationship name="folder">
-            <destination>{c888b5d5-0700-4084-b66b-62e09aa7ed89}</destination>
+            <destination>{f3516427-9d25-4481-889f-72818518c03d}</destination>
         </relationship>
         <relationship name="mixer">
             <destination>{b0d46225-ec99-49cd-bc37-d675d42f34c7}</destination>
@@ -30,6 +30,9 @@
         </relationship>
         <relationship name="timeline">
             <destination>{9054a288-3f5f-4881-bc04-c50a3c9941bb}</destination>
+        </relationship>
+        <relationship name="banks">
+            <destination>{59efd31e-f5f9-40dd-ab3b-3551d645bb29}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{b0d46225-ec99-49cd-bc37-d675d42f34c7}">
