@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{a23d852a-8967-4ba3-8683-c8a80f7a5f1d}">
+        <property name="assetPath">
+            <value>humming singing 6.mp3</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.5600000000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{19bec2a8-b900-4ad8-a2aa-9f88b337c4f2}</destination>
+        </relationship>
+    </object>
+</objects>
