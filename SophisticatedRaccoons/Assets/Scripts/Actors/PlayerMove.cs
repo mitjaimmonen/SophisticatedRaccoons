@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerMove : TacticsMove
 {
@@ -36,7 +37,7 @@ public class PlayerMove : TacticsMove
             }
 
         }
-        else if (!beingPushed)
+        else if (!beingPushed && active)
         {
             Move();
         }
@@ -48,6 +49,145 @@ public class PlayerMove : TacticsMove
 
     }
 
+    public void HandleGamepadInput(PlayerGamepadData gamepadData)
+    {
+        if (!active || moving)
+            return;
+        
+        var thumbstick = gamepadData.state.ThumbSticks;
+         if (thumbstick.Left.X > 0.2f || thumbstick.Left.X < -0.2f ||
+            thumbstick.Left.Y > 0.2f || thumbstick.Left.Y < -0.2f)
+        {
+
+            if (!turnPhase)
+            {
+                //check camera state
+                Tile t = new Tile();
+
+                if (thumbstick.Left.X < -0.2f)
+                {
+                    t = currentTile.adjacencyDict["Left"];
+                }
+                if (thumbstick.Left.X > 0.2f)
+                {
+                    t = currentTile.adjacencyDict["Right"];
+                }
+                if ( thumbstick.Left.Y > 0.2f)
+                {
+                    t = currentTile.adjacencyDict["Up"];
+                }
+                if (thumbstick.Left.Y < -0.2f)
+                {
+                    t = currentTile.adjacencyDict["Down"];
+                }
+
+                if (t == currentSelectedTile)
+                {
+                    //nothing
+                }
+
+                else
+                {
+                    currentSelectedTile = t;
+                }
+            }
+
+            else
+            {
+                Arrow a = new Arrow();
+
+                if (thumbstick.Left.X < -0.2f)
+                {
+
+                    a = arrowHolder.GetArrow("Left");
+                }
+                if (thumbstick.Left.X > 0.2f)
+                {
+                    a = arrowHolder.GetArrow("Right");
+
+                }
+                if (thumbstick.Left.Y > 0.2f)
+                {
+                    a = arrowHolder.GetArrow("Up");
+
+                }
+                if (thumbstick.Left.Y < -0.2f)
+                {
+                    a = arrowHolder.GetArrow("Down");
+
+                }
+
+                if (a == arrowHolder.currentArrow)
+                {
+                    //nothing
+                }
+
+                else
+                {
+                    arrowHolder.ClearSelectedArrows();
+                    arrowHolder.currentArrow = null;
+                    arrowHolder.currentArrow = a;
+                    a.selected = true;
+
+                }
+
+            }
+        }
+
+        if (gamepadData.state.Buttons.A == ButtonState.Pressed)
+        {
+            if (!turnPhase)
+            {
+                if (currentSelectedTile)
+                {
+                    if (currentSelectedTile.walkable)
+                    {
+                        MoveToTile(currentSelectedTile);
+                    }
+                    else if (currentSelectedTile.pushable)
+                    {
+                        TryToPush();
+                    }
+                    else
+                    {
+                        //nothing
+                    }
+
+                    turnPhase = !turnPhase;
+                }
+
+                else
+                {
+                    if (!skipMove)
+                    {
+                        skipMove = !skipMove;
+                    }
+                    else
+                    {
+                        skipMove = !skipMove;
+                        turnPhase = !turnPhase;
+                        Debug.Log("Setting arrows active");
+                        ToggleArrows(true);
+                    }
+                }
+            }
+
+            else
+            {
+                TurnTo(arrowHolder.currentArrow);
+                arrowHolder.currentArrow = null;
+                turnPhase = !turnPhase;
+            }
+        }
+
+        if (gamepadData.state.Buttons.B == ButtonState.Pressed)
+        {
+            if (currentSelectedTile)
+            {
+                currentSelectedTile = null;
+            }
+        }
+    }
 
 
     void KeyBoardControl()
@@ -163,6 +303,7 @@ public class PlayerMove : TacticsMove
                     {
                         skipMove = !skipMove;
                         turnPhase = !turnPhase;
+                        Debug.Log("Setting arrows active");
                         ToggleArrows(true);
                     }
                 }
@@ -344,6 +485,7 @@ public class PlayerMove : TacticsMove
         Vector3 lookAt = turnDir.gameObject.transform.position;
         lookAt.y = transform.position.y;
         transform.LookAt(lookAt);
+        Debug.Log("Setting arrows active");
         ToggleArrows(false);
     }
 

@@ -31,6 +31,7 @@ public class StateHandler : MonoBehaviour
 
     public GameState gamestate = GameState.menu;
     public MainMenuController menuControl;
+    public InputHandler inputHandler;
 
 
     void Awake()
@@ -78,12 +79,30 @@ public class StateHandler : MonoBehaviour
 
     void Instantiate()
     {
+        inputHandler = GetComponent<InputHandler>();
         if (gamestate == GameState.menu)
         {
             GameObject menu = GameObject.Find("Main Menu");
             if (menu)
                 menuControl = menu.GetComponent<MainMenuController>();
 
+        }
+        if (gamestate == GameState.game)
+        {
+            var holders = GameObject.FindGameObjectsWithTag("PlayerHolder");
+            if (holders.Length == 2)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    var h = holders[i].GetComponent<PlayerHolder>();
+                    if (h.playerOne)
+                        inputHandler.playerHolders[0] = h;
+                    else if (!h.playerOne)
+                        inputHandler.playerHolders[1] = h;
+                }
+            }
+            else
+                Debug.LogWarning("No two player holders found in level");
         }
     }
 }

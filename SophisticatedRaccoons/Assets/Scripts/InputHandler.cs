@@ -10,7 +10,9 @@ public class InputHandler : MonoBehaviour {
 	GamepadStateHandler gamepad;
 	StateHandler stateHandler; 
 
-	public bool playerOne = true;
+	public PlayerHolder[] playerHolders = new PlayerHolder[2];
+
+	public bool playerOneTurn = true;
 	bool isPaused = false;
 	int pausedController = 0;
 
@@ -27,10 +29,11 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (stateHandler.gamestate == GameState.game)
 		{
-			if ((gamepadData.characterIndex == 0 && playerOne) || (gamepadData.characterIndex == 1 && !playerOne))
+			if ((gamepadData.characterIndex == 0 && playerOneTurn) || (gamepadData.characterIndex == 1 && !playerOneTurn))
 			{
 				//Only checks current player's inputs
-				PlayerInputs(gamepadData);
+				Debug.Log("Inputhandler. charIndex: " +gamepadData.characterIndex);
+				playerHolders[gamepadData.characterIndex].HandleInput(gamepadData);
 			}
 			if (!isPaused || (gamepadData.characterIndex == pausedController && isPaused))
 			{
@@ -53,7 +56,7 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 		{
-			Debug.Log("pressed A, characterindex: " + gamepadData.characterIndex + ", playerone: " + playerOne);
+			Debug.Log("pressed A, characterindex: " + gamepadData.characterIndex + ", playerone: " + playerOneTurn);
 			//A pressed this frame
 		}
 
