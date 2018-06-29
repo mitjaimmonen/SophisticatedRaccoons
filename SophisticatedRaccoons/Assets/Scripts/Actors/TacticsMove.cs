@@ -6,6 +6,7 @@ public class TacticsMove : MonoBehaviour
 {
 
     List<Tile> selectableTiles = new List<Tile>();
+
     GameObject[] tiles;
     public Tile currentSelectedTile = null;
 
@@ -52,8 +53,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void ComputeAdjacencyLists()
-    {
-
+    {        
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
@@ -75,8 +75,8 @@ public class TacticsMove : MonoBehaviour
         {
             Tile t = process.Dequeue();
 
-            selectableTiles.Add(t);            
-                t.selectable = true;            
+            selectableTiles.Add(t);
+            t.selectable = true;
 
             if (t.distance < move)
             {
@@ -85,13 +85,41 @@ public class TacticsMove : MonoBehaviour
                     if (!tile.visited)
                     {
                         tile.parent = t;
-                        tile.visited = true;                
+                        tile.visited = true;
                         tile.distance = 1 + t.distance;
                         process.Enqueue(tile);
                     }
                 }
             }
         }
+    }
+
+    public void FindEntryTiles()
+    {        
+        selectableTiles.Clear();
+
+        foreach (GameObject t in tiles)
+        {
+            Tile temp = t.GetComponent<Tile>();
+
+            if (temp.isSpawn)
+            {                
+                selectableTiles.Add(temp);
+                temp.selectable = true;
+            }
+        }
+
+        if (currentTile == null)
+        {         
+            currentTile = selectableTiles[0].GetComponent<Tile>();
+            selectableTiles[0].GetComponent<Tile>().current = true;
+        }
+
+        foreach (Tile t in selectableTiles)
+        {           
+            t.FindNeighbors();
+        }
+
     }
 
     public void MoveToTile(Tile tile)
@@ -131,7 +159,7 @@ public class TacticsMove : MonoBehaviour
             {
                 transform.position = target;
                 path.Pop();
-                
+
             }
         }
 

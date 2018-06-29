@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4386111651415616}
+  - component: {fileID: 114018632282780172}
   - component: {fileID: 114602189402692160}
   - component: {fileID: 114020799726454024}
   - component: {fileID: 114030337626258546}
@@ -42,6 +43,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114018632282780172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071417157165078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5604e0cdcea344f864e26ae358adfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryMode: 1
 --- !u!114 &114020799726454024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,6 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb2e4387d741d74c8f8f1e45fe92270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHolders:
+  - {fileID: 0}
+  - {fileID: 0}
+  playerOneTurn: 1
 --- !u!114 &114030337626258546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamestate: 0
   menuControl: {fileID: 0}
+  inputHandler: {fileID: 0}
 --- !u!114 &114602189402692160
 MonoBehaviour:
   m_ObjectHideFlags: 1
