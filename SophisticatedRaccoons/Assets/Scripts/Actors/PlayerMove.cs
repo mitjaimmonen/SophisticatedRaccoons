@@ -14,6 +14,9 @@ public class PlayerMove : TacticsMove
     public Vector3 direction;
     public bool skipMove = false;
 
+
+    float lastInputTime = 0;
+
     private void Start()
     {
         Init();
@@ -189,6 +192,8 @@ public class PlayerMove : TacticsMove
                     arrowHolder.currentArrow = null;
                     turnPhase = !turnPhase;
                 }
+                Debug.Log("Pressed A");
+                lastInputTime = Time.time;
             }
 
             if (gamepadData.state.Buttons.B == ButtonState.Pressed)
@@ -204,7 +209,7 @@ public class PlayerMove : TacticsMove
         {
             //check camera state
        
-            if (gamepadData.state.ThumbSticks.Left.X < -0.2f)
+            if (gamepadData.state.ThumbSticks.Left.X < -0.2f && gamepadData.prevState.ThumbSticks.Left.X >= -0.2f)
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
                 {                  
@@ -213,7 +218,7 @@ public class PlayerMove : TacticsMove
                     currentTile.current = true;
                 }
             }
-            if (gamepadData.state.ThumbSticks.Left.X > 0.2f)
+            if (gamepadData.state.ThumbSticks.Left.X > 0.2f && gamepadData.prevState.ThumbSticks.Left.X <= 0.2f)
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
                 {                  
@@ -222,7 +227,7 @@ public class PlayerMove : TacticsMove
                     currentTile.current = true;
                 }
             }
-            if (gamepadData.state.ThumbSticks.Left.Y > 0.2f)
+            if (gamepadData.state.ThumbSticks.Left.Y > 0.2f && gamepadData.prevState.ThumbSticks.Left.Y <= 0.2f)
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
                 {
@@ -231,21 +236,25 @@ public class PlayerMove : TacticsMove
                     currentTile.current = true;
                 }
             }
-            if (gamepadData.state.ThumbSticks.Left.Y < -0.2f)
+            if (gamepadData.state.ThumbSticks.Left.Y < -0.2f && gamepadData.prevState.ThumbSticks.Left.Y >= -0.2f)
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
                 {
-                
                     currentTile.current = false;
                     currentTile = currentTile.spawnAdjacencyDict["Down"];
                     currentTile.current = true;
                 }
-            }       
+            }
 
-            else
+            if (gamepadData.state.Buttons.A == ButtonState.Pressed && gamepadData.prevState.Buttons.A == ButtonState.Released && lastInputTime+0.1f < Time.time)
             {
-            
+                //Doesnt work??
+                MoveToTile(currentTile);
 
+                //This hack works :))))
+                transform.position = new Vector3(currentTile.transform.position.x, currentTile.transform.position.y + 1f, currentTile.transform.position.z);
+                Debug.Log("Entry mode finished");
+                // statehandler.Instance.EntryModeToggle(false);
             }
         }
     }

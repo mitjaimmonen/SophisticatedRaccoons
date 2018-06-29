@@ -13,7 +13,7 @@ public class PlayerHolder : MonoBehaviour {
 	bool playerSelected = false;
 	bool showSelection = true;
 	int characterIndex = 0;
-
+	float lastInputTime = 0;
 	void Awake()
 	{
 		if (isOwnTurn)
@@ -61,10 +61,9 @@ public class PlayerHolder : MonoBehaviour {
 	public void HandleInput(PlayerGamepadData gamepadData)
 	{
 		//Gets called by input handler if this player's turn
-		Debug.Log("Player holder. player selected: " + playerSelected);
 		PlayerSelectionInputs(gamepadData);
 
-		if (playerSelected)
+		if (playerSelected && lastInputTime+0.1f < Time.time)
 			characters[characterIndex].HandleGamepadInput(gamepadData);
 	}
 
@@ -92,6 +91,7 @@ public class PlayerHolder : MonoBehaviour {
 
 			if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 			{
+				lastInputTime = Time.time;
 				characters[characterIndex].active = true;
 				playerSelected = true;
 			}
