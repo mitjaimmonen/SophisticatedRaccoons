@@ -64,136 +64,188 @@ public class PlayerMove : TacticsMove
             return;
         
         var thumbstick = gamepadData.state.ThumbSticks;
-         if (thumbstick.Left.X > 0.2f || thumbstick.Left.X < -0.2f ||
-            thumbstick.Left.Y > 0.2f || thumbstick.Left.Y < -0.2f)
+        if (!GameMaster.Instance.entryMode)
         {
-
-            if (!turnPhase)
+            if (thumbstick.Left.X > 0.2f || thumbstick.Left.X < -0.2f ||
+                thumbstick.Left.Y > 0.2f || thumbstick.Left.Y < -0.2f)
             {
-                //check camera state
-                Tile t = new Tile();
 
-                if (thumbstick.Left.X < -0.2f)
+                if (!turnPhase)
                 {
-                    t = currentTile.adjacencyDict["Left"];
-                }
-                if (thumbstick.Left.X > 0.2f)
-                {
-                    t = currentTile.adjacencyDict["Right"];
-                }
-                if ( thumbstick.Left.Y > 0.2f)
-                {
-                    t = currentTile.adjacencyDict["Up"];
-                }
-                if (thumbstick.Left.Y < -0.2f)
-                {
-                    t = currentTile.adjacencyDict["Down"];
-                }
+                    //check camera state
+                    Tile t = new Tile();
 
-                if (t == currentSelectedTile)
-                {
-                    //nothing
-                }
-
-                else
-                {
-                    currentSelectedTile = t;
-                }
-            }
-
-            else
-            {
-                Arrow a = new Arrow();
-
-                if (thumbstick.Left.X < -0.2f)
-                {
-
-                    a = arrowHolder.GetArrow("Left");
-                }
-                if (thumbstick.Left.X > 0.2f)
-                {
-                    a = arrowHolder.GetArrow("Right");
-
-                }
-                if (thumbstick.Left.Y > 0.2f)
-                {
-                    a = arrowHolder.GetArrow("Up");
-
-                }
-                if (thumbstick.Left.Y < -0.2f)
-                {
-                    a = arrowHolder.GetArrow("Down");
-
-                }
-
-                if (a == arrowHolder.currentArrow)
-                {
-                    //nothing
-                }
-
-                else
-                {
-                    arrowHolder.ClearSelectedArrows();
-                    arrowHolder.currentArrow = null;
-                    arrowHolder.currentArrow = a;
-                    a.selected = true;
-
-                }
-
-            }
-        }
-
-        if (gamepadData.state.Buttons.A == ButtonState.Pressed)
-        {
-            if (!turnPhase)
-            {
-                if (currentSelectedTile)
-                {
-                    if (currentSelectedTile.walkable)
+                    if (thumbstick.Left.X < -0.2f)
                     {
-                        MoveToTile(currentSelectedTile);
+                        t = currentTile.adjacencyDict["Left"];
                     }
-                    else if (currentSelectedTile.pushable)
+                    if (thumbstick.Left.X > 0.2f)
                     {
-                        TryToPush();
+                        t = currentTile.adjacencyDict["Right"];
                     }
-                    else
+                    if ( thumbstick.Left.Y > 0.2f)
+                    {
+                        t = currentTile.adjacencyDict["Up"];
+                    }
+                    if (thumbstick.Left.Y < -0.2f)
+                    {
+                        t = currentTile.adjacencyDict["Down"];
+                    }
+
+                    if (t == currentSelectedTile)
                     {
                         //nothing
                     }
 
-                    turnPhase = !turnPhase;
+                    else
+                    {
+                        currentSelectedTile = t;
+                    }
                 }
 
                 else
                 {
-                    if (!skipMove)
+                    Arrow a = new Arrow();
+
+                    if (thumbstick.Left.X < -0.2f)
                     {
-                        skipMove = !skipMove;
+
+                        a = arrowHolder.GetArrow("Left");
                     }
+                    if (thumbstick.Left.X > 0.2f)
+                    {
+                        a = arrowHolder.GetArrow("Right");
+
+                    }
+                    if (thumbstick.Left.Y > 0.2f)
+                    {
+                        a = arrowHolder.GetArrow("Up");
+
+                    }
+                    if (thumbstick.Left.Y < -0.2f)
+                    {
+                        a = arrowHolder.GetArrow("Down");
+
+                    }
+
+                    if (a == arrowHolder.currentArrow)
+                    {
+                        //nothing
+                    }
+
                     else
                     {
-                        skipMove = !skipMove;
-                        turnPhase = !turnPhase;
-                        Debug.Log("Setting arrows active");
-                        ToggleArrows(true);
+                        arrowHolder.ClearSelectedArrows();
+                        arrowHolder.currentArrow = null;
+                        arrowHolder.currentArrow = a;
+                        a.selected = true;
+
                     }
+
                 }
             }
 
-            else
+            if (gamepadData.state.Buttons.A == ButtonState.Pressed)
             {
-                TurnTo(arrowHolder.currentArrow);
-                arrowHolder.currentArrow = null;
-                turnPhase = !turnPhase;
+                if (!turnPhase)
+                {
+                    if (currentSelectedTile)
+                    {
+                        if (currentSelectedTile.walkable)
+                        {
+                            MoveToTile(currentSelectedTile);
+                        }
+                        else if (currentSelectedTile.pushable)
+                        {
+                            TryToPush();
+                        }
+                        else
+                        {
+                            //nothing
+                        }
+
+                        turnPhase = !turnPhase;
+                    }
+
+                    else
+                    {
+                        if (!skipMove)
+                        {
+                            skipMove = !skipMove;
+                        }
+                        else
+                        {
+                            skipMove = !skipMove;
+                            turnPhase = !turnPhase;
+                            Debug.Log("Setting arrows active");
+                            ToggleArrows(true);
+                        }
+                    }
+                }
+
+                else
+                {
+                    TurnTo(arrowHolder.currentArrow);
+                    arrowHolder.currentArrow = null;
+                    turnPhase = !turnPhase;
+                }
+            }
+
+            if (gamepadData.state.Buttons.B == ButtonState.Pressed)
+            {
+                if (currentSelectedTile)
+                {
+                    currentSelectedTile = null;
+                }
             }
         }
 
-        if (gamepadData.state.Buttons.B == ButtonState.Pressed)
+        else // Is entry mode
         {
-            if (currentSelectedTile)
+            //check camera state
+       
+            if (gamepadData.state.ThumbSticks.Left.X < -0.2f)
             {
-                currentSelectedTile = null;
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
+                {                  
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Left"];
+                    currentTile.current = true;
+                }
+            }
+            if (gamepadData.state.ThumbSticks.Left.X > 0.2f)
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
+                {                  
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Right"];
+                    currentTile.current = true;
+                }
+            }
+            if (gamepadData.state.ThumbSticks.Left.Y > 0.2f)
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
+                {
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Up"];
+                    currentTile.current = true;
+                }
+            }
+            if (gamepadData.state.ThumbSticks.Left.Y < -0.2f)
+            {
+                if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
+                {
+                
+                    currentTile.current = false;
+                    currentTile = currentTile.spawnAdjacencyDict["Down"];
+                    currentTile.current = true;
+                }
+            }       
+
+            else
+            {
+            
+
             }
         }
     }
