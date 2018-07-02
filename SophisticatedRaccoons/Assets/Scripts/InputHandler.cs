@@ -8,29 +8,36 @@ public class InputHandler : MonoBehaviour {
 	// List<Player> players = new List<Player>();
 	MainMenuController menuControl;
 	GamepadStateHandler gamepad;
-	StateHandler stateHandler; 
+	GameMaster gameMaster; 
 
-	public bool playerOne = true;
+	public PlayerHolder[] playerHolders = new PlayerHolder[2];
+
+	public bool inputDebug = false;
+	public bool playerOneTurn = true;
 	bool isPaused = false;
 	int pausedController = 0;
 
 	void Awake()
 	{
 		gamepad = GetComponent<GamepadStateHandler>();
-		stateHandler = GetComponent<StateHandler>();
+		gameMaster = GetComponent<GameMaster>();
 	}
 	public PlayerGamepadData HandleInput(PlayerGamepadData gamepadData)
 	{
-		if (stateHandler.gamestate == GameState.menu)
+		if (gameMaster.gamestate == GameState.menu)
 		{
 			gamepadData = HandleMenuInputs(gamepadData);
 		}
-		if (stateHandler.gamestate == GameState.game)
+		if (gameMaster.gamestate == GameState.game)
 		{
-			if ((gamepadData.characterIndex == 0 && playerOne) || (gamepadData.characterIndex == 1 && !playerOne))
+			if ((gamepadData.characterIndex == 0 && playerOneTurn) || (gamepadData.characterIndex == 1 && !playerOneTurn) || (inputDebug && gamepadData.gamepadPlayerIndex == PlayerIndex.One))
 			{
 				//Only checks current player's inputs
-				PlayerInputs(gamepadData);
+				if (!inputDebug)
+					playerHolders[gamepadData.characterIndex].HandleInput(gamepadData);
+				else
+					playerHolders[0].HandleInput(gamepadData);
+
 			}
 			if (!isPaused || (gamepadData.characterIndex == pausedController && isPaused))
 			{
@@ -53,7 +60,7 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 		{
-			Debug.Log("pressed A, characterindex: " + gamepadData.characterIndex + ", playerone: " + playerOne);
+			Debug.Log("pressed A, characterindex: " + gamepadData.characterIndex + ", playerone: " + playerOneTurn);
 			//A pressed this frame
 		}
 
@@ -120,18 +127,18 @@ public class InputHandler : MonoBehaviour {
 				}
 
 				gamepadData.characterIndex = firstJoined ? 1 : 0;			
-				stateHandler.menuControl.AddPlayer(gamepadData.characterIndex);
+				gameMaster.menuControl.AddPlayer(gamepadData.characterIndex);
 			}
 			else
 			{
-				stateHandler.menuControl.RemovePlayer(gamepadData.characterIndex);
+				gameMaster.menuControl.RemovePlayer(gamepadData.characterIndex);
 				gamepadData.characterIndex = -1;
 			}
 		}
 
 		if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 		{
-			stateHandler.menuControl.ToggleReady(gamepadData.characterIndex);
+			gameMaster.menuControl.ToggleReady(gamepadData.characterIndex);
 		}
 
 		return gamepadData;

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{1ddaa2eb-c84f-475a-ac82-d791359e7689}">
         <property name="name">
-            <value>Audio_Background_Default</value>
+            <value>Audio_Default</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
@@ -98,6 +98,9 @@
         <property name="length">
             <value>2.5338775510204083</value>
         </property>
+        <property name="pitch">
+            <value>-0.100000001</value>
+        </property>
         <relationship name="modulators">
             <destination>{49067cf5-9d3e-477c-b2a0-29888e734f77}</destination>
         </relationship>
@@ -128,7 +131,11 @@
             <destination>{5e77720c-0a32-4c38-a619-2a10ef15ee7a}</destination>
         </relationship>
     </object>
-    <object class="MixerBusPanner" id="{4c034ad1-e25c-4648-8932-df47a542c9ad}"/>
+    <object class="MixerBusPanner" id="{4c034ad1-e25c-4648-8932-df47a542c9ad}">
+        <property name="disabledSpeakers">
+            <value>48</value>
+        </property>
+    </object>
     <object class="MixerBusFader" id="{e1ca0ae9-e49a-44d5-9306-11f516aeb45f}"/>
     <object class="RandomizerModulator" id="{49067cf5-9d3e-477c-b2a0-29888e734f77}">
         <property name="nameOfPropertyBeingModulated">

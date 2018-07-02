@@ -53,6 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb2e4387d741d74c8f8f1e45fe92270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHolders:
+  - {fileID: 0}
+  - {fileID: 0}
+  inputDebug: 0
+  playerOneTurn: 1
 --- !u!114 &114030337626258546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,8 +69,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de204c295da1e0048965aa2624a9a479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entryMode: 1
   gamestate: 0
   menuControl: {fileID: 0}
+  inputHandler: {fileID: 0}
 --- !u!114 &114602189402692160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -77,4 +84,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbc30a2bb4b5f24295fa03c542b1bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateHandler: {fileID: 0}
+  gameMaster: {fileID: 0}

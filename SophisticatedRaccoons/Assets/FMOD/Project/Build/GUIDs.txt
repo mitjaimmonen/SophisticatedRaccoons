@@ -1,13 +1,13 @@
-{5e2651bf-4c94-4a4f-a74e-e9d9dbbd51b7} event:/Raccoon Sounds/SFX_Background_AgainstFriend
-{a8b28a08-362b-4329-8f29-e125af0f7422} event:/Raccoon Sounds/SFX_Background_HitEnemy
-{cf46124e-1fff-4fb2-9039-7cf90737cb7d} event:/Raccoon Sounds/SFX_Background_GetHit
-{dd4e116d-8837-46b5-9b2c-c9b19a7dd585} event:/Raccoon Sounds/Audio_Background_GetHit
-{1ddaa2eb-c84f-475a-ac82-d791359e7689} event:/Raccoon Sounds/Audio_Background_Default
-{b728e298-8414-49cb-9d30-b06441994976} event:/Raccoon Sounds/Background_AgainstTreasure
-{60815e4a-c36c-4029-9f15-72d1c1218c83} event:/Raccoon Sounds/Get Pushed
-{953a25ed-d440-4f2a-a31e-b3a5641f2acb} event:/Raccoon Sounds/Move
-{1c48d341-26fe-4fab-bb62-09fa22dc2170} event:/Raccoon Sounds/Push
-{d9334b9e-fef7-4e85-96a9-7d89dcda65e3} event:/Raccoon Sounds/Spawn
+{47f88f83-f2fc-4000-890e-a58ccd0f5123} event:/Raccoon Sounds/Audio_Background_Crowd
+{83dea051-a817-4ebf-b233-8b8f392cd7dc} event:/Raccoon Sounds/Audio_Background_Drums
+{1ddaa2eb-c84f-475a-ac82-d791359e7689} event:/Raccoon Sounds/Audio_Default
+{dd4e116d-8837-46b5-9b2c-c9b19a7dd585} event:/Raccoon Sounds/Audio_GetHit
+{1c48d341-26fe-4fab-bb62-09fa22dc2170} event:/Raccoon Sounds/Audio_Push
+{948f2f14-a886-4a89-a707-a84fef907b14} event:/Raccoon Sounds/Audio_PushedOut
+{cf46124e-1fff-4fb2-9039-7cf90737cb7d} event:/Raccoon Sounds/SFX_GetHit
+{a8b28a08-362b-4329-8f29-e125af0f7422} event:/Raccoon Sounds/SFX_HitEnemy
+{953a25ed-d440-4f2a-a31e-b3a5641f2acb} event:/Raccoon Sounds/Audio_Move
+{39bc2fc0-c40b-48fb-96af-c9a2fc12d6b4} event:/General_StartGame-Horn
 {88534f94-6b97-461c-b723-71c2ff018341} bus:/
 {87113df7-5c1b-4812-bfcc-de6d69a1444d} bus:/Reverb
 {59efd31e-f5f9-40dd-ab3b-3551d645bb29} bank:/Master Bank

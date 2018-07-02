@@ -20,9 +20,8 @@ public struct PlayerGamepadData
 public class GamepadStateHandler : MonoBehaviour {
 
 	[HideInInspector]public PlayerGamepadData[] playerGamepadData = new PlayerGamepadData[4];
-	[HideInInspector]public StateHandler stateHandler;
+	[HideInInspector]public GameMaster gameMaster;
 
-	InputHandler inputHandler;
 
 
 	float timer = 0;
@@ -30,7 +29,6 @@ public class GamepadStateHandler : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-		inputHandler = GetComponent<InputHandler>();
 		FindGamepads();
 
 		// for(int i = 0; i < playerDataArray.Length;i++)
@@ -73,9 +71,8 @@ public class GamepadStateHandler : MonoBehaviour {
 
 			if (!playerGamepadData[i].state.IsConnected)
 				continue;
-				
-			if (inputHandler)
-				playerGamepadData[i] = inputHandler.HandleInput(playerGamepadData[i]);
+			
+			playerGamepadData[i] = GameMaster.Instance.inputHandler.HandleInput(playerGamepadData[i]);
 
 		}
 	}

@@ -167,6 +167,7 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
+            Debug.Log("Setting arrows active");
             ToggleArrows(true);
         }
 
