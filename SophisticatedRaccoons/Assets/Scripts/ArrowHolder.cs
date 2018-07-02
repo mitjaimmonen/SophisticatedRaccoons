@@ -14,7 +14,7 @@ public class ArrowHolder : MonoBehaviour {
 
     }
 
-    private void Start()
+    private void Awake()
     {
         directionArrows = new Dictionary<string, Arrow>();
         FetchArrows();
@@ -31,9 +31,9 @@ public class ArrowHolder : MonoBehaviour {
 
         foreach (Arrow a in arrows)
         {
-            Debug.Log(a.direction);
+        
             directionArrows.Add(a.direction, a);          
-            Debug.Log("Adding " + a + " arrow. Pointing at: " + a.direction + ".");
+      
         }
     }
 
@@ -59,6 +59,24 @@ public class ArrowHolder : MonoBehaviour {
     public void SelectArrow(string direction)
     {
 
+    }
+
+    public void ToggleArrow(bool toggle)
+    {       
+        if (toggle)
+        {
+            foreach (KeyValuePair<string, Arrow> a in directionArrows)
+            {
+                a.Value.gameObject.GetComponent<Renderer>().enabled = true;
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, Arrow> a in directionArrows)
+            {              
+                a.Value.gameObject.GetComponent<Renderer>().enabled = false;
+            }
+        }
     }
 
 

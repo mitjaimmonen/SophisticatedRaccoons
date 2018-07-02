@@ -12,8 +12,10 @@ public class PlayerHolder : MonoBehaviour {
 	public bool isOwnTurn;
 	bool playerSelected = false;
 	bool showSelection = true;
+    public bool selectPhase = true;
 	int characterIndex = 0;
 	float lastInputTime = 0;
+
 	void Awake()
 	{
 		if (isOwnTurn)
@@ -43,6 +45,7 @@ public class PlayerHolder : MonoBehaviour {
 				selectionIndicator.transform.position = pos;
 				selectionIndicator.transform.Rotate(new Vector3(0,1f,0));
 			}
+                       
 		}
 	}
 
@@ -51,12 +54,19 @@ public class PlayerHolder : MonoBehaviour {
 		playerSelected = false;
 		selectionIndicator.SetActive(true);
 	}
+
+    public void DoTurn()
+    {
+        //select phase
+        //move/push phase
+        //turn phase
+    }
+
 	public void EndTurn()
 	{
 		selectionIndicator.SetActive(false);
-
+        //do end things
 	}
-
 
 	public void HandleInput(PlayerGamepadData gamepadData)
 	{
@@ -71,7 +81,6 @@ public class PlayerHolder : MonoBehaviour {
 	{
 		if (!playerSelected)
 		{
-
 			if ((gamepadData.prevState.ThumbSticks.Left.X < 0.2f && gamepadData.state.ThumbSticks.Left.X >= 0.2f) ||
 				(gamepadData.prevState.Buttons.LeftShoulder == ButtonState.Released && gamepadData.state.Buttons.LeftShoulder == ButtonState.Pressed))
 			{
@@ -106,4 +115,5 @@ public class PlayerHolder : MonoBehaviour {
 		// }
 
 	}
+   
 }

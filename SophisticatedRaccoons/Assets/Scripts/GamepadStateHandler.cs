@@ -14,6 +14,9 @@ public struct PlayerGamepadData
 	public PlayerIndex gamepadPlayerIndex; //Each gamepad gets assigned a number
 	public int characterIndex; //Each player gets assigned in the order of joining
 	public bool active; //When joined game, gamepad becomes active
+    public bool movePhase;
+    public bool choosePhase;
+
 
 }
 

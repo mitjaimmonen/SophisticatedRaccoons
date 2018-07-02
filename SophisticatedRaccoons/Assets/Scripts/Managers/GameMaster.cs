@@ -35,6 +35,8 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     public MainMenuController menuControl;
     public InputHandler inputHandler;
+    public PlayerHolder[] players = new PlayerHolder[2];
+    public int playerIndex;
 
 
     void Awake()
@@ -48,24 +50,18 @@ public class GameMaster : MonoBehaviour
 
         Instantiate();
 
+        playerIndex = 0;
+      
+
     }
     private void Start()
     {
-        //List<Tile> temp = new List<Tile>();
-
-        //foreach(GameObject T in GameObject.FindGameObjectsWithTag("Tile"))
-        //{
-        //    Tile t = T.GetComponent<Tile>();
-        //    if (t.isSpawn)
-        //    {
-        //        entryTiles.Add(t);
-        //    }
-        //}
+        StartTurn();
     }
+
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelLoaded;
-
     }
 
     private void Update()
@@ -79,32 +75,45 @@ public class GameMaster : MonoBehaviour
         {
             // if treasure is out
                 //end game
-
         }
     }
+
     private void LateUpdate()
     {
         if (entryMode)
         {
-            //foreach (Tile entry in entryTiles)
-            //{
-            //    Debug.Log("got here");
-            //    entry.selectable = entryMode;
-            //}
+           //nothing
         }
     }
-
-    //public List<Tile> GetEntryTiles()
-    //{
-        //return entryTiles;
-    //}
 
     public void EntryModeToggle(bool state)
     {
         entryMode = state;
     }
 
+    public void EndTurn()
+    {
+        players[playerIndex].isOwnTurn = false;
+        players[playerIndex].EndTurn();
 
+        if (playerIndex == 1)
+        {
+            playerIndex = 0;
+        }
+        else
+        {
+            playerIndex = 1;
+        }
+
+        StartTurn();
+        //switch player
+    }
+
+    private void StartTurn()
+    {
+        players[playerIndex].isOwnTurn = true;
+        players[playerIndex].StartTurn();
+    }
 
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {

@@ -147,7 +147,7 @@ public class TacticsMove : MonoBehaviour
             //calculate unit's position on top of the target tile
             target.y = gameObject.transform.position.y;
 
-            if (Vector3.Distance(transform.position, target) >= 0.05f)
+            if (Vector3.Distance(transform.position, target) >= 0.1f)
             {
                 CalculateHeading(target);
                 SetHorizontalVelocity();
@@ -159,7 +159,6 @@ public class TacticsMove : MonoBehaviour
             {
                 transform.position = target;
                 path.Pop();
-
             }
         }
 
@@ -200,14 +199,8 @@ public class TacticsMove : MonoBehaviour
         velocity = heading * moveSpeed;
     }
 
-    public void BeginTurn()
-    {
-
-    }
-
     public void ToggleArrows(bool toggle)
-    {
-        arrowHolder.gameObject.SetActive(toggle);
-        arrowHolder.haveSelected = toggle;
+    {        
+        arrowHolder.ToggleArrow(toggle);
     }
 }

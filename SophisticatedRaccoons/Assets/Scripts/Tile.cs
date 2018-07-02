@@ -29,8 +29,6 @@ public class Tile : MonoBehaviour
     public int distance = 0;
 
 
-
-
     // Use this for initialization
     void Start()
     {
@@ -219,12 +217,7 @@ public class Tile : MonoBehaviour
                 break;
 
             }
-        }
-
-        //while (looking for spawn)
-        //{
-
-        //}
+        }   
     }
 
     public Tile ReturnTile(Vector3 direction)
