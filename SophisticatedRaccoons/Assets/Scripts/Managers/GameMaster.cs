@@ -35,7 +35,8 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     public MainMenuController menuControl;
     public InputHandler inputHandler;
-
+    [FMODUnity.EventRef] public string startSound;
+    bool startSoundPlayed = false;
 
     void Awake()
     {
@@ -144,6 +145,14 @@ public class GameMaster : MonoBehaviour
             }
             else
                 Debug.LogWarning("No two player holders found in level");
+
+            if (!startSoundPlayed)
+            {
+                startSoundPlayed = true;
+                Debug.Log("Play sound");
+                FMODUnity.RuntimeManager.PlayOneShot(startSound, Camera.main.transform.position);
+
+            }
         }
     }
 }
