@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 136662154725575968}
   - component: {fileID: 114383585692704602}
   - component: {fileID: 95648756446221878}
+  - component: {fileID: 114756292675866204}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -56,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433766967102836}
   m_LocalRotation: {x: -0, y: 0.02351925, z: -0, w: 0.99972343}
-  m_LocalPosition: {x: 3.0526829, y: 1.3, z: -1.9931353}
+  m_LocalPosition: {x: -2.6701732, y: 0.25753665, z: -0.3836422}
   m_LocalScale: {x: 0.7, y: 0.8, z: 0.7}
   m_Children:
   - {fileID: 4880618449334384}
@@ -210,12 +211,31 @@ MonoBehaviour:
   arrowHolderPrefab: {fileID: 1935749220466228, guid: 2f53e6f02b6d4ba43b3b0527db2b8d9c,
     type: 2}
   keyReleased: 1
-  active: 1
+  active: 0
   turnPhase: 0
   beingPushed: 0
+  settingPhase: 1
   target: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
   skipMove: 0
+--- !u!114 &114756292675866204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1433766967102836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e82d14567e0544da5faacf43559bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chantSound: event:/Raccoon Sounds/Audio_Default
+  getHitSound: event:/Raccoon Sounds/Audio_GetHit
+  moveSound: event:/Raccoon Sounds/Audio_Move
+  pushSound: event:/Raccoon Sounds/Audio_Push
+  pushedOutSound: event:/Raccoon Sounds/Audio_PushedOut
+  sfxGetHitSound: event:/Raccoon Sounds/SFX_GetHit
+  sfxHitEnemySound: event:/Raccoon Sounds/SFX_HitEnemy
 --- !u!136 &136662154725575968
 CapsuleCollider:
   m_ObjectHideFlags: 1
