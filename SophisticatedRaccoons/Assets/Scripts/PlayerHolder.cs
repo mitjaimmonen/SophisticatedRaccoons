@@ -10,7 +10,7 @@ public class PlayerHolder : MonoBehaviour {
 	List<PlayerMove> characters = new List<PlayerMove>();
 
 	public bool isOwnTurn;
-	bool playerSelected = false;
+	public bool playerSelected = false;
 	bool showSelection = true;
     public bool selectPhase = true;
 	int characterIndex = 0;
@@ -101,8 +101,8 @@ public class PlayerHolder : MonoBehaviour {
 			if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 			{
 				lastInputTime = Time.time;
-				characters[characterIndex].active = true;
-				playerSelected = true;
+                characters[characterIndex].Activate();
+				playerSelected = true;                
 			}
 
 		}

@@ -30,6 +30,7 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (gameMaster.gamestate == GameState.game)
 		{
+                Debug.Log(gamepadData.characterIndex + " " + playerOneTurn);
 			if ((gamepadData.characterIndex == 0 && playerOneTurn) || (gamepadData.characterIndex == 1 && !playerOneTurn) || (inputDebug && gamepadData.gamepadPlayerIndex == PlayerIndex.One))
 			{
 				//Only checks current player's inputs

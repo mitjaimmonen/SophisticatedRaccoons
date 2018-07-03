@@ -33,9 +33,10 @@ public class GameMaster : MonoBehaviour
     #endregion
 
     public GameState gamestate = GameState.menu;
+    TacticsCamera tacticsCamera;
     public MainMenuController menuControl;
     public InputHandler inputHandler;
-    public PlayerHolder[] players = new PlayerHolder[2];
+    public PlayerHolder[] players;
     public int playerIndex;
 
 
@@ -56,7 +57,7 @@ public class GameMaster : MonoBehaviour
     }
     private void Start()
     {
-        StartTurn();
+        
     }
 
     void OnDisable()
@@ -89,6 +90,8 @@ public class GameMaster : MonoBehaviour
     public void EntryModeToggle(bool state)
     {
         entryMode = state;
+        players[playerIndex].selectPhase = state;
+        players[playerIndex].playerSelected = !state;
     }
 
     public void EndTurn()
@@ -96,13 +99,19 @@ public class GameMaster : MonoBehaviour
         players[playerIndex].isOwnTurn = false;
         players[playerIndex].EndTurn();
 
+        Debug.Log("turn ended, is now player " + (playerIndex + 1));
+
         if (playerIndex == 1)
         {
             playerIndex = 0;
+            inputHandler.playerOneTurn = true;
+            tacticsCamera.ChangePlayer(true);
         }
         else
         {
             playerIndex = 1;
+            inputHandler.playerOneTurn = false;
+            tacticsCamera.ChangePlayer(false);
         }
 
         StartTurn();
@@ -111,7 +120,9 @@ public class GameMaster : MonoBehaviour
 
     private void StartTurn()
     {
+       
         players[playerIndex].isOwnTurn = true;
+        entryMode = true;
         players[playerIndex].StartTurn();
     }
 
@@ -139,6 +150,7 @@ public class GameMaster : MonoBehaviour
         }
         if (gamestate == GameState.game)
         {
+            tacticsCamera = Camera.main.GetComponentInParent<TacticsCamera>();
             var holders = GameObject.FindGameObjectsWithTag("PlayerHolder");
             if (holders.Length == 2)
             {
@@ -146,13 +158,21 @@ public class GameMaster : MonoBehaviour
                 {
                     var h = holders[i].GetComponent<PlayerHolder>();
                     if (h.playerOne)
+                    {
                         inputHandler.playerHolders[0] = h;
+                        players[0] = h;
+                    }
                     else if (!h.playerOne)
+                    {
                         inputHandler.playerHolders[1] = h;
+                        players[1] = h;
+                    }
                 }
             }
             else
-                Debug.LogWarning("No two player holders found in level");
+                Debug.LogWarning("No two player holders found in level, holder's lenght is: " + holders.Length);
+
+            StartTurn();
         }
     }
 }

@@ -9,14 +9,18 @@ public class TacticsMove : MonoBehaviour
 
     GameObject[] tiles;
     public Tile currentSelectedTile = null;
-
+    public bool active = true;
+    public bool canCancel = true;
+    public bool inBoard;
     public int move = 1;
     public float moveSpeed = 2;
     public bool moving = false;
+    public bool hasPushed;
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
 
+    public Vector3 startPos;
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     public ArrowHolder arrowHolder;
@@ -53,7 +57,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void ComputeAdjacencyLists()
-    {        
+    {
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
@@ -95,7 +99,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void FindEntryTiles()
-    {        
+    {
         selectableTiles.Clear();
 
         foreach (GameObject t in tiles)
@@ -103,20 +107,20 @@ public class TacticsMove : MonoBehaviour
             Tile temp = t.GetComponent<Tile>();
 
             if (temp.isSpawn)
-            {                
+            {
                 selectableTiles.Add(temp);
                 temp.selectable = true;
             }
         }
 
         if (currentTile == null)
-        {         
+        {
             currentTile = selectableTiles[0].GetComponent<Tile>();
             selectableTiles[0].GetComponent<Tile>().current = true;
         }
 
         foreach (Tile t in selectableTiles)
-        {           
+        {
             t.FindNeighbors();
         }
 
@@ -166,8 +170,16 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            Debug.Log("Setting arrows active");
-            ToggleArrows(true);
+            canCancel = false;
+            inBoard = true;
+            if (!hasPushed)
+            {
+                ToggleArrows(true);
+            }
+            else
+            {               
+                Deactivate(true);          
+            }
         }
 
     }
@@ -200,7 +212,15 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void ToggleArrows(bool toggle)
-    {        
+    {
         arrowHolder.ToggleArrow(toggle);
+    }
+
+    public void Deactivate(bool endTurn)
+    {
+        active = false;   
+             
+        if (endTurn)
+        GameMaster.Instance.EndTurn();
     }
 }

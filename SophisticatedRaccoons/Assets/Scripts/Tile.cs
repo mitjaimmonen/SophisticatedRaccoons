@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Tile : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class Tile : MonoBehaviour
     public bool selectable = false;
     public bool occupied = false;
     public bool isCorner = false;
-    public bool isSpawn = false;
+    public bool isSpawn;
+    public bool skippable = false;
     public bool active = false;
+
     public GameObject thingOnTopOfIt = null;
     Vector3 playerDirection;
 
@@ -73,14 +76,18 @@ public class Tile : MonoBehaviour
 
     public void Reset()
     {
+        Reset(false);
+    }
 
+    public void Reset(bool cancelling)
+    {
         pushable = false;
         walkable = false;
         thingOnTopOfIt = null;
         adjacencyList.Clear();
         adjacencyDict.Clear();
 
-        if (!GameMaster.Instance.entryMode)
+        if (!GameMaster.Instance.entryMode && !cancelling)
         {
             current = false;
             target = false;
@@ -91,6 +98,14 @@ public class Tile : MonoBehaviour
         visited = false;
         parent = null;
         distance = 0;
+    }
+
+    public void ResetNeighbours()
+    {
+        foreach (KeyValuePair<string, Tile> t in adjacencyDict)
+        {
+            t.Value.Reset();
+        }
     }
 
     public void FindNeighbors()
@@ -205,7 +220,10 @@ public class Tile : MonoBehaviour
 
     public void CheckSpawnTile(string directionKey, Vector3 direction)
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 50);
+       // RaycastHit[] hits = Physics.RaycastAll(new Ray(transform.position, direction), 50, LayerMask.NameToLayer("Default"),QueryTriggerInteraction.Collide);
+       RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, 10).OrderBy(h => h.distance).ToArray();
+     //   RaycastHit[] hits = Physics.RaycastAll(new Ray(transform.position, direction), 10, LayerMask.NameToLayer("Default"));
+    
 
         foreach (RaycastHit hit in hits)
         {
@@ -213,8 +231,11 @@ public class Tile : MonoBehaviour
 
             if (tile.isSpawn && tile != this && !spawnAdjacencyDict.ContainsKey(directionKey))
             {
-                spawnAdjacencyDict.Add(directionKey, tile);
-                break;
+                if (!tile.skippable)
+                {
+                    spawnAdjacencyDict.Add(directionKey, tile);
+                    break;
+                }         
 
             }
         }   
