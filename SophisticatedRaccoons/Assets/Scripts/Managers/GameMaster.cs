@@ -38,7 +38,27 @@ public class GameMaster : MonoBehaviour
     public PauseMenu pauseMenu;
     [FMODUnity.EventRef] public string startSound;
     bool startSoundPlayed = false;
+    bool isGameOver = false;
     public bool isPaused = false;
+
+    public bool IsGameOver
+    {
+        get {return isGameOver;}
+        set 
+        {
+            if (isGameOver != value)
+            {
+                isGameOver = value;
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        // TODO: Hud text to show who won
+        pauseMenu.GameOver();
+    }
 
     void Awake()
     {
@@ -155,6 +175,8 @@ public class GameMaster : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(startSound, Camera.main.transform.position);
 
             }
+            if (!pauseMenu)
+                pauseMenu = GameObject.Find("Menu").GetComponent<PauseMenu>();
         }
     }
 }

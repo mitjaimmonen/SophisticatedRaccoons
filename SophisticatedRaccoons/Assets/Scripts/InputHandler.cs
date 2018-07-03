@@ -29,14 +29,21 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (gameMaster.gamestate == GameState.game)
 		{
+			if (gamepadData.characterIndex < 0 || gamepadData.characterIndex > 1)
+				return gamepadData;
+
 			if ((gamepadData.characterIndex == 0 && playerOneTurn) || (gamepadData.characterIndex == 1 && !playerOneTurn) || (inputDebug && gamepadData.gamepadPlayerIndex == PlayerIndex.One))
 			{
-				if (!inputDebug)
+				if (!gameMaster.isPaused)
 				{
-					playerHolders[gamepadData.characterIndex].HandleInput(gamepadData);
+					if (!inputDebug)
+					{
+						playerHolders[gamepadData.characterIndex].HandleInput(gamepadData);
+					}
+					else
+						playerHolders[0].HandleInput(gamepadData);
+
 				}
-				else
-					playerHolders[0].HandleInput(gamepadData);
 
 			}
 			if (!gameMaster.isPaused || (gamepadData.characterIndex == pausedController && gameMaster.isPaused))
