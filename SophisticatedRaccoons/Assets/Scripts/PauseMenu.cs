@@ -38,12 +38,6 @@ public class PauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (isGameOver)
-		{
-			resumeButton.SetActive(false);
-			newGameButton.SetActive(true);
-			menuPanel.SetActive(true);
-		}
 		if (menuPanel.activeSelf && !confirmationPanel.activeSelf)
 		{
 			if (EventSystem.current.currentSelectedGameObject == null)
@@ -138,7 +132,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void ToMainMenu(string sceneName)
 	{
-		if (!isGameOver)
+		if (!isGameOver && !confirmationPending)
 		{
 			confirmationPending = true;
 			StartCoroutine(ConfirmToScene(sceneName));
@@ -149,7 +143,7 @@ public class PauseMenu : MonoBehaviour {
 
 	IEnumerator ConfirmToScene(string sceneName)
 	{
-		confirmationText.text = "Are you sure you want to surrender?";
+		confirmationText.text = "Surrender?";
 		confirmationPanel.SetActive(true);
 		while (confirmationPending)
 			yield return null;
@@ -172,6 +166,8 @@ public class PauseMenu : MonoBehaviour {
 		isGameOver = true;
 		GameMaster.Instance.IsGameOver = true;
 
+		newGameButton.SetActive(true);
+		resumeButton.SetActive(false);
 		confirmationPanel.SetActive(false);
 		menuPanel.SetActive(false);
 		
@@ -180,6 +176,8 @@ public class PauseMenu : MonoBehaviour {
 	public void GameOver() // GameMaster Calls when game finishes
 	{
 		isGameOver = true;
+		newGameButton.SetActive(true);
+		resumeButton.SetActive(false);
 		StartCoroutine(SetPauseWithDelay(true, 2f));
 	}
 
@@ -202,7 +200,7 @@ public class PauseMenu : MonoBehaviour {
 	}
 	IEnumerator ConfirmQuit()
 	{
-		confirmationText.text = "Are you sure you want to quit to desktop?";
+		confirmationText.text = "Quit to desktop?";
 		confirmationPanel.SetActive(true);
 		while (confirmationPending)
 			yield return null;

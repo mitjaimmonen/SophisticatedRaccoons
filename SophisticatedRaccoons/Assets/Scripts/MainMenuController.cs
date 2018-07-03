@@ -8,8 +8,8 @@ using UnityEngine.Events;
 public class MainMenuController : MonoBehaviour
 {
 
-    public Text[] joinTexts = new Text[4];
-    public Text[] readyTexts = new Text[4];
+    public Text[] joinTexts = new Text[2];
+    public Text[] readyTexts = new Text[2];
     public Text countdownText;
     public string LevelToLoad = "SampleScene";
     [HideInInspector] public bool[] ready = new bool[2];
@@ -24,6 +24,21 @@ public class MainMenuController : MonoBehaviour
         for (int i = 0; i < ready.Length; i++)
             ready[i] = false;
 
+    }
+
+    public void Reset()
+    {
+        for (int i = 0; i < ready.Length; i++)
+        {
+            ready[i] = false;
+            readyTexts[i].gameObject.SetActive(false);
+            readyTexts[i].color = Color.white;
+            joinTexts[i].text = "Join";
+        }
+
+        amountJoined = 0;
+        amountReady = 0;
+        isCountdown = false;
     }
 
     void Update()

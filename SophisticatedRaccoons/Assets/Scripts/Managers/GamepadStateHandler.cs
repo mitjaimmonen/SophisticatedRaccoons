@@ -20,11 +20,14 @@ public struct PlayerGamepadData
 public class GamepadStateHandler : MonoBehaviour {
 
 	[HideInInspector]public PlayerGamepadData[] playerGamepadData = new PlayerGamepadData[4];
-	[HideInInspector]public GameMaster gameMaster;
-
-
-
 	float timer = 0;
+
+
+	public void Reset()
+	{
+		playerGamepadData = new PlayerGamepadData[4];
+		FindGamepads();
+	}
 
     // Use this for initialization
     void Awake()

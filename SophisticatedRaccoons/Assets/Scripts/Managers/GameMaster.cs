@@ -34,8 +34,10 @@ public class GameMaster : MonoBehaviour
 
     public GameState gamestate = GameState.menu;
     public MainMenuController menuControl;
+    public GamepadStateHandler gamepadStateHandler;
     public InputHandler inputHandler;
     public PauseMenu pauseMenu;
+    public HudHandler hudHandler;
     [FMODUnity.EventRef] public string startSound;
     bool startSoundPlayed = false;
     bool isGameOver = false;
@@ -57,6 +59,7 @@ public class GameMaster : MonoBehaviour
     void GameOver()
     {
         // TODO: Hud text to show who won
+        hudHandler.GameOver("WINNER'S NAME");
         pauseMenu.GameOver();
     }
 
@@ -144,11 +147,14 @@ public class GameMaster : MonoBehaviour
     {
         _instance = this;
         inputHandler = GetComponent<InputHandler>();
+        gamepadStateHandler = GetComponent<GamepadStateHandler>();
+
         if (gamestate == GameState.menu)
         {
             GameObject menu = GameObject.Find("Main Menu");
             if (menu)
                 menuControl = menu.GetComponent<MainMenuController>();
+            Reset();
 
         }
         if (gamestate == GameState.game)
@@ -177,6 +183,20 @@ public class GameMaster : MonoBehaviour
             }
             if (!pauseMenu)
                 pauseMenu = GameObject.Find("Menu").GetComponent<PauseMenu>();
+            if (!hudHandler)
+                hudHandler = GameObject.Find("Hud").GetComponent<HudHandler>();
+
         }
+    }
+
+    void Reset()
+    {
+        startSoundPlayed = false;
+        isGameOver = false;
+        isPaused = false;
+
+        inputHandler.Reset();
+        gamepadStateHandler.Reset();
+        menuControl.Reset();
     }
 }

@@ -21,6 +21,14 @@ public class InputHandler : MonoBehaviour {
 		gamepad = GetComponent<GamepadStateHandler>();
 		gameMaster = GetComponent<GameMaster>();
 	}
+
+	public void Reset()
+	{
+		playerHolders = new PlayerHolder[2];
+		inputDebug = false;
+		playerOneTurn = true;
+		pausedController = 0;
+	}
 	public PlayerGamepadData HandleInput(PlayerGamepadData gamepadData)
 	{
 		if (gameMaster.gamestate == GameState.menu)
