@@ -35,8 +35,10 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     public MainMenuController menuControl;
     public InputHandler inputHandler;
+    public PauseMenu pauseMenu;
     [FMODUnity.EventRef] public string startSound;
     bool startSoundPlayed = false;
+    public bool isPaused = false;
 
     void Awake()
     {

@@ -14,7 +14,6 @@ public class InputHandler : MonoBehaviour {
 
 	public bool inputDebug = false;
 	public bool playerOneTurn = true;
-	bool isPaused = false;
 	int pausedController = 0;
 
 	void Awake()
@@ -32,72 +31,30 @@ public class InputHandler : MonoBehaviour {
 		{
 			if ((gamepadData.characterIndex == 0 && playerOneTurn) || (gamepadData.characterIndex == 1 && !playerOneTurn) || (inputDebug && gamepadData.gamepadPlayerIndex == PlayerIndex.One))
 			{
-				//Only checks current player's inputs
 				if (!inputDebug)
+				{
 					playerHolders[gamepadData.characterIndex].HandleInput(gamepadData);
+				}
 				else
 					playerHolders[0].HandleInput(gamepadData);
 
 			}
-			if (!isPaused || (gamepadData.characterIndex == pausedController && isPaused))
+			if (!gameMaster.isPaused || (gamepadData.characterIndex == pausedController && gameMaster.isPaused))
 			{
 				//Allow any control when not paused. Allow only one paused controller if paused
-				PauseInputs(gamepadData);
+				if (gamepadData.state.Buttons.Start == ButtonState.Pressed && gamepadData.prevState.Buttons.Start == ButtonState.Released)
+				{
+					gameMaster.isPaused = gameMaster.pauseMenu.TogglePaused();
+					pausedController = gamepadData.characterIndex;
+				}
+				if (gameMaster.isPaused)
+					gameMaster.pauseMenu.HandleInput(gamepadData);
+				// PauseInputs(gamepadData);
 			}
 
 		}
 
 		return gamepadData;
-	}
-
-
-	void PlayerInputs(PlayerGamepadData gamepadData)
-	{
-
-		if (gamepadData.prevState.Buttons.Y == ButtonState.Released && gamepadData.state.Buttons.Y == ButtonState.Pressed)
-		{
-			//Y pressed this frame
-		}
-		if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
-		{
-			Debug.Log("pressed A, characterindex: " + gamepadData.characterIndex + ", playerone: " + playerOneTurn);
-			//A pressed this frame
-		}
-
-
-		//DIRECTIONS
-		//**********
-		if (gamepadData.prevState.ThumbSticks.Left.X < 0.2f && gamepadData.state.ThumbSticks.Left.X >= 0.2f)
-		{
-			//Right pressed this frame
-		}
-		if (gamepadData.prevState.ThumbSticks.Left.X > -0.2f && gamepadData.state.ThumbSticks.Left.X <= -0.2f)
-		{
-			//Left pressed this frame
-		}
-		if (gamepadData.prevState.ThumbSticks.Left.Y < 0.2f && gamepadData.state.ThumbSticks.Left.Y >= 0.2f)
-		{
-			//Up pressed this frame
-		}
-		if (gamepadData.prevState.ThumbSticks.Left.Y > -0.2f && gamepadData.state.ThumbSticks.Left.Y <= -0.2f)
-		{
-			//Down pressed this frame
-		}
-		//**********
-		//END OF DIRECTIONS
-	}
-
-	void PauseInputs (PlayerGamepadData gamepadData)
-	{
-		if (gamepadData.state.Buttons.Start == ButtonState.Pressed && gamepadData.prevState.Buttons.Start == ButtonState.Released)
-		{
-			isPaused = !isPaused;
-			pausedController = gamepadData.characterIndex;
-		}
-		if (isPaused)
-		{
-			//rest of inputs
-		}
 	}
 	PlayerGamepadData HandleMenuInputs(PlayerGamepadData gamepadData)
 	{
