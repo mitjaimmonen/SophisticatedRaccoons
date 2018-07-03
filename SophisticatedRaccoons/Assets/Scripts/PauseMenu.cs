@@ -67,7 +67,9 @@ public class PauseMenu : MonoBehaviour {
 
 		EventSystem.current.SetSelectedGameObject(null);
 		if (state)
-			EventSystem.current.SetSelectedGameObject(resumeButton);
+		{
+			EventSystem.current.SetSelectedGameObject(isGameOver ? newGameButton : resumeButton);
+		}
 
 		GameMaster.Instance.isPaused = state;
 			
@@ -175,10 +177,13 @@ public class PauseMenu : MonoBehaviour {
 	}
 	public void GameOver() // GameMaster Calls when game finishes
 	{
-		isGameOver = true;
-		newGameButton.SetActive(true);
-		resumeButton.SetActive(false);
-		StartCoroutine(SetPauseWithDelay(true, 2f));
+		if (!isGameOver)
+		{
+			isGameOver = true;
+			newGameButton.SetActive(true);
+			resumeButton.SetActive(false);
+			StartCoroutine(SetPauseWithDelay(true, 2f));
+		}
 	}
 
 	IEnumerator LoadSceneWithDelay(string sceneName, float delay)

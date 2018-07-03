@@ -59,7 +59,7 @@ public class GameMaster : MonoBehaviour
     void GameOver()
     {
         // TODO: Hud text to show who won
-        hudHandler.GameOver("WINNER'S NAME");
+        hudHandler.GameOver("[winner's name]");
         pauseMenu.GameOver();
     }
 
