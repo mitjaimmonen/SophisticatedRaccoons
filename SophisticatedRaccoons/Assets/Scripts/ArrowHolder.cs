@@ -61,6 +61,19 @@ public class ArrowHolder : MonoBehaviour {
 
     }
 
+    public Arrow SelectedArrow()
+    {      
+        foreach (KeyValuePair<string, Arrow> a in directionArrows)
+        {
+            if (a.Value.selected)
+            {
+                return a.Value;
+            }            
+        }
+
+        return null;
+    }
+
     public void ToggleArrow(bool toggle)
     {       
         if (toggle)

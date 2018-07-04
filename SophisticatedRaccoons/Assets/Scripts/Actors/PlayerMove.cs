@@ -752,9 +752,8 @@ public class PlayerMove : TacticsMove
 
     void TurnTo(Arrow turnDir)
     {
-        Vector3 lookAt = turnDir.gameObject.transform.position;
-        lookAt.y = transform.position.y;
-        transform.LookAt(lookAt);
+        Vector3 lookAt = turnDir.gameObject.transform.position; 
+        StartCoroutine(SlerpTurn(lookAt));
         ToggleArrows(false);
         turnPhase = false;
 
