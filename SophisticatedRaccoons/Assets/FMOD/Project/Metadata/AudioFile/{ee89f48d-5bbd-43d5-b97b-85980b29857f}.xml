@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{ee89f48d-5bbd-43d5-b97b-85980b29857f}">
+        <property name="assetPath">
+            <value>Norse Horn5.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>12.277551020408163</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{19bec2a8-b900-4ad8-a2aa-9f88b337c4f2}</destination>
+        </relationship>
+    </object>
+</objects>

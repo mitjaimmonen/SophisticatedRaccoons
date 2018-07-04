@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{7876ea5f-7181-421a-a6cd-31351b7e5cb7}">
+        <property name="assetPath">
+            <value>war drum multiple 3.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>288.94040816326532</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{19bec2a8-b900-4ad8-a2aa-9f88b337c4f2}</destination>
+        </relationship>
+    </object>
+</objects>

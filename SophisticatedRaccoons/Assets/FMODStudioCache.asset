@@ -12,237 +12,30 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114158328282128132}
-  - {fileID: 114605721067319196}
+  - {fileID: 114218522031439814}
+  - {fileID: 114933919245448786}
   EditorEvents:
-  - {fileID: 114674196544376844}
-  - {fileID: 114577961401789998}
-  - {fileID: 114549298497970166}
-  - {fileID: 114269738786037982}
-  - {fileID: 114056877759890642}
-  - {fileID: 114362126495066752}
-  - {fileID: 114489479028070592}
-  - {fileID: 114287354581853678}
-  - {fileID: 114638810086508494}
-  - {fileID: 114176714629153108}
-  MasterBankRef: {fileID: 114605721067319196}
-  StringsBankRef: {fileID: 114158328282128132}
-  stringsBankWriteTime: 636661226696168651
+  - {fileID: 114635310355379950}
+  - {fileID: 114357945434383874}
+  - {fileID: 114223968072266456}
+  - {fileID: 114149518592096462}
+  - {fileID: 114364283449608702}
+  - {fileID: 114836753225629104}
+  - {fileID: 114157557877734724}
+  - {fileID: 114796368509797348}
+  - {fileID: 114626810236994818}
+  - {fileID: 114966177803124956}
+  - {fileID: 114258109089169006}
+  - {fileID: 114206451394109362}
+  - {fileID: 114621274432343020}
+  - {fileID: 114011989576239024}
+  - {fileID: 114091277239330080}
+  - {fileID: 114932345395059050}
+  MasterBankRef: {fileID: 114933919245448786}
+  StringsBankRef: {fileID: 114218522031439814}
+  stringsBankWriteTime: 636662984658073698
   cacheVersion: 2
---- !u!114 &114056877759890642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_Background_Drums
-  guid: 51a0de8317a8bf4eb2338b8f392cd7dc
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 60000
---- !u!114 &114158328282128132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: Assets\FMOD\Project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636661226696168651
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1168
-  Exists: 1
---- !u!114 &114176714629153108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_Move
-  guid: ed253a9540d42a4fa31eb3a5641f2acb
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2700
---- !u!114 &114269738786037982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/SFX_GetHit
-  guid: 4e1246cfff1fb24f90397cf90737cb7d
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1250
---- !u!114 &114287354581853678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/General_StartGame-Horn
-  guid: c02fbc390bc4fb4896afc9a2fc12d6b4
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 12225
---- !u!114 &114362126495066752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_GetHit
-  guid: 6d114edd3788b5469b2cc9b19a7dd585
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 835
---- !u!114 &114489479028070592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_Background_Crowd
-  guid: 838ff847fcf20040890ea58ccd0f5123
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 87024
---- !u!114 &114549298497970166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_Push
-  guid: 41d3481cfe26ab4fbb6209fa22dc2170
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2377
---- !u!114 &114577961401789998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Raccoon Sounds/Audio_PushedOut
-  guid: 142f8f9486a8894aa707a84fef907b14
-  Banks:
-  - {fileID: 114605721067319196}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4675
---- !u!114 &114605721067319196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: C:\Users\c4arodri.WPK\Documents\SophisticatedRaccoons\SophisticatedRaccoons\Assets\FMOD\Project\Build\Desktop\Master
-    Bank.bank
-  lastModified: 636661226696459427
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 2671584
-  Exists: 1
---- !u!114 &114638810086508494
+--- !u!114 &114011989576239024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -256,7 +49,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/Audio_Default
   guid: eba2da1d4fc85a47ac82d791359e7689
   Banks:
-  - {fileID: 114605721067319196}
+  - {fileID: 114933919245448786}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -264,7 +57,157 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2533
---- !u!114 &114674196544376844
+--- !u!114 &114091277239330080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Move
+  guid: ed253a9540d42a4fa31eb3a5641f2acb
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2700
+--- !u!114 &114149518592096462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Push
+  guid: 41d3481cfe26ab4fbb6209fa22dc2170
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2377
+--- !u!114 &114157557877734724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_GetHit
+  guid: 6d114edd3788b5469b2cc9b19a7dd585
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 835
+--- !u!114 &114206451394109362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/General_StartGame-Horn
+  guid: c02fbc390bc4fb4896afc9a2fc12d6b4
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12277
+--- !u!114 &114218522031439814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: Assets\FMOD\Project\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636662984658073698
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1412
+  Exists: 1
+--- !u!114 &114223968072266456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_PushedOut
+  guid: 142f8f9486a8894aa707a84fef907b14
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4675
+--- !u!114 &114258109089169006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Swords
+  guid: 9c5d36f54a5cd74192d59f791e51334f
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 120000
+--- !u!114 &114357945434383874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -278,7 +221,7 @@ MonoBehaviour:
   Path: event:/Raccoon Sounds/SFX_HitEnemy
   guid: 088ab2a82b3629438f29e125af0f7422
   Banks:
-  - {fileID: 114605721067319196}
+  - {fileID: 114933919245448786}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -286,7 +229,161 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1040
---- !u!114 &114915466701848906
+--- !u!114 &114364283449608702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/SFX_GetHit
+  guid: 4e1246cfff1fb24f90397cf90737cb7d
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
+--- !u!114 &114621274432343020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drum_Solo2
+  guid: d7dfe020fb68b14c894c12d09dbd94dd
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18860
+--- !u!114 &114626810236994818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drums_Many2
+  guid: 921d188b7a52d34b8663c8f2334392aa
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 60000
+--- !u!114 &114635310355379950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drum_Solo3
+  guid: 027293d2d48da643ad763f27d14f999e
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 37642
+--- !u!114 &114796368509797348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Crowd
+  guid: 838ff847fcf20040890ea58ccd0f5123
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 87024
+--- !u!114 &114836753225629104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drums_Many1
+  guid: 51a0de8317a8bf4eb2338b8f392cd7dc
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 60000
+--- !u!114 &114932345395059050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drum_Solo1
+  guid: fcbb891aa7fd0f4ba561d0a7f7958d38
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16587
+--- !u!114 &114933919245448786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -299,9 +396,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\Users\Laptop\Documents\Git\SophisticatedRaccoons\SophisticatedRaccoons\Assets\FMOD\Project\Build\Desktop\Master
     Bank.bank
-  lastModified: 636658693428285632
+  lastModified: 636662984659700589
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2671584
+    Value: 14457088
   Exists: 1
+--- !u!114 &114966177803124956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Raccoon Sounds/Audio_Background_Drums_Many3
+  guid: 942a07850201bd41942327f5c86a7384
+  Banks:
+  - {fileID: 114933919245448786}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 60000

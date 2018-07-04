@@ -34,11 +34,36 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     TacticsCamera tacticsCamera;
     public MainMenuController menuControl;
+    public GamepadStateHandler gamepadStateHandler;
     public InputHandler inputHandler;
     public PlayerHolder[] players;
     public int playerIndex;
-    public bool gameIsOver = false;
+    public PauseMenu pauseMenu;
+    public HudHandler hudHandler;
+    [FMODUnity.EventRef] public string startSound;
+    bool startSoundPlayed = false;
+    bool isGameOver = false;
+    public bool isPaused = false;
 
+    public bool IsGameOver
+    {
+        get {return isGameOver;}
+        set 
+        {
+            if (isGameOver != value)
+            {
+                isGameOver = value;
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        // TODO: Hud text to show who won
+        hudHandler.GameOver("[winner's name]");
+        pauseMenu.GameOver();
+    }
 
     void Awake()
     {
@@ -104,7 +129,7 @@ public class GameMaster : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        if (!gameIsOver)
+        if (!isGameOver)
         {
 
             players[playerIndex].isOwnTurn = false;
@@ -135,7 +160,7 @@ public class GameMaster : MonoBehaviour
 
     private void StartTurn()
     {
-        if (!gameIsOver)
+        if (!isGameOver)
         {
             players[playerIndex].isOwnTurn = true;
             entryMode = true;
@@ -162,11 +187,14 @@ public class GameMaster : MonoBehaviour
     {
         _instance = this;
         inputHandler = GetComponent<InputHandler>();
+        gamepadStateHandler = GetComponent<GamepadStateHandler>();
+
         if (gamestate == GameState.menu)
         {
             GameObject menu = GameObject.Find("Main Menu");
             if (menu)
                 menuControl = menu.GetComponent<MainMenuController>();
+            Reset();
 
         }
         if (gamestate == GameState.game)
@@ -191,9 +219,32 @@ public class GameMaster : MonoBehaviour
                 }
             }
             else
-                Debug.LogWarning("No two player holders found in level, holder's lenght is: " + holders.Length);
+                Debug.LogWarning("No two player holders found in level");
+
+            if (!startSoundPlayed)
+            {
+                startSoundPlayed = true;
+                Debug.Log("Play sound");
+                FMODUnity.RuntimeManager.PlayOneShot(startSound, Camera.main.transform.position);
+
+            }
+            if (!pauseMenu)
+                pauseMenu = GameObject.Find("Menu").GetComponent<PauseMenu>();
+            if (!hudHandler)
+                hudHandler = GameObject.Find("Hud").GetComponent<HudHandler>();
 
             StartTurn();
         }
+    }
+
+    void Reset()
+    {
+        startSoundPlayed = false;
+        isGameOver = false;
+        isPaused = false;
+
+        inputHandler.Reset();
+        gamepadStateHandler.Reset();
+        menuControl.Reset();
     }
 }

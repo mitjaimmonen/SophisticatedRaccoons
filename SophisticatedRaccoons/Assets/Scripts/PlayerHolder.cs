@@ -26,8 +26,8 @@ public class PlayerHolder : MonoBehaviour {
 		{
 			if (!characters.Contains(p))
 			{
-				var mat = p.GetComponent<Renderer>();
-				mat.material = playerMaterial;
+				// var mat = p.GetComponent<Renderer>();
+				// mat.material = playerMaterial;
 				characters.Add(p);
 
 			}

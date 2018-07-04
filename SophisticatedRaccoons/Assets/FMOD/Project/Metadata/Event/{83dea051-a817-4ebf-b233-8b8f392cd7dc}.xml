@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{83dea051-a817-4ebf-b233-8b8f392cd7dc}">
         <property name="name">
-            <value>Audio_Background_Drums</value>
+            <value>Audio_Background_Drums_Many1</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
@@ -60,7 +60,7 @@
     <object class="MarkerTrack" id="{871ef9cc-3413-4768-94b3-5d6481bef2a2}"/>
     <object class="GroupTrack" id="{3fde43c2-1771-42eb-b0e7-5698a1aacf18}">
         <relationship name="modules">
-            <destination>{7ace5f85-1299-4313-81ba-7fb853764f0a}</destination>
+            <destination>{2eeda7bb-d7e9-4563-9f65-55e55baac576}</destination>
         </relationship>
         <relationship name="mixerGroup">
             <destination>{220660b0-2959-4dca-8ecb-62f247527f26}</destination>
@@ -68,7 +68,10 @@
     </object>
     <object class="Timeline" id="{309fb2eb-476a-41a4-95e4-6bb6f02629d1}">
         <relationship name="modules">
-            <destination>{7ace5f85-1299-4313-81ba-7fb853764f0a}</destination>
+            <destination>{2eeda7bb-d7e9-4563-9f65-55e55baac576}</destination>
+        </relationship>
+        <relationship name="markers">
+            <destination>{cba4af26-b495-4d95-acd3-d83dd7f09190}</destination>
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{12e89454-2f36-4f58-9318-7c6e01838ded}">
@@ -88,18 +91,24 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{7a59bd8c-fe6b-43de-ae46-e8da7500b083}"/>
-    <object class="SingleSound" id="{7ace5f85-1299-4313-81ba-7fb853764f0a}">
+    <object class="SingleSound" id="{2eeda7bb-d7e9-4563-9f65-55e55baac576}">
         <property name="isAsync">
             <value>true</value>
         </property>
         <property name="length">
             <value>60</value>
         </property>
+        <property name="startOffset">
+            <value>20.5</value>
+        </property>
         <property name="looping">
             <value>true</value>
         </property>
+        <relationship name="modulators">
+            <destination>{3c237aee-b07e-4c4e-b35b-8bf945851de8}</destination>
+        </relationship>
         <relationship name="audioFile">
-            <destination>{21c6029a-7dab-4acc-b2d7-da4e68c8baf3}</destination>
+            <destination>{f3ab7e28-b931-4237-86f8-67c0fb8bfe78}</destination>
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{220660b0-2959-4dca-8ecb-62f247527f26}">
@@ -116,6 +125,20 @@
             <destination>{12e89454-2f36-4f58-9318-7c6e01838ded}</destination>
         </relationship>
     </object>
+    <object class="LoopRegion" id="{cba4af26-b495-4d95-acd3-d83dd7f09190}">
+        <property name="position">
+            <value>0</value>
+        </property>
+        <property name="length">
+            <value>60</value>
+        </property>
+        <relationship name="timeline">
+            <destination>{309fb2eb-476a-41a4-95e4-6bb6f02629d1}</destination>
+        </relationship>
+        <relationship name="markerTrack">
+            <destination>{871ef9cc-3413-4768-94b3-5d6481bef2a2}</destination>
+        </relationship>
+    </object>
     <object class="MixerBusEffectChain" id="{1f8226bf-49cd-43a5-8533-6a9a3f501ac3}">
         <relationship name="effects">
             <destination>{aaff5f40-4683-4050-adeb-c786e87cbf23}</destination>
@@ -128,6 +151,14 @@
         </property>
     </object>
     <object class="MixerBusFader" id="{7b23338b-8830-4710-acf0-734400543f43}"/>
+    <object class="RandomizerModulator" id="{3c237aee-b07e-4c4e-b35b-8bf945851de8}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>startOffset</value>
+        </property>
+        <property name="amount">
+            <value>20.5</value>
+        </property>
+    </object>
     <object class="MixerBusEffectChain" id="{e60be0a0-6458-4bd2-94ca-4f279d6f783e}">
         <relationship name="effects">
             <destination>{59e33965-c1a7-4709-a033-45cb00231f4f}</destination>

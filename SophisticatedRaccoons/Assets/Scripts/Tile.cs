@@ -229,7 +229,7 @@ public class Tile : MonoBehaviour
         {
             Tile tile = hit.transform.gameObject.GetComponent<Tile>();
 
-            if (tile.isSpawn && tile != this && !spawnAdjacencyDict.ContainsKey(directionKey))
+            if (tile && tile.isSpawn && tile != this && !spawnAdjacencyDict.ContainsKey(directionKey))
             {
                 if (!tile.skippable)
                 {

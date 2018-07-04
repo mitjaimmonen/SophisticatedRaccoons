@@ -43,7 +43,7 @@ public class Booty : MonoBehaviour
         //get current tile
         if (GetTargetTile(gameObject).isSpawn)
         {
-            GameMaster.Instance.gameIsOver = true;
+            GameMaster.Instance.IsGameOver = true;
             Debug.Log("Game Ended! Player " + (GameMaster.Instance.playerIndex + 1) + " won!");
         }
         //is spawn tile, game ends
