@@ -20,10 +20,10 @@ public class HudHandler : MonoBehaviour {
 		playerTurnText.text = playerName + " turn";
 	}
 
-	public void GameOver(string winnerName)
+	public void GameOver(int winnerIndex)
 	{
 		winText.gameObject.SetActive(true);
 		playerTurnText.gameObject.SetActive(false);
-		winText.text = winnerName + " won!";
+		winText.text = "Player " + (winnerIndex+1) + " won!";
 	}
 }

@@ -59,7 +59,7 @@ public class InputHandler : MonoBehaviour {
 				//Allow any control when not paused. Allow only one paused controller if paused
 				if (gamepadData.state.Buttons.Start == ButtonState.Pressed && gamepadData.prevState.Buttons.Start == ButtonState.Released)
 				{
-					gameMaster.isPaused = gameMaster.pauseMenu.TogglePaused();
+					gameMaster.isPaused = gameMaster.pauseMenu.TogglePaused(gamepadData.characterIndex);
 					pausedController = gamepadData.characterIndex;
 				}
 				if (gameMaster.isPaused)

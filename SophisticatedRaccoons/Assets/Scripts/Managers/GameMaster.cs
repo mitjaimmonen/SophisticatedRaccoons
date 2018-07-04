@@ -61,7 +61,7 @@ public class GameMaster : MonoBehaviour
     void GameOver()
     {
         // TODO: Hud text to show who won
-        hudHandler.GameOver("[winner's name]");
+        hudHandler.GameOver(playerIndex);
         pauseMenu.GameOver();
     }
 
@@ -165,12 +165,14 @@ public class GameMaster : MonoBehaviour
             players[playerIndex].isOwnTurn = true;
             entryMode = true;
             players[playerIndex].StartTurn();
+            hudHandler.SetPlayerTurn("Player" + (playerIndex+1));
         }
     }
 
     void EndGame()
     {
         Debug.Log("The Game may not continue as it is over!!!!");
+        hudHandler.GameOver(playerIndex);
     }
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
