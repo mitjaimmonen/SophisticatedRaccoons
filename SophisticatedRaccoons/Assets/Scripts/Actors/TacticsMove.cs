@@ -177,8 +177,8 @@ public class TacticsMove : MonoBehaviour
                 ToggleArrows(true);
             }
             else
-            {               
-                Deactivate(true);          
+            {
+                Deactivate(true);
             }
         }
 
@@ -218,9 +218,21 @@ public class TacticsMove : MonoBehaviour
 
     public void Deactivate(bool endTurn)
     {
-        active = false;   
-             
+        active = false;
+
+        foreach (GameObject tile in tiles)
+        {
+            Debug.Log("got here!!");
+            Tile temp = tile.GetComponent<Tile>();
+            if (!temp.isSpawn)
+            {
+                temp.Reset();
+            }
+        }
+
         if (endTurn)
-        GameMaster.Instance.EndTurn();
+        {
+            GameMaster.Instance.EndTurn();
+        }
     }
 }

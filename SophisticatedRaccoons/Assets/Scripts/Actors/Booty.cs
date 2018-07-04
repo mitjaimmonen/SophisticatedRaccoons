@@ -34,6 +34,31 @@ public class Booty : MonoBehaviour
         {
             transform.position = target;
             beingPushed = false;
+            CheckBoardLimits();
         }
+    }
+
+     void CheckBoardLimits()
+    {
+        //get current tile
+        if (GetTargetTile(gameObject).isSpawn)
+        {
+            GameMaster.Instance.gameIsOver = true;
+            Debug.Log("Game Ended! Player " + (GameMaster.Instance.playerIndex + 1) + " won!");
+        }
+        //is spawn tile, game ends
+    }
+
+    public Tile GetTargetTile(GameObject target)
+    {
+        RaycastHit hit;
+        Tile tile = null;
+
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
+        {
+            tile = hit.collider.GetComponent<Tile>();
+        }
+
+        return tile;
     }
 }

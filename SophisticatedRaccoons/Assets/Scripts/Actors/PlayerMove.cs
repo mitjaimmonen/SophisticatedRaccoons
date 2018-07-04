@@ -8,7 +8,7 @@ public class PlayerMove : TacticsMove
 
 
     public bool turnPhase = false;
-   
+
     public bool beingPushed = false;
     public bool settingPhase = true;
 
@@ -31,9 +31,7 @@ public class PlayerMove : TacticsMove
         arrowHolder = aHolder.AddComponent<ArrowHolder>();
         arrowHolder.owner = this;
 
-
         ToggleArrows(false);
-
     }
 
     private void Update()
@@ -261,6 +259,19 @@ public class PlayerMove : TacticsMove
                 lastInputTime = Time.time;
             }
 
+            if (gamepadData.state.Buttons.X == ButtonState.Pressed && gamepadData.prevState.Buttons.X == ButtonState.Released)
+            {
+                if (inBoard && canCancel)
+                {
+                    GetCurrentTile();
+                    if (currentTile.isCorner)
+                    {
+                        GetOutOfBoard();
+                        Deactivate(true);
+                    }
+                }
+
+            }
             if (gamepadData.state.Buttons.B == ButtonState.Pressed)
             {
                 if (currentSelectedTile)
@@ -766,8 +777,27 @@ public class PlayerMove : TacticsMove
         {
             transform.position = target;
             beingPushed = false;
+            CheckBoardLimit();
         }
     }
+
+    void CheckBoardLimit()
+    {
+        GetCurrentTile();
+        if (currentTile.isSpawn)
+        {
+            GetOutOfBoard();
+        }
+    }
+
+    void GetOutOfBoard()
+    {
+        inBoard = false;
+        transform.position = startPos;
+        currentTile = null;
+       
+    }
+
 
     public void Activate()
     {

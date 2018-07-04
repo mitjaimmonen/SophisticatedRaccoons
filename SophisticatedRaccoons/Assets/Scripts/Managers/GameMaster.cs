@@ -12,7 +12,6 @@ public enum GameState
 
 public class GameMaster : MonoBehaviour
 {
-    //List<Tile> entryTiles = new List<Tile>();
     public bool entryMode = true;
     private bool displayingSelected;
 
@@ -38,6 +37,7 @@ public class GameMaster : MonoBehaviour
     public InputHandler inputHandler;
     public PlayerHolder[] players;
     public int playerIndex;
+    public bool gameIsOver = false;
 
 
     void Awake()
@@ -52,12 +52,12 @@ public class GameMaster : MonoBehaviour
         Instantiate();
 
         playerIndex = 0;
-      
+
 
     }
     private void Start()
     {
-        
+
     }
 
     void OnDisable()
@@ -75,7 +75,7 @@ public class GameMaster : MonoBehaviour
         if (gamestate == GameState.game)
         {
             // if treasure is out
-                //end game
+            //end game
         }
     }
 
@@ -83,7 +83,7 @@ public class GameMaster : MonoBehaviour
     {
         if (entryMode)
         {
-           //nothing
+            //nothing
         }
     }
 
@@ -96,43 +96,64 @@ public class GameMaster : MonoBehaviour
 
     public void EndTurn()
     {
-        players[playerIndex].isOwnTurn = false;
-        players[playerIndex].EndTurn();
+        StartCoroutine(WaitForEnd());
+        //switch player
+    }
 
-        Debug.Log("turn ended, is now player " + (playerIndex + 1));
+    IEnumerator WaitForEnd()
+    {
+        yield return new WaitForSeconds(0.5f);
 
-        if (playerIndex == 1)
+        if (!gameIsOver)
         {
-            playerIndex = 0;
-            inputHandler.playerOneTurn = true;
-            tacticsCamera.ChangePlayer(true);
+
+            players[playerIndex].isOwnTurn = false;
+            players[playerIndex].EndTurn();
+
+            Debug.Log("turn ended, is now player " + (playerIndex + 1));
+
+            if (playerIndex == 1)
+            {
+                playerIndex = 0;
+                inputHandler.playerOneTurn = true;
+                tacticsCamera.ChangePlayer(true);
+            }
+            else
+            {
+                playerIndex = 1;
+                inputHandler.playerOneTurn = false;
+                tacticsCamera.ChangePlayer(false);
+            }
+
+            StartTurn();
         }
         else
         {
-            playerIndex = 1;
-            inputHandler.playerOneTurn = false;
-            tacticsCamera.ChangePlayer(false);
+            EndGame();
         }
-
-        StartTurn();
-        //switch player
     }
 
     private void StartTurn()
     {
-       
-        players[playerIndex].isOwnTurn = true;
-        entryMode = true;
-        players[playerIndex].StartTurn();
+        if (!gameIsOver)
+        {
+            players[playerIndex].isOwnTurn = true;
+            entryMode = true;
+            players[playerIndex].StartTurn();
+        }
     }
 
+    void EndGame()
+    {
+        Debug.Log("The Game may not continue as it is over!!!!");
+    }
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
             gamestate = GameState.menu;
         else
             gamestate = GameState.game;
-            
+
         Instantiate();
     }
 
@@ -154,7 +175,7 @@ public class GameMaster : MonoBehaviour
             var holders = GameObject.FindGameObjectsWithTag("PlayerHolder");
             if (holders.Length == 2)
             {
-                for(int i = 0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     var h = holders[i].GetComponent<PlayerHolder>();
                     if (h.playerOne)
