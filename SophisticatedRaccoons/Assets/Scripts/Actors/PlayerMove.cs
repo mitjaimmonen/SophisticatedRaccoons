@@ -6,14 +6,18 @@ using XInputDotNetPure;
 public class PlayerMove : TacticsMove
 {
 
-    public bool active = true;
+
     public bool turnPhase = false;
+
     public bool beingPushed = false;
     public bool settingPhase = true;
+
+
     public Vector3 target;
     public Vector3 direction;
     public bool skipMove = false;
 
+    PlayerHolder daddy;
 
     float lastInputTime = 0;
 
@@ -21,12 +25,13 @@ public class PlayerMove : TacticsMove
     {
         Init();
 
+        startPos = transform.position;
         GameObject aHolder = Instantiate(arrowHolderPrefab, transform.position, Quaternion.identity);
+        daddy = GetComponentInParent<PlayerHolder>();
         arrowHolder = aHolder.AddComponent<ArrowHolder>();
         arrowHolder.owner = this;
-        ToggleArrows(false);
-        FindEntryTiles();
 
+        ToggleArrows(false);
     }
 
     private void Update()
@@ -39,22 +44,19 @@ public class PlayerMove : TacticsMove
                 if (!moving)
                 {
                     FindSelectableTiles();
-                    CheckControl();
-                    //mouse for now
                     if (currentSelectedTile)
                     {
                         currentSelectedTile.target = true;
                     }
                 }
+                else if (!beingPushed)
+                {
+                    Move();
+                }
             }
-
-        }
-        else if (!beingPushed && active)
-        {
-            Move();
         }
 
-        else
+        if (beingPushed)
         {
             GetPushed();
         }
@@ -65,34 +67,66 @@ public class PlayerMove : TacticsMove
     {
         if (!active || moving)
             return;
-        
+
         var thumbstick = gamepadData.state.ThumbSticks;
         if (!GameMaster.Instance.entryMode)
         {
             if (thumbstick.Left.X > 0.2f || thumbstick.Left.X < -0.2f ||
                 thumbstick.Left.Y > 0.2f || thumbstick.Left.Y < -0.2f)
             {
-
                 if (!turnPhase)
                 {
                     //check camera state
                     Tile t = new Tile();
 
-                    if (thumbstick.Left.X < -0.2f)
+                    if (GameMaster.Instance.playerIndex == 0)
                     {
-                        t = currentTile.adjacencyDict["Left"];
+                        if (thumbstick.Left.X < -0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Left"))
+                                t = currentTile.adjacencyDict["Left"];
+                        }
+                        if (thumbstick.Left.X > 0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Right"))
+                                t = currentTile.adjacencyDict["Right"];
+                        }
+                        if (thumbstick.Left.Y > 0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Up"))
+                                t = currentTile.adjacencyDict["Up"];
+                        }
+                        if (thumbstick.Left.Y < -0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Down"))
+                                t = currentTile.adjacencyDict["Down"];
+                        }
+
                     }
-                    if (thumbstick.Left.X > 0.2f)
+                    else
                     {
-                        t = currentTile.adjacencyDict["Right"];
-                    }
-                    if ( thumbstick.Left.Y > 0.2f)
-                    {
-                        t = currentTile.adjacencyDict["Up"];
-                    }
-                    if (thumbstick.Left.Y < -0.2f)
-                    {
-                        t = currentTile.adjacencyDict["Down"];
+                        Debug.Log("got here!!");
+                        if (thumbstick.Left.X < -0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Right"))
+                                t = currentTile.adjacencyDict["Right"];
+                        }
+                        if (thumbstick.Left.X > 0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Left"))
+                                t = currentTile.adjacencyDict["Left"];
+                        }
+                        if (thumbstick.Left.Y > 0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Down"))
+                                t = currentTile.adjacencyDict["Down"];
+                        }
+                        if (thumbstick.Left.Y < -0.2f)
+                        {
+                            if (currentTile.adjacencyDict.ContainsKey("Up"))
+                                t = currentTile.adjacencyDict["Up"];
+                        }
+
                     }
 
                     if (t == currentSelectedTile)
@@ -110,25 +144,44 @@ public class PlayerMove : TacticsMove
                 {
                     Arrow a = new Arrow();
 
-                    if (thumbstick.Left.X < -0.2f)
+                    if (GameMaster.Instance.playerIndex == 0)
                     {
+                        if (thumbstick.Left.X < -0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Left");
+                        }
+                        if (thumbstick.Left.X > 0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Right");
+                        }
+                        if (thumbstick.Left.Y > 0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Up");
+                        }
+                        if (thumbstick.Left.Y < -0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Down");
+                        }
 
-                        a = arrowHolder.GetArrow("Left");
                     }
-                    if (thumbstick.Left.X > 0.2f)
+                    else
                     {
-                        a = arrowHolder.GetArrow("Right");
-
-                    }
-                    if (thumbstick.Left.Y > 0.2f)
-                    {
-                        a = arrowHolder.GetArrow("Up");
-
-                    }
-                    if (thumbstick.Left.Y < -0.2f)
-                    {
-                        a = arrowHolder.GetArrow("Down");
-
+                        if (thumbstick.Left.X < -0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Right");
+                        }
+                        if (thumbstick.Left.X > 0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Left");
+                        }
+                        if (thumbstick.Left.Y > 0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Down");
+                        }
+                        if (thumbstick.Left.Y < -0.2f)
+                        {
+                            a = arrowHolder.GetArrow("Up");
+                        }
                     }
 
                     if (a == arrowHolder.currentArrow)
@@ -138,17 +191,15 @@ public class PlayerMove : TacticsMove
 
                     else
                     {
-                        arrowHolder.ClearSelectedArrows();
                         arrowHolder.currentArrow = null;
                         arrowHolder.currentArrow = a;
-                        a.selected = true;
-
+                        arrowHolder.ClearSelectedArrows();
+                        arrowHolder.currentArrow.selected = true;
                     }
-
                 }
             }
 
-            if (gamepadData.state.Buttons.A == ButtonState.Pressed)
+            if (gamepadData.state.Buttons.A == ButtonState.Pressed && gamepadData.prevState.Buttons.A == ButtonState.Released)
             {
                 if (!turnPhase)
                 {
@@ -157,50 +208,88 @@ public class PlayerMove : TacticsMove
                         if (currentSelectedTile.walkable)
                         {
                             MoveToTile(currentSelectedTile);
+                            turnPhase = true;
+
+
                         }
                         else if (currentSelectedTile.pushable)
                         {
                             TryToPush();
+
                         }
                         else
                         {
                             //nothing
                         }
 
-                        turnPhase = !turnPhase;
                     }
 
                     else
                     {
-                        if (!skipMove)
+                        if (inBoard)
                         {
-                            skipMove = !skipMove;
-                        }
-                        else
-                        {
-                            skipMove = !skipMove;
-                            turnPhase = !turnPhase;
-                            Debug.Log("Setting arrows active");
-                            ToggleArrows(true);
+                            if (!skipMove)
+                            {
+                                skipMove = !skipMove;
+                            }
+                            else
+                            {
+                                skipMove = !skipMove;
+                                turnPhase = true;
+                                ToggleArrows(true);
+                            }
                         }
                     }
                 }
 
                 else
                 {
-                    TurnTo(arrowHolder.currentArrow);
-                    arrowHolder.currentArrow = null;
-                    turnPhase = !turnPhase;
+                    if (arrowHolder.currentArrow)
+                    {
+                        TurnTo(arrowHolder.currentArrow);
+                        if (!inBoard)
+                        {
+                            inBoard = true;
+                        }
+                        Deactivate(true);
+
+                    }
                 }
                 Debug.Log("Pressed A");
                 lastInputTime = Time.time;
             }
 
+            if (gamepadData.state.Buttons.X == ButtonState.Pressed && gamepadData.prevState.Buttons.X == ButtonState.Released)
+            {
+                if (inBoard && canCancel)
+                {
+                    GetCurrentTile();
+                    if (currentTile.isCorner)
+                    {
+                        GetOutOfBoard();
+                        Deactivate(true);
+                    }
+                }
+
+            }
             if (gamepadData.state.Buttons.B == ButtonState.Pressed)
             {
                 if (currentSelectedTile)
                 {
                     currentSelectedTile = null;
+                }
+                else
+                {
+                    if (canCancel)
+                    {
+                        GameMaster.Instance.EntryModeToggle(true);
+                        if (!inBoard)
+                        {
+                            Debug.Log("current position: " + transform.position + " start position: " + startPos);
+                            transform.position = startPos;
+                        }
+                        Deactivate(false);
+                    }
                 }
             }
         }
@@ -208,57 +297,118 @@ public class PlayerMove : TacticsMove
         else // Is entry mode
         {
             //check camera state
-       
-            if (gamepadData.state.ThumbSticks.Left.X < -0.2f && gamepadData.prevState.ThumbSticks.Left.X >= -0.2f)
+            if (GameMaster.Instance.playerIndex == 0)
             {
-                if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
-                {                  
-                    currentTile.current = false;
-                    currentTile = currentTile.spawnAdjacencyDict["Left"];
-                    currentTile.current = true;
-                }
-            }
-            if (gamepadData.state.ThumbSticks.Left.X > 0.2f && gamepadData.prevState.ThumbSticks.Left.X <= 0.2f)
-            {
-                if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
-                {                  
-                    currentTile.current = false;
-                    currentTile = currentTile.spawnAdjacencyDict["Right"];
-                    currentTile.current = true;
-                }
-            }
-            if (gamepadData.state.ThumbSticks.Left.Y > 0.2f && gamepadData.prevState.ThumbSticks.Left.Y <= 0.2f)
-            {
-                if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
+                if (gamepadData.state.ThumbSticks.Left.X < -0.2f && gamepadData.prevState.ThumbSticks.Left.X >= -0.2f)
                 {
-                    currentTile.current = false;
-                    currentTile = currentTile.spawnAdjacencyDict["Up"];
-                    currentTile.current = true;
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
+                    {
+                        Debug.Log("Moving from " + currentTile.gameObject + " to " + currentTile.spawnAdjacencyDict["Left"].gameObject);
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Left"];
+                        currentTile.current = true;
+                    }
                 }
-            }
-            if (gamepadData.state.ThumbSticks.Left.Y < -0.2f && gamepadData.prevState.ThumbSticks.Left.Y >= -0.2f)
-            {
-                if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
+                if (gamepadData.state.ThumbSticks.Left.X > 0.2f && gamepadData.prevState.ThumbSticks.Left.X <= 0.2f)
                 {
-                    currentTile.current = false;
-                    currentTile = currentTile.spawnAdjacencyDict["Down"];
-                    currentTile.current = true;
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
+                    {
+                        Debug.Log("Moving from " + currentTile.gameObject + " to " + currentTile.spawnAdjacencyDict["Right"].gameObject);
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Right"];
+                        currentTile.current = true;
+                    }
+                }
+                if (gamepadData.state.ThumbSticks.Left.Y > 0.2f && gamepadData.prevState.ThumbSticks.Left.Y <= 0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
+                    {
+                        Debug.Log("Moving from " + currentTile.gameObject + " to " + currentTile.spawnAdjacencyDict["Up"].gameObject);
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Up"];
+                        currentTile.current = true;
+                    }
+                }
+                if (gamepadData.state.ThumbSticks.Left.Y < -0.2f && gamepadData.prevState.ThumbSticks.Left.Y >= -0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
+                    {
+                        Debug.Log("Moving from " + currentTile.gameObject + " to " + currentTile.spawnAdjacencyDict["Down"].gameObject);
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Down"];
+                        currentTile.current = true;
+                    }
                 }
             }
 
-            if (gamepadData.state.Buttons.A == ButtonState.Pressed && gamepadData.prevState.Buttons.A == ButtonState.Released && lastInputTime+0.1f < Time.time)
+            else
+            {
+                if (gamepadData.state.ThumbSticks.Left.X < -0.2f && gamepadData.prevState.ThumbSticks.Left.X >= -0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
+                    {
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Right"];
+                        currentTile.current = true;
+                    }
+                }
+                if (gamepadData.state.ThumbSticks.Left.X > 0.2f && gamepadData.prevState.ThumbSticks.Left.X <= 0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
+                    {
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Left"];
+                        currentTile.current = true;
+                    }
+                }
+                if (gamepadData.state.ThumbSticks.Left.Y > 0.2f && gamepadData.prevState.ThumbSticks.Left.Y <= 0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
+                    {
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Down"];
+                        currentTile.current = true;
+                    }
+                }
+                if (gamepadData.state.ThumbSticks.Left.Y < -0.2f && gamepadData.prevState.ThumbSticks.Left.Y >= -0.2f)
+                {
+                    if (currentTile.spawnAdjacencyDict.ContainsKey("Up"))
+                    {
+                        currentTile.current = false;
+                        currentTile = currentTile.spawnAdjacencyDict["Up"];
+                        currentTile.current = true;
+                    }
+                }
+            }
+
+
+            if (gamepadData.state.Buttons.A == ButtonState.Pressed && gamepadData.prevState.Buttons.A == ButtonState.Released && lastInputTime + 0.1f < Time.time)
             {
                 //Doesnt work??
-                MoveToTile(currentTile);
+                // MoveToTile(currentTile);
 
                 //This hack works :))))
                 transform.position = new Vector3(currentTile.transform.position.x, currentTile.transform.position.y + 1f, currentTile.transform.position.z);
                 Debug.Log("Entry mode finished");
-                // statehandler.Instance.EntryModeToggle(false);
+                GameMaster.Instance.EntryModeToggle(false);
+                currentTile.FindNeighbors();
+                Vector3 temp = currentTile.adjacencyList[0].transform.position;
+                temp.y = transform.position.y;
+                transform.LookAt(temp);
+            }
+
+            if (gamepadData.state.Buttons.B == ButtonState.Pressed)
+            {
+                if (active)
+                {
+                    Deactivate(false);
+                    GameMaster.Instance.EntryModeToggle(true);
+                }
             }
         }
     }
 
+    /*
     void KeyBoardControl()
     {
         if (!GameMaster.Instance.entryMode)
@@ -374,7 +524,7 @@ public class PlayerMove : TacticsMove
                         {
                             skipMove = !skipMove;
                             turnPhase = !turnPhase;
-                            ToggleArrows(true);
+                            // ToggleArrows(true);
                         }
                     }
                 }
@@ -384,6 +534,7 @@ public class PlayerMove : TacticsMove
                     TurnTo(arrowHolder.currentArrow);
                     arrowHolder.currentArrow = null;
                     turnPhase = !turnPhase;
+
                 }
             }
 
@@ -399,12 +550,12 @@ public class PlayerMove : TacticsMove
         else
         {
             //check camera state
-       
+
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Left"))
-                {                  
+                {
                     currentTile.current = false;
                     currentTile = currentTile.spawnAdjacencyDict["Left"];
                     currentTile.current = true;
@@ -413,7 +564,7 @@ public class PlayerMove : TacticsMove
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Right"))
-                {                  
+                {
                     currentTile.current = false;
                     currentTile = currentTile.spawnAdjacencyDict["Right"];
                     currentTile.current = true;
@@ -432,27 +583,28 @@ public class PlayerMove : TacticsMove
             {
                 if (currentTile.spawnAdjacencyDict.ContainsKey("Down"))
                 {
-                
+
                     currentTile.current = false;
                     currentTile = currentTile.spawnAdjacencyDict["Down"];
                     currentTile.current = true;
                 }
-            }       
+            }
 
             else
             {
-            
+
 
             }
         }
     }
+    */
 
     void CheckControl()
     {
-        if (Input.anyKeyDown)
-        {
-            KeyBoardControl();
-        }
+        //if (Input.anyKeyDown)
+        //{
+        //    KeyBoardControl();
+        //}
 
 
         //if (Input.GetMouseButtonUp(0))
@@ -507,52 +659,56 @@ public class PlayerMove : TacticsMove
         List<Tile> pushableTiles = new List<Tile>();
         Tile thisTile = currentTile;
         bool done = false;
-
         GetCurrentTile();
+        Tile temp = thisTile.ReturnTile(transform.forward);
 
-        while (!done)
+        if (temp == currentSelectedTile)
         {
-            Tile temp = thisTile.ReturnTile(transform.forward);
-
-            if (temp)
+            while (!done)
             {
-                if (temp.pushable)
+                temp = thisTile.ReturnTile(transform.forward);
+
+                if (temp)
                 {
-                    pushableTiles.Add(temp);
-                    thisTile = temp;
+                    if (temp.pushable)
+                    {
+                        pushableTiles.Add(temp);
+                        thisTile = temp;
+                    }
+                    else
+                    {
+                        done = true;
+                    }
                 }
                 else
                 {
                     done = true;
                 }
             }
-            else
-            {
-                done = true;
-            }
-        }
 
-        if (pushableTiles.Count > 0)
-        {
-            if (CalculatePush(pushableTiles))
+            if (pushableTiles.Count > 0)
             {
-                foreach (Tile t in pushableTiles)
+                if (CalculatePush(pushableTiles))
                 {
-                    GameObject temp = t.thingOnTopOfIt;
-                    if (temp.GetComponent<Booty>())
+                    foreach (Tile t in pushableTiles)
                     {
-                        temp.GetComponent<Booty>().BePushed(transform.forward);
+                        GameObject obstacle = t.thingOnTopOfIt;
+                        if (obstacle.GetComponent<Booty>())
+                        {
+                            obstacle.GetComponent<Booty>().BePushed(transform.forward);
+                        }
+                        else
+                        {
+                            obstacle.GetComponent<PlayerMove>().BePushed(transform.forward);
+                        }
                     }
-                    else
-                    {
-                        temp.GetComponent<PlayerMove>().BePushed(transform.forward);
-                    }
+                    hasPushed = true;
+                    MoveToTile(pushableTiles[0]);
                 }
-                MoveToTile(pushableTiles[0]);
-            }
-            else
-            {
-                //can't push
+                else
+                {
+                    //can't push
+                }
             }
         }
 
@@ -599,8 +755,9 @@ public class PlayerMove : TacticsMove
         Vector3 lookAt = turnDir.gameObject.transform.position;
         lookAt.y = transform.position.y;
         transform.LookAt(lookAt);
-        Debug.Log("Setting arrows active");
         ToggleArrows(false);
+        turnPhase = false;
+
     }
 
     public void BePushed(Vector3 _direction)
@@ -620,7 +777,45 @@ public class PlayerMove : TacticsMove
         {
             transform.position = target;
             beingPushed = false;
+            CheckBoardLimit();
         }
     }
+
+    void CheckBoardLimit()
+    {
+        GetCurrentTile();
+        if (currentTile.isSpawn)
+        {
+            GetOutOfBoard();
+        }
+    }
+
+    void GetOutOfBoard()
+    {
+        inBoard = false;
+        transform.position = startPos;
+        currentTile = null;
+       
+    }
+
+
+    public void Activate()
+    {
+        active = true;
+        turnPhase = false;
+        hasPushed = false;
+        ToggleArrows(false);
+        canCancel = true;
+        if (!inBoard)
+        {
+            FindEntryTiles();
+        }
+        else
+        {
+            GameMaster.Instance.EntryModeToggle(false);
+        }
+    }
+
+
 
 }

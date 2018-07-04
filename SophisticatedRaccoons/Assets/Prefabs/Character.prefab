@@ -1172,14 +1172,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433766967102836}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6701732, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -2.6701732, y: 0.25753665, z: -0.3836422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4109364840173536}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4311724768459224
 Transform:
   m_ObjectHideFlags: 1
@@ -2045,15 +2045,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelectedTile: {fileID: 0}
+  active: 0
+  canCancel: 1
+  inBoard: 0
   move: 1
   moveSpeed: 2
   moving: 0
+  hasPushed: 0
   currentTile: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
   arrowHolder: {fileID: 0}
   arrowHolderPrefab: {fileID: 1935749220466228, guid: 2f53e6f02b6d4ba43b3b0527db2b8d9c,
     type: 2}
   keyReleased: 1
-  active: 0
   turnPhase: 0
   beingPushed: 0
   settingPhase: 1

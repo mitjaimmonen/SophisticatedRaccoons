@@ -10,10 +10,12 @@ public class PlayerHolder : MonoBehaviour {
 	List<PlayerMove> characters = new List<PlayerMove>();
 
 	public bool isOwnTurn;
-	bool playerSelected = false;
+	public bool playerSelected = false;
 	bool showSelection = true;
+    public bool selectPhase = true;
 	int characterIndex = 0;
 	float lastInputTime = 0;
+
 	void Awake()
 	{
 		if (isOwnTurn)
@@ -24,8 +26,8 @@ public class PlayerHolder : MonoBehaviour {
 		{
 			if (!characters.Contains(p))
 			{
-				var mat = p.GetComponent<Renderer>();
-				mat.material = playerMaterial;
+				// var mat = p.GetComponent<Renderer>();
+				// mat.material = playerMaterial;
 				characters.Add(p);
 
 			}
@@ -43,6 +45,7 @@ public class PlayerHolder : MonoBehaviour {
 				selectionIndicator.transform.position = pos;
 				selectionIndicator.transform.Rotate(new Vector3(0,1f,0));
 			}
+                       
 		}
 	}
 
@@ -51,12 +54,19 @@ public class PlayerHolder : MonoBehaviour {
 		playerSelected = false;
 		selectionIndicator.SetActive(true);
 	}
+
+    public void DoTurn()
+    {
+        //select phase
+        //move/push phase
+        //turn phase
+    }
+
 	public void EndTurn()
 	{
 		selectionIndicator.SetActive(false);
-
+        //do end things
 	}
-
 
 	public void HandleInput(PlayerGamepadData gamepadData)
 	{
@@ -71,7 +81,6 @@ public class PlayerHolder : MonoBehaviour {
 	{
 		if (!playerSelected)
 		{
-
 			if ((gamepadData.prevState.ThumbSticks.Left.X < 0.2f && gamepadData.state.ThumbSticks.Left.X >= 0.2f) ||
 				(gamepadData.prevState.Buttons.LeftShoulder == ButtonState.Released && gamepadData.state.Buttons.LeftShoulder == ButtonState.Pressed))
 			{
@@ -92,8 +101,8 @@ public class PlayerHolder : MonoBehaviour {
 			if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 			{
 				lastInputTime = Time.time;
-				characters[characterIndex].active = true;
-				playerSelected = true;
+                characters[characterIndex].Activate();
+				playerSelected = true;                
 			}
 
 		}
@@ -106,4 +115,5 @@ public class PlayerHolder : MonoBehaviour {
 		// }
 
 	}
+   
 }
