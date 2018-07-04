@@ -65,6 +65,14 @@ ModelImporter:
     100118: VikingraccoonRig
     100120: Weapon
     100122: WeaponCube
+    100124: Axe
+    100126: Cube
+    100128: Cube_001
+    100130: DownTeeth_002
+    100132: Eyes_002
+    100134: Helmet
+    100136: Helmet2
+    100138: UpTeeth_002
     400000: Base
     400002: DownTeeth
     400004: Eye_L
@@ -127,21 +135,52 @@ ModelImporter:
     400118: VikingraccoonRig
     400120: Weapon
     400122: WeaponCube
+    400124: Axe
+    400126: Cube
+    400128: Cube_001
+    400130: DownTeeth_002
+    400132: Eyes_002
+    400134: Helmet
+    400136: Helmet2
+    400138: UpTeeth_002
     2100000: SeaxTextureMaterial__otter_robe_uv_002
     2100002: unnamed
     2100004: HelmetTextureMaterial__otter_robe_uv_002
     2100006: EyeToothTextureMaterial__otter_robe_uv_002
     2100008: RaccoonTextureMaterial__otter_robe_uv_002
+    2100010: BlueLight__otter_robe_uv_002
+    2100012: Eyes_014
+    2100014: Material_013
+    2100016: Eyes_013
+    2100018: BlackFur_002__otter_robe_uv_002
+    2100020: Mouth__otter_robe_uv_002
+    2100022: BrightWhite__otter_robe_uv_002
+    2100024: WhiteFur_002__otter_robe_uv_002
+    2100026: GreenTrim__otter_robe_uv_002
+    2100028: LighTMetal_002__otter_robe_uv_002
+    2100030: ChairGreen__otter_robe_uv_002
+    2100032: GreyFur_001__otter_robe_uv_002
+    2100034: Nose_002__otter_robe_uv_002
+    2100036: LightYellow__otter_robe_uv_002
+    2100038: LightGreyFur_002__otter_robe_uv_002
+    2100040: MetalGrey__otter_robe_uv_002
+    2100042: SpaceSuit__otter_robe_uv_002
     2300000: Seax
     2300002: SeaxHandle
     2300004: Shield
     2300006: Sword
     2300008: WeaponCube
+    2300010: Axe
+    2300012: Cube
+    2300014: Cube_001
     3300000: Seax
     3300002: SeaxHandle
     3300004: Shield
     3300006: Sword
     3300008: WeaponCube
+    3300010: Axe
+    3300012: Cube
+    3300014: Cube_001
     4300000: SeaxHandle
     4300002: WeaponCube
     4300004: Seax
@@ -153,6 +192,14 @@ ModelImporter:
     4300016: Eyes
     4300018: RaccoonViking
     4300020: UpTeeth
+    4300022: Cube_001
+    4300024: Cube
+    4300026: Axe
+    4300028: Helmet2
+    4300030: Helmet
+    4300032: DownTeeth_002
+    4300034: Eyes_002
+    4300036: UpTeeth_002
     7400000: Default Take
     7400002: PoseLib_001
     7400004: RaccoonRigAction_001
@@ -163,6 +210,11 @@ ModelImporter:
     13700006: HelmetWings
     13700008: RaccoonViking
     13700010: UpTeeth
+    13700012: DownTeeth_002
+    13700014: Eyes_002
+    13700016: Helmet
+    13700018: Helmet2
+    13700020: UpTeeth_002
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
