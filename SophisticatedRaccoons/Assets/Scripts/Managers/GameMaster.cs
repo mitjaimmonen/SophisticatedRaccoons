@@ -34,6 +34,7 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     TacticsCamera tacticsCamera;
     public MainMenuController menuControl;
+    public MenuCamera menuCamera;
     public GamepadStateHandler gamepadStateHandler;
     public InputHandler inputHandler;
     public PlayerHolder[] players;
@@ -196,6 +197,8 @@ public class GameMaster : MonoBehaviour
             GameObject menu = GameObject.Find("Main Menu");
             if (menu)
                 menuControl = menu.GetComponent<MainMenuController>();
+
+            menuCamera = Camera.main.GetComponent<MenuCamera>();
             Reset();
 
         }
@@ -239,7 +242,7 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    void Reset()
+    public void Reset()
     {
         startSoundPlayed = false;
         isGameOver = false;

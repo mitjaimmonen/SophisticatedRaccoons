@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 public class MainMenuController : MonoBehaviour
 {
-
     public Text[] joinTexts = new Text[2];
     public Text[] readyTexts = new Text[2];
     public Text countdownText;
@@ -15,14 +14,28 @@ public class MainMenuController : MonoBehaviour
     [HideInInspector] public bool[] ready = new bool[2];
 
     public int amountJoined = 0;
+    public int countdownTime = 3;
     int amountReady = 0;
     bool isCountdown = false;
+    public bool joiningPhase = false;
+
+
+    public void StartJoining()
+    {
+        joiningPhase = true;
+        GameMaster.Instance.menuCamera.ToJoinScreen();
+    }
+    public void BackToTitle()
+    {
+        joiningPhase = false;
+        GameMaster.Instance.menuCamera.ToTitleScreen();
+    }
+
 
     // Use this for initialization
     void Awake()
     {
-        for (int i = 0; i < ready.Length; i++)
-            ready[i] = false;
+        Reset();
 
     }
 
@@ -60,17 +73,17 @@ public class MainMenuController : MonoBehaviour
     IEnumerator StartCountdown()
     {
         countdownText.gameObject.SetActive(true);
-        int countdownTime = 5;
+        int countdown = countdownTime;
 
-        while (isCountdown && countdownTime >= 0)
+        while (isCountdown && countdown >= 0)
         {
-            countdownText.text = countdownTime.ToString();
+            countdownText.text = countdown.ToString();
             yield return new WaitForSeconds(1);
-            countdownTime--;
-            if (countdownTime < 0)
+            countdown--;
+            if (countdown < 0)
                 isCountdown = false;
         }
-        if (countdownTime < 0)
+        if (countdown < 0)
         {
             LoadLevel(LevelToLoad);
         }
