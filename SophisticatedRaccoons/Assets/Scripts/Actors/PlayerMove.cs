@@ -55,7 +55,7 @@ public class PlayerMove : TacticsMove
                     {
                         GameMaster.Instance.MovePhaseInstructions(currentSelectedTile,inBoard, currentTile.isCorner);
 
-                        if (currentSelectedTile.thingOnTopOfIt)
+                        if (currentSelectedTile && currentSelectedTile.thingOnTopOfIt)
                         {
                             GameMaster.Instance.PushInstructions(CouldPush());
                         }
