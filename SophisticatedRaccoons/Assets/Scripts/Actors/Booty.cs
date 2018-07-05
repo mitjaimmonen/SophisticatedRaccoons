@@ -8,6 +8,7 @@ public class Booty : MonoBehaviour
     public float moveSpeed = 2;
     public Vector3 target;
     public Vector3 direction;
+    public GameObject pusher;
 
     private void Update()
     {
@@ -19,6 +20,16 @@ public class Booty : MonoBehaviour
 
     public void BePushed(Vector3 _direction)
     {
+        GameObject _pusher = GetTargetTile(gameObject).GetComponent<Tile>().ReturnTile(-_direction).thingOnTopOfIt;
+        if (_pusher.GetComponent<PlayerMove>())
+        {
+            pusher = _pusher;
+        }
+        else if (_pusher.GetComponent<Booty>())
+        {
+            pusher = _pusher.GetComponent<Booty>().pusher;
+        }
+
         direction = _direction;
         target = transform.position + direction;
         beingPushed = true;
@@ -44,7 +55,18 @@ public class Booty : MonoBehaviour
         if (GetTargetTile(gameObject).isSpawn)
         {
             GameMaster.Instance.IsGameOver = true;
-            Debug.Log("Game Ended! Player " + (GameMaster.Instance.playerIndex + 1) + " won!");
+            PlayerHolder winnerHolder = pusher.GetComponentInParent<PlayerHolder>();
+            int winner = 0;
+            if (winnerHolder.playerOne)
+            {
+                winner = 0;
+            }
+            else
+            {
+                winner = 1;
+            }
+
+            Debug.Log("Game Ended! Player " +(winner + 1) + " won!");
         }
         //is spawn tile, game ends
     }

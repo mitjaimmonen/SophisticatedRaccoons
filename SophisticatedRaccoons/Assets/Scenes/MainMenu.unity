@@ -1099,6 +1099,7 @@ GameObject:
   - component: {fileID: 1178221730}
   - component: {fileID: 1178221734}
   - component: {fileID: 1178221735}
+  - component: {fileID: 1178221736}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1199,6 +1200,18 @@ MonoBehaviour:
   eulerMiddleLerp: {x: 67.298, y: -42.55, z: -29.887}
   posEnd: {x: 3.02, y: 11.8118, z: -9.070471}
   eulerEnd: {x: 67.97, y: -48.981, z: -32.115}
+--- !u!114 &1178221736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178221729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!1 &1259508126
 GameObject:
   m_ObjectHideFlags: 0

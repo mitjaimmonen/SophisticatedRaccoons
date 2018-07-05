@@ -16,16 +16,20 @@ public class TacticsMove : MonoBehaviour
     public float moveSpeed = 2;
     public bool moving = false;
     public bool hasPushed;
+    public bool isTurning;
+    public bool slerpMoving = false;
 
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
 
     public Vector3 startPos;
+    public Vector3 startForward;
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     public ArrowHolder arrowHolder;
     public GameObject arrowHolderPrefab;
     public bool keyReleased = true;
+    public bool autoTurnAfterMove = false;
 
 
 
@@ -139,6 +143,33 @@ public class TacticsMove : MonoBehaviour
             path.Push(next);
             next = next.parent;
         }
+
+        
+    }
+
+    public IEnumerator SlerpMove(Vector3 target)
+    {
+        float time = Time.time;
+        float t;
+        float smoothLerp;
+        float lerpTime = 0.5f;
+        slerpMoving = true;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = target;
+        CalculateHeading(target);
+        Debug.Log("Position is: " + transform.position + " target is: " + target);
+
+        while (time + lerpTime > Time.time)
+        {
+            t = (Time.time - time) / lerpTime;
+            smoothLerp = t * t * (3f - 2f * t);
+            transform.position = Vector3.Lerp(startPos, endPos, smoothLerp);
+            Debug.Log("looping...");
+            yield return null;
+        }
+        transform.position = target;
+        slerpMoving = false;
+        yield break;
     }
 
     public void Move()
@@ -151,13 +182,20 @@ public class TacticsMove : MonoBehaviour
             //calculate unit's position on top of the target tile
             target.y = gameObject.transform.position.y;
 
+            //StartCoroutine(SlerpMove(target));
+            //path.Pop();
+
             if (Vector3.Distance(transform.position, target) >= 0.1f)
             {
                 CalculateHeading(target);
-                SetHorizontalVelocity();
+                //SetHorizontalVelocity();
 
-                transform.forward = heading;
-                transform.position += velocity * Time.deltaTime;
+                //  transform.forward = heading;
+            if (!isTurning)
+                StartCoroutine(SlerpTurn(target));
+            if (!slerpMoving)
+                StartCoroutine(SlerpMove(target));
+                //transform.position += velocity * Time.deltaTime;
             }
             else
             {
@@ -172,8 +210,17 @@ public class TacticsMove : MonoBehaviour
             moving = false;
             canCancel = false;
             inBoard = true;
+
             if (!hasPushed)
             {
+                if (autoTurnAfterMove)
+                {
+                    if (arrowHolder.SelectedArrow())
+                    {
+                        StartCoroutine(SlerpTurn(arrowHolder.SelectedArrow().gameObject.transform.position));
+                    }
+                }
+
                 ToggleArrows(true);
             }
             else
@@ -182,6 +229,27 @@ public class TacticsMove : MonoBehaviour
             }
         }
 
+    }
+
+    public IEnumerator SlerpTurn(Vector3 lookAt)
+    {
+        isTurning = true;
+        float elapsedTime = 0;
+        float time = 0.3f;
+        lookAt.y = transform.position.y;
+        Vector3 relativePos = lookAt - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(relativePos);
+        Quaternion startRotation = transform.rotation;
+
+        while (elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, (elapsedTime / time));
+
+            yield return new WaitForEndOfFrame();
+        }
+        isTurning = false;
     }
 
     protected void RemoveSelectableTiles()
@@ -219,20 +287,22 @@ public class TacticsMove : MonoBehaviour
     public void Deactivate(bool endTurn)
     {
         active = false;
+        
+        if (endTurn)
+        {
+            GameMaster.Instance.EndTurn();
+        }
 
         foreach (GameObject tile in tiles)
-        {
-            Debug.Log("got here!!");
+        {            
             Tile temp = tile.GetComponent<Tile>();
+
             if (!temp.isSpawn)
             {
                 temp.Reset();
             }
-        }
 
-        if (endTurn)
-        {
-            GameMaster.Instance.EndTurn();
+            Debug.Log("Tile is " + temp.selectable);
         }
     }
 }
