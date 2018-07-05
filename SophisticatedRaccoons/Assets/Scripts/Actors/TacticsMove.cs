@@ -287,20 +287,22 @@ public class TacticsMove : MonoBehaviour
     public void Deactivate(bool endTurn)
     {
         active = false;
+        
+        if (endTurn)
+        {
+            GameMaster.Instance.EndTurn();
+        }
 
         foreach (GameObject tile in tiles)
-        {
-            Debug.Log("got here!!");
+        {            
             Tile temp = tile.GetComponent<Tile>();
+
             if (!temp.isSpawn)
             {
                 temp.Reset();
             }
-        }
 
-        if (endTurn)
-        {
-            GameMaster.Instance.EndTurn();
+            Debug.Log("Tile is " + temp.selectable);
         }
     }
 }

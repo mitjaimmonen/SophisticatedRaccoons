@@ -724,7 +724,7 @@ public class PlayerMove : TacticsMove
             if (pushableTiles.Count > 0)
             {
                 if (CalculatePush(pushableTiles))
-                {
+                {                    
                     foreach (Tile t in pushableTiles)
                     {
                         GameObject obstacle = t.thingOnTopOfIt;
@@ -840,7 +840,7 @@ public class PlayerMove : TacticsMove
         hasPushed = false;
         ToggleArrows(false);
         canCancel = true;
-        if (!inBoard)
+        if (!inBoard && GameMaster.Instance.entryMode)
         {
             FindEntryTiles();
         }
