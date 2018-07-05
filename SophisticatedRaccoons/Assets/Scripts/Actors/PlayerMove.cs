@@ -47,10 +47,33 @@ public class PlayerMove : TacticsMove
                     if (currentSelectedTile)
                     {
                         currentSelectedTile.target = true;
+
+                    }
+
+                    if (!turnPhase)
+                    {
+                        GameMaster.Instance.MovePhaseInstructions(currentSelectedTile,inBoard, currentTile.isCorner);
+
+                        if (currentSelectedTile.thingOnTopOfIt)
+                        {
+                            GameMaster.Instance.PushInstructions(CouldPush());
+                        }
+                        else
+                        {
+                            GameMaster.Instance.MovePhaseInstructions(currentSelectedTile, inBoard, currentTile.isCorner);
+                        }
+
+                      
+                    }
+                    else
+                    {
+                        GameMaster.Instance.TurnPhaseInstructions(arrowHolder.currentArrow);
+                        GameMaster.Instance.ToggleExitBoard(false);
                     }
                 }
                 else if (!beingPushed)
                 {
+                    GameMaster.Instance.TurnOffInstructions();
                     Move();
                 }
             }
@@ -223,23 +246,6 @@ public class PlayerMove : TacticsMove
                         }
 
                     }
-
-                    else
-                    {
-                        if (inBoard)
-                        {
-                            if (!skipMove)
-                            {
-                                skipMove = !skipMove;
-                            }
-                            else
-                            {
-                                skipMove = !skipMove;
-                                turnPhase = true;
-                                ToggleArrows(true);
-                            }
-                        }
-                    }
                 }
 
                 else
@@ -259,6 +265,15 @@ public class PlayerMove : TacticsMove
                 lastInputTime = Time.time;
             }
 
+            if (gamepadData.state.Buttons.Y == ButtonState.Pressed && gamepadData.prevState.Buttons.Y == ButtonState.Released)
+            {
+                if (inBoard)
+                {
+                    turnPhase = true;
+                    ToggleArrows(true);
+                }
+            }
+
             if (gamepadData.state.Buttons.X == ButtonState.Pressed && gamepadData.prevState.Buttons.X == ButtonState.Released)
             {
                 if (inBoard && canCancel)
@@ -274,21 +289,34 @@ public class PlayerMove : TacticsMove
             }
             if (gamepadData.state.Buttons.B == ButtonState.Pressed)
             {
-                if (currentSelectedTile)
+                if (!turnPhase)
                 {
-                    currentSelectedTile = null;
+
+                    if (currentSelectedTile)
+                    {
+                        currentSelectedTile = null;
+                    }
+                    else
+                    {
+                        if (canCancel)
+                        {
+                            GameMaster.Instance.EntryModeToggle(true);
+                            if (!inBoard)
+                            {
+                                transform.position = startPos;
+                            }
+                            Deactivate(false);
+                        }
+                    }
+
                 }
+
                 else
                 {
-                    if (canCancel)
+                    if (arrowHolder.currentArrow)
                     {
-                        GameMaster.Instance.EntryModeToggle(true);
-                        if (!inBoard)
-                        {
-                            Debug.Log("current position: " + transform.position + " start position: " + startPos);
-                            transform.position = startPos;
-                        }
-                        Deactivate(false);
+                        arrowHolder.currentArrow.selected = false;
+                        arrowHolder.currentArrow = null;
                     }
                 }
             }
@@ -399,7 +427,7 @@ public class PlayerMove : TacticsMove
 
             if (gamepadData.state.Buttons.B == ButtonState.Pressed)
             {
-                if (active)
+                if (active && canCancel)
                 {
                     Deactivate(false);
                     GameMaster.Instance.EntryModeToggle(true);
@@ -654,6 +682,11 @@ public class PlayerMove : TacticsMove
         //}
     }
 
+    bool CouldPush()
+    {
+        return true;
+    }
+
     void TryToPush()
     {
         List<Tile> pushableTiles = new List<Tile>();
@@ -707,7 +740,7 @@ public class PlayerMove : TacticsMove
                 }
                 else
                 {
-                    //can't push
+                    GameMaster.Instance.FailPush();
                 }
             }
         }
@@ -752,7 +785,7 @@ public class PlayerMove : TacticsMove
 
     void TurnTo(Arrow turnDir)
     {
-        Vector3 lookAt = turnDir.gameObject.transform.position; 
+        Vector3 lookAt = turnDir.gameObject.transform.position;
         StartCoroutine(SlerpTurn(lookAt));
         ToggleArrows(false);
         turnPhase = false;
@@ -794,7 +827,7 @@ public class PlayerMove : TacticsMove
         inBoard = false;
         transform.position = startPos;
         currentTile = null;
-       
+
     }
 
 

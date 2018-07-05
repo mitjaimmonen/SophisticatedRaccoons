@@ -47,8 +47,8 @@ public class GameMaster : MonoBehaviour
 
     public bool IsGameOver
     {
-        get {return isGameOver;}
-        set 
+        get { return isGameOver; }
+        set
         {
             if (isGameOver != value)
             {
@@ -99,6 +99,11 @@ public class GameMaster : MonoBehaviour
         }
         if (gamestate == GameState.game)
         {
+            if (entryMode)
+            {
+                StartTurnInstructions(players[playerIndex].playerSelected);
+
+            }
             // if treasure is out
             //end game
         }
@@ -106,10 +111,7 @@ public class GameMaster : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (entryMode)
-        {
-            //nothing
-        }
+        
     }
 
     public void EntryModeToggle(bool state)
@@ -161,7 +163,7 @@ public class GameMaster : MonoBehaviour
     private void StartTurn()
     {
         if (!isGameOver)
-        {
+        {          
             players[playerIndex].isOwnTurn = true;
             entryMode = true;
             players[playerIndex].StartTurn();
@@ -247,4 +249,121 @@ public class GameMaster : MonoBehaviour
         gamepadStateHandler.Reset();
         menuControl.Reset();
     }
+
+
+    private void StartTurnInstructions(bool selected)
+    {
+        if (!selected)
+        {
+            hudHandler.SetInstructions("A", "SELECT WARRIOR");
+        }
+        else
+        {
+            hudHandler.SetInstructions("A", "SELECT TILE");            
+        }
+
+        
+        hudHandler.SetInstructions("B", "CANCEL");
+        hudHandler.SetInstructions("Y", "SKIP MOVE");
+        hudHandler.SetInstructions("X", "JUMP THE BOARD");
+        hudHandler.ToggleInstructions("x", false);
+        hudHandler.ToggleInstructions("A", true);
+        hudHandler.ToggleInstructions("B", true);
+        hudHandler.ToggleInstructions("y", false);
+              
+
+    }
+
+
+    public void TurnOffInstructions()
+    {
+        hudHandler.ToggleInstructions("A", false);
+        hudHandler.ToggleInstructions("B", false);
+        hudHandler.ToggleInstructions("y", false);
+        hudHandler.ToggleInstructions("x", false);
+    }
+
+    public void MovePhaseInstructions(bool selected, bool inBoard, bool inCorner)
+    {
+        if (!selected)
+        {
+            hudHandler.SetInstructions("A", "SELECT TILE");
+            hudHandler.SetInstructions("B", "CANCEL");
+            hudHandler.SetInstructions("Y", "SKIP MOVE");
+            hudHandler.ToggleInstructions("A", true);
+            hudHandler.ToggleInstructions("B", true);
+            hudHandler.ToggleInstructions("y", true);
+            hudHandler.ToggleInstructions("x", false);
+        }
+
+        else
+        {
+            hudHandler.SetInstructions("A", "MOVE");
+            hudHandler.SetInstructions("B", "CANCEL");
+            hudHandler.SetInstructions("Y", "SKIP MOVE");
+            hudHandler.ToggleInstructions("A", true);
+            hudHandler.ToggleInstructions("B", true);
+            hudHandler.ToggleInstructions("y", true);
+            hudHandler.ToggleInstructions("x", false);
+        }
+
+        if (!inBoard)
+        {
+            hudHandler.ToggleInstructions("y", false);
+
+        }
+
+        if (inCorner)
+        {
+            hudHandler.ToggleInstructions("x", true);
+        }
+    }
+
+    public void ToggleExitBoard(bool toggle)
+    {        
+        hudHandler.ToggleInstructions("X", toggle);
+    }
+
+    public void TurnPhaseInstructions(bool selected)
+    {
+        if (!selected)
+        {
+            hudHandler.SetInstructions("A", "SELECT DIRECTION");
+            hudHandler.SetInstructions("B", "CANCEL");
+            hudHandler.SetInstructions("Y", "SKIP MOVE");
+            hudHandler.ToggleInstructions("A", true);
+            hudHandler.ToggleInstructions("B", true);
+            hudHandler.ToggleInstructions("y", false);
+            hudHandler.ToggleInstructions("x", false);
+        }
+
+        else
+        {
+            hudHandler.SetInstructions("A", "TURN");
+            hudHandler.SetInstructions("B", "CANCEL");
+            hudHandler.SetInstructions("Y", "SKIP MOVE");
+            hudHandler.ToggleInstructions("A", true);
+            hudHandler.ToggleInstructions("B", true);
+            hudHandler.ToggleInstructions("y", false);
+            hudHandler.ToggleInstructions("x", false);
+        }
+    }
+
+    public void PushInstructions(bool canPush)
+    {
+        if (canPush)
+        {
+            hudHandler.SetInstructions("A", "PUSH");
+        }
+        else
+        {
+            hudHandler.SetInstructions("A", "FAIL PUSH");
+        }
+    }
+
+    public void FailPush()
+    {
+        hudHandler.CallFailPush();
+    }
+
 }
