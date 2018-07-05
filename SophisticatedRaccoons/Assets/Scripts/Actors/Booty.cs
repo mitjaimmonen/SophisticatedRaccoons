@@ -59,14 +59,14 @@ public class Booty : MonoBehaviour
             int winner = 0;
             if (winnerHolder.playerOne)
             {
-                winner = 1;
+                winner = 0;
             }
             else
             {
-                winner = 2;
+                winner = 1;
             }
 
-            Debug.Log("Game Ended! Player " + winner + " won!");
+            Debug.Log("Game Ended! Player " +(winner + 1) + " won!");
         }
         //is spawn tile, game ends
     }
