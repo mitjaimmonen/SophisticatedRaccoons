@@ -8,7 +8,7 @@
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000000008DD99858 isAsync 1 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000000009531BA18 isAsync 1 updatePeriod 0.02
 [LOG] Thread::initThread                       : Init FMOD Studio update thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
@@ -24,9 +24,13 @@
 [LOG] SystemI::createSound                     : filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
 [LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Priority: 1, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] SystemI::createSound                     : setdata soundi = 000000008DAB3F18 : node = 000000008D9A7070
-[LOG] SystemI::createSound                     : add node to async list : head = 000000002035EB38.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB3F18
+[LOG] SystemI::createSound                     : setdata soundi = 00000000859374C8 : node = 00000000784B0AD0
+[LOG] SystemI::createSound                     : add node to async list : head = 00000000200D7D08.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000859374C8
+[LOG] SystemI::createSound                     : filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     :     setdata soundi = 0000000085938248 : node = 00000000784B06E0
+[LOG] SystemI::createSound                     :     add node to async list : head = 00000000200D7D08.  list count = 0
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
@@ -34,41 +38,37 @@
 [LOG] SystemI::createSound                     :     filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
 [LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A7188
-[LOG] SystemI::createSound                     :     setdata soundi = 000000008DAB4428 : node = 000000008D9A6890
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000784B0BE8
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000000002035EB38.  list count = 0
+[LOG] SystemI::createSound                     :     setdata soundi = 0000000085937678 : node = 00000000784B0D70
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSound                     :     add node to async list : head = 00000000200D7D08.  list count = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSound                     :     filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000000008DAB40C8 : node = 000000008D9A60B0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000000002035EB38.  list count = 1
+[LOG] SystemI::createSound                     :     setdata soundi = 00000000859385A8 : node = 000000009517C870
+[LOG] SystemI::createSound                     :     add node to async list : head = 00000000200D7D08.  list count = 2
 [LOG] SystemI::createSound                     :     filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000000008DAB4788 : node = 000000008D9A6350
-[LOG] SystemI::createSound                     :     add node to async list : head = 000000002035EB38.  list count = 2
+[LOG] SystemI::createSound                     :     setdata soundi = 0000000085937828 : node = 000000009517AB90
+[LOG] SystemI::createSound                     :     add node to async list : head = 00000000200D7D08.  list count = 3
 [LOG] SystemI::createSound                     :     filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
 [LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000000008DAB4938 : node = 000000008D9A64A0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000000002035EB38.  list count = 3
-[LOG] SystemI::createSound                     :     filename = Assets\FMOD\Project\Build\Desktop/Master Bank.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000000008DAB3BB8 : node = 000000008D9A65F0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000000002035EB38.  list count = 4
+[LOG] SystemI::createSound                     :     setdata soundi = 0000000085938C68 : node = 000000009517AF80
+[LOG] SystemI::createSound                     :     add node to async list : head = 00000000200D7D08.  list count = 4
 [LOG] SystemI::createSoundInternal             :     Create name='', mode=0x02000202
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000E56FF5FC
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000BBFEF5FC
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->useropen           = 00007FFDA862E4B0
 [LOG] SystemI::createSoundInternal             :     exinfo->userclose          = 00007FFDA862E480
 [LOG] SystemI::createSoundInternal             :     exinfo->userread           = 00007FFDA862E580
 [LOG] SystemI::createSoundInternal             :     exinfo->userseek           = 00007FFDA862E640
-[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 0000000036487C18
+[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 00000000363AA458
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            :     register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='screaming raccoon crowd', format=2, channels=2, frequency=48000, lengthbytes=1170432, lengthpcm=4177152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.590759.
@@ -78,14 +78,14 @@
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000E56FF5FC
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000BBFEF5FC
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->useropen           = 00007FFDA862E4B0
 [LOG] SystemI::createSoundInternal             :     exinfo->userclose          = 00007FFDA862E480
 [LOG] SystemI::createSoundInternal             :     exinfo->userread           = 00007FFDA862E580
 [LOG] SystemI::createSoundInternal             :     exinfo->userseek           = 00007FFDA862E640
-[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 0000000036487C18
+[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 00000000363AA458
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            :     register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             :     Sample 0/1: name='Norse Horn', format=2, channels=2, frequency=48000, lengthbytes=100576, lengthpcm=437603, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.891357.
@@ -94,14 +94,14 @@
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000E56FF5FC
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000BBFEF5FC
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->useropen           = 00007FFDA862E4B0
 [LOG] SystemI::createSoundInternal             :     exinfo->userclose          = 00007FFDA862E480
 [LOG] SystemI::createSoundInternal             :     exinfo->userread           = 00007FFDA862E580
 [LOG] SystemI::createSoundInternal             :     exinfo->userseek           = 00007FFDA862E640
-[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 0000000036487C18
+[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 00000000363AA458
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            :     register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             :     Sample 0/1: name='Norse Horn2', format=2, channels=2, frequency=48000, lengthbytes=67328, lengthpcm=353593, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.956543.
@@ -110,122 +110,122 @@
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000E56FF5FC
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000BBFEF5FC
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->useropen           = 00007FFDA862E4B0
 [LOG] SystemI::createSoundInternal             :     exinfo->userclose          = 00007FFDA862E480
 [LOG] SystemI::createSoundInternal             :     exinfo->userread           = 00007FFDA862E580
 [LOG] SystemI::createSoundInternal             :     exinfo->userseek           = 00007FFDA862E640
-[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 0000000036487C18
+[LOG] SystemI::createSoundInternal             :     exinfo->fileuserdata       = 00000000363AA458
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            :     register codec pool for pool type 5
 [LOG] SystemI::createSoundInternal             :     Sample 0/1: name='Norse Horn3', format=2, channels=2, frequency=48000, lengthbytes=81504, lengthpcm=379924, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.635803.
 [LOG] Thread::initThread                       :     Init FMOD file thread. Priority: 1, Stack Size: 16384, Semaphore: No, Sleep Time: 10, Looping: Yes.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB3F18
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB4428
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000859374C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085938248
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A69A8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000784B07F8
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 1500
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Sword Fight Sounds', format=2, channels=2, frequency=48000, lengthbytes=3245152, lengthpcm=12094902, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.639496.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB4428
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB40C8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085938248
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085937678
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A61C8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000000784B0E88
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='screaming raccoon crowd', format=2, channels=2, frequency=48000, lengthbytes=1170432, lengthpcm=4177152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.590759.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB40C8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB4788
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085937678
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000859385A8
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A6468
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000009517C988
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='screaming raccoon crowd', format=2, channels=2, frequency=48000, lengthbytes=1170432, lengthpcm=4177152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.590759.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB4788
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB4938
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000859385A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085937828
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A65B8
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000009517ACA8
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='war drum multiple 1', format=2, channels=2, frequency=48000, lengthbytes=1696992, lengthpcm=6073782, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB4938
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000008DAB3BB8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085937828
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085938C68
 [LOG] SystemI::createSoundInternal             :     Create name='Assets\FMOD\Project\Build\Desktop/Master Bank.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 14399584
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 57504
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000008D9A6708
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000009517B098
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='war drum solo loop 3', format=2, channels=2, frequency=48000, lengthbytes=449792, lengthpcm=1806837, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.998169.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000008DAB3BB8
-[LOG] SoundI::getSubSound                      : sound 000000008DAB3F18.  Subsound index 0 / 1
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000200EEC98
-[LOG] SoundI::getSubSound                      : sound 000000008DAB40C8.  Subsound index 0 / 1
-[LOG] SoundI::getSubSound                      :     sound 000000008DAB4788.  Subsound index 0 / 1
-[LOG] SoundI::getSubSound                      :     sound 000000008DAB4428.  Subsound index 0 / 1
-[LOG] SoundI::getSubSound                      :     sound 000000008DAB4938.  Subsound index 0 / 1
-[LOG] SoundI::getSubSound                      :     sound 000000008DAB3BB8.  Subsound index 0 / 1
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000200EEC98
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000200EE938
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000200EE938
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000200EFBC8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000200EFBC8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000200EEE48
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000200EEE48
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000000200EF1A8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000000200EF1A8
-[LOG] SoundI::release                          : screaming raccoon crowd (000000008DAB40C8)
-[LOG] SoundI::release                          :     screaming raccoon crowd (000000002035EEC8)
-[LOG] SoundI::release                          :     screaming raccoon crowd (00000000200EE938)
-[LOG] SoundI::release                          : screaming raccoon crowd (000000008DAB4788)
-[LOG] SoundI::release                          :     screaming raccoon crowd (0000000020371388)
-[LOG] SoundI::release                          :     screaming raccoon crowd (00000000200EFBC8)
-[LOG] SoundI::release                          : screaming raccoon crowd (000000008DAB3F18)
-[LOG] SoundI::release                          :     screaming raccoon crowd (000000002035F888)
-[LOG] SoundI::release                          :     screaming raccoon crowd (00000000200EEC98)
-[LOG] SoundI::release                          : Sword Fight Sounds (000000008DAB4428)
-[LOG] SoundI::release                          :     Sword Fight Sounds (000000002035ED28)
-[LOG] SoundI::release                          :     Sword Fight Sounds (00000000200EEE48)
-[LOG] SoundI::release                          : war drum solo loop 3 (000000008DAB3BB8)
-[LOG] SoundI::release                          :     war drum solo loop 3 (0000000020371528)
-[LOG] SoundI::release                          :     war drum solo loop 3 (00000000200EF508)
-[LOG] SoundI::release                          : war drum multiple 1 (000000008DAB4938)
-[LOG] SoundI::release                          :     war drum multiple 1 (00000000203701A8)
-[LOG] SoundI::release                          :     war drum multiple 1 (00000000200EF1A8)
-[LOG] SoundI::release                          :  (0000000086B13B38)
-[LOG] SoundI::release                          :     Norse Horn (000000002035F548)
-[LOG] SoundI::release                          :  (0000000086B136E8)
-[LOG] SoundI::release                          :     Norse Horn2 (000000002035EB88)
-[LOG] SoundI::release                          :  (0000000086B14998)
-[LOG] SoundI::release                          :     Norse Horn3 (00000000203603E8)
-[LOG] SoundI::release                          :  (0000000086B13F88)
-[LOG] SoundI::release                          :     Norse Horn4 (00000000203600A8)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085938C68
+[LOG] SoundI::getSubSound                      : sound 00000000859374C8.  Subsound index 0 / 1
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085938758
+[LOG] SoundI::getSubSound                      : sound 0000000085937678.  Subsound index 0 / 1
+[LOG] SoundI::getSubSound                      :     sound 00000000859385A8.  Subsound index 0 / 1
+[LOG] SoundI::getSubSound                      :     sound 0000000085938248.  Subsound index 0 / 1
+[LOG] SoundI::getSubSound                      :     sound 0000000085937828.  Subsound index 0 / 1
+[LOG] SoundI::getSubSound                      :     sound 0000000085938C68.  Subsound index 0 / 1
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085938758
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085937B88
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085937B88
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085937D38
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085937D38
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085938908
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085938908
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000000085937EE8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000000085937EE8
+[LOG] SoundI::release                          : war drum multiple 1 (0000000085937828)
+[LOG] SoundI::release                          :     war drum multiple 1 (00000000954BE918)
+[LOG] SoundI::release                          :     war drum multiple 1 (0000000085937EE8)
+[LOG] SoundI::release                          : screaming raccoon crowd (0000000085937678)
+[LOG] SoundI::release                          :     screaming raccoon crowd (00000000954BDF58)
+[LOG] SoundI::release                          :     screaming raccoon crowd (0000000085937B88)
+[LOG] SoundI::release                          : screaming raccoon crowd (00000000859385A8)
+[LOG] SoundI::release                          :     screaming raccoon crowd (00000000954BD3F8)
+[LOG] SoundI::release                          :     screaming raccoon crowd (0000000085937D38)
+[LOG] SoundI::release                          : screaming raccoon crowd (00000000859374C8)
+[LOG] SoundI::release                          :     screaming raccoon crowd (00000000954BD738)
+[LOG] SoundI::release                          :     screaming raccoon crowd (0000000085938758)
+[LOG] SoundI::release                          : Sword Fight Sounds (0000000085938248)
+[LOG] SoundI::release                          :     Sword Fight Sounds (00000000954BEC58)
+[LOG] SoundI::release                          :     Sword Fight Sounds (0000000085938908)
+[LOG] SoundI::release                          : war drum solo loop 3 (0000000085938C68)
+[LOG] SoundI::release                          :     war drum solo loop 3 (00000000954BE5D8)
+[LOG] SoundI::release                          :     war drum solo loop 3 (00000000859383F8)
+[LOG] SoundI::release                          :  (000000000EED16D8)
+[LOG] SoundI::release                          :     Norse Horn (00000000954BEAB8)
+[LOG] SoundI::release                          :  (000000000EED09E8)
+[LOG] SoundI::release                          :     Norse Horn2 (00000000954BDDB8)
+[LOG] SoundI::release                          :  (000000000EED1118)
+[LOG] SoundI::release                          :     Norse Horn3 (00000000954BDC18)
+[LOG] SoundI::release                          :  (0000000094AE9438)
+[LOG] SoundI::release                          :     Norse Horn4 (00000000954BE298)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
