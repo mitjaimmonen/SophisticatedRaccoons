@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class MainMenuController : MonoBehaviour
 {
+
+    [Header("References")]
     public Text[] joinTexts = new Text[2];
     public Text[] cancelTexts = new Text[2];
     public GameObject[] aIcons = new GameObject[2];
@@ -15,13 +17,45 @@ public class MainMenuController : MonoBehaviour
     public string LevelToLoad = "SampleScene";
     [HideInInspector] public bool[] ready = new bool[2];
 
-
-
-    public int amountJoined = 0;
+    [Header("Timers and Delays")]
     public int countdownTime = 3;
+    public float fadeinTime = 2f;
+
+    [Header("Other data")]
+    public Light directionalLight;
+
+    public Vector3 startLightRotation;
+    public Vector3 endLightRotation;
+
+    [HideInInspector]public int amountJoined = 0;
     int amountReady = 0;
     bool isCountdown = false;
-    public bool joiningPhase = false;
+    [HideInInspector]public bool joiningPhase = false;
+
+
+    void Start()
+    {
+        if (directionalLight)
+            StartCoroutine(FadeIn());
+    }
+
+    IEnumerator FadeIn()
+    {
+
+        float time = Time.time;
+        float t = 0;
+        while (time + fadeinTime > Time.time)
+        {
+            t = (Time.time-time)/fadeinTime;
+            directionalLight.gameObject.transform.eulerAngles = Vector3.Lerp(startLightRotation, endLightRotation, t);
+            directionalLight.intensity = Mathf.Lerp(0.5f, 1f, t);
+            yield return null;
+        }
+        
+        directionalLight.intensity = 1f;
+        directionalLight.gameObject.transform.eulerAngles = endLightRotation;
+        yield break;
+    }
 
 
     public void StartJoining()
