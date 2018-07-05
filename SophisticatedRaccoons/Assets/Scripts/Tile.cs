@@ -17,6 +17,11 @@ public class Tile : MonoBehaviour
     public bool skippable = false;
     public bool active = false;
 
+    Color32 tileColorSelectable = new Color32(255,255,255,75);
+    Color32 tileColorPushable = new Color32(255,255,255,75);
+    Color32 tileColorTarget = new Color32(0,255,0,175);
+    Color32 tileColorCurrent = new Color32(0,255,0,175);
+
     public GameObject thingOnTopOfIt = null;
     Vector3 playerDirection;
 
@@ -47,25 +52,30 @@ public class Tile : MonoBehaviour
 
             if (target)
             {
-                GetComponent<Renderer>().material.color = Color.green;
+                GetComponent<Renderer>().material.color = tileColorTarget;
 
             }
             else if (pushable)
             {
-                GetComponent<Renderer>().material.color = Color.red;
+                GetComponent<Renderer>().material.color = tileColorPushable;
             }
             else
             {
-                GetComponent<Renderer>().material.color = Color.yellow;
+                GetComponent<Renderer>().material.color = tileColorSelectable;
             }
 
         }
 
         if (current)
         {
-            GetComponent<Renderer>().enabled = true;
+            if (GameMaster.Instance.entryMode)
+            {
+                GetComponent<Renderer>().enabled = true;
+                GetComponent<Renderer>().material.color = tileColorCurrent;
+            }
+            else
+                GetComponent<Renderer>().enabled = false;
 
-            GetComponent<Renderer>().material.color = Color.magenta;
         }
         else if (!selectable)
         {
