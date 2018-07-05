@@ -78,7 +78,7 @@ public class GamepadStateHandler : MonoBehaviour {
 			if (!playerGamepadData[i].state.IsConnected)
 				continue;
 			
-			if (GameMaster.Instance.inputHandler != null)
+			if ( GameMaster.Instance && GameMaster.Instance.inputHandler != null)
 				playerGamepadData[i] = GameMaster.Instance.inputHandler.HandleInput(playerGamepadData[i]);
 
 		}

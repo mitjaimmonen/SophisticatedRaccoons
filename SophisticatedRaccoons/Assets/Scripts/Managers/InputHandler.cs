@@ -59,7 +59,7 @@ public class InputHandler : MonoBehaviour {
 				//Allow any control when not paused. Allow only one paused controller if paused
 				if (gamepadData.state.Buttons.Start == ButtonState.Pressed && gamepadData.prevState.Buttons.Start == ButtonState.Released)
 				{
-					gameMaster.isPaused = gameMaster.pauseMenu.TogglePaused();
+					gameMaster.isPaused = gameMaster.pauseMenu.TogglePaused(gamepadData.characterIndex);
 					pausedController = gamepadData.characterIndex;
 				}
 				if (gameMaster.isPaused)
@@ -73,44 +73,61 @@ public class InputHandler : MonoBehaviour {
 	}
 	PlayerGamepadData HandleMenuInputs(PlayerGamepadData gamepadData)
 	{
-		//Handle player (gamepad) activation - check if Y-button was pressed in this gamepad in this frame
-		if (gamepadData.prevState.Buttons.Y == ButtonState.Released && gamepadData.state.Buttons.Y == ButtonState.Pressed)
+		if (!gameMaster.menuControl.joiningPhase)
 		{
-			//Invert active bool
-
-			gamepadData.active = !gamepadData.active;
-
-			if (gamepadData.active)
+			if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 			{
-				bool firstJoined = false, secondJoined = false;
-				for(int j = 0; j < gamepad.playerGamepadData.Length; j++)
-				{
-					if (gamepad.playerGamepadData[j].characterIndex == 0)
-						firstJoined = true;
-					if (gamepad.playerGamepadData[j].characterIndex == 1)
-						secondJoined = true;
-
-				}
-				
-				if (firstJoined && secondJoined)
-				{
-					gamepadData.active = false;
-					return gamepadData;
-				}
-
-				gamepadData.characterIndex = firstJoined ? 1 : 0;			
-				gameMaster.menuControl.AddPlayer(gamepadData.characterIndex);
-			}
-			else
-			{
-				gameMaster.menuControl.RemovePlayer(gamepadData.characterIndex);
-				gamepadData.characterIndex = -1;
+				gameMaster.menuControl.StartJoining();
 			}
 		}
-
-		if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
+		else
 		{
-			gameMaster.menuControl.ToggleReady(gamepadData.characterIndex);
+			//Handle player (gamepad) activation - check if Y-button was pressed in this gamepad in this frame
+			if (gamepadData.prevState.Buttons.Y == ButtonState.Released && gamepadData.state.Buttons.Y == ButtonState.Pressed)
+			{
+				//Invert active bool
+
+				gamepadData.active = !gamepadData.active;
+
+				if (gamepadData.active)
+				{
+					bool firstJoined = false, secondJoined = false;
+					for(int j = 0; j < gamepad.playerGamepadData.Length; j++)
+					{
+						if (gamepad.playerGamepadData[j].characterIndex == 0)
+							firstJoined = true;
+						if (gamepad.playerGamepadData[j].characterIndex == 1)
+							secondJoined = true;
+
+					}
+					
+					if (firstJoined && secondJoined)
+					{
+						gamepadData.active = false;
+						return gamepadData;
+					}
+
+					gamepadData.characterIndex = firstJoined ? 1 : 0;			
+					gameMaster.menuControl.AddPlayer(gamepadData.characterIndex);
+				}
+				else
+				{
+					gameMaster.menuControl.RemovePlayer(gamepadData.characterIndex);
+					gamepadData.characterIndex = -1;
+				}
+			}
+
+			if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
+			{
+				gameMaster.menuControl.ToggleReady(gamepadData.characterIndex);
+			}
+
+			if (gamepadData.prevState.Buttons.B == ButtonState.Released && gamepadData.state.Buttons.B == ButtonState.Pressed)
+			{
+				gameMaster.menuControl.BackToTitle();
+				gameMaster.Reset();
+			}
+
 		}
 
 		return gamepadData;

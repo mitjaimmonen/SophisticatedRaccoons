@@ -34,6 +34,7 @@ public class GameMaster : MonoBehaviour
     public GameState gamestate = GameState.menu;
     TacticsCamera tacticsCamera;
     public MainMenuController menuControl;
+    public MenuCamera menuCamera;
     public GamepadStateHandler gamepadStateHandler;
     public InputHandler inputHandler;
     public PlayerHolder[] players;
@@ -61,7 +62,7 @@ public class GameMaster : MonoBehaviour
     void GameOver()
     {
         // TODO: Hud text to show who won
-        hudHandler.GameOver("[winner's name]");
+        hudHandler.GameOver(playerIndex);
         pauseMenu.GameOver();
     }
 
@@ -69,14 +70,18 @@ public class GameMaster : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("GameMaster").Length > 1)
             Destroy(this.gameObject);
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
 
-        DontDestroyOnLoad(this.gameObject);
+            SceneManager.sceneLoaded += OnLevelLoaded;
 
-        SceneManager.sceneLoaded += OnLevelLoaded;
+            Instantiate();
 
-        Instantiate();
+            playerIndex = 0;
 
-        playerIndex = 0;
+        }
+
 
 
     }
@@ -167,12 +172,14 @@ public class GameMaster : MonoBehaviour
             players[playerIndex].isOwnTurn = true;
             entryMode = true;
             players[playerIndex].StartTurn();
+            hudHandler.SetPlayerTurn("Player" + (playerIndex+1));
         }
     }
 
     void EndGame()
     {
         Debug.Log("The Game may not continue as it is over!!!!");
+        hudHandler.GameOver(playerIndex);
     }
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -196,6 +203,8 @@ public class GameMaster : MonoBehaviour
             GameObject menu = GameObject.Find("Main Menu");
             if (menu)
                 menuControl = menu.GetComponent<MainMenuController>();
+
+            menuCamera = Camera.main.GetComponent<MenuCamera>();
             Reset();
 
         }
@@ -239,15 +248,20 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    void Reset()
+    public void Reset()
     {
         startSoundPlayed = false;
         isGameOver = false;
         isPaused = false;
+        playerIndex = 0;
 
+        
         inputHandler.Reset();
         gamepadStateHandler.Reset();
-        menuControl.Reset();
+        if (menuControl)
+            menuControl.Reset();
+        if (hudHandler)
+            hudHandler.Reset();
     }
 
 

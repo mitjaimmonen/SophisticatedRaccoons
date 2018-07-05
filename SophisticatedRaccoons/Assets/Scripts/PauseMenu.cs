@@ -27,6 +27,9 @@ public class PauseMenu : MonoBehaviour {
 	public bool confirmationPending = false;
 	public bool confirmationPositive = false;
 
+
+	int lastPlayerIndex = 0;
+
 	// Use this for initialization
 	void Start () {
 		menuPanel.SetActive(false);
@@ -46,11 +49,12 @@ public class PauseMenu : MonoBehaviour {
 
 	}
 
-	public bool TogglePaused()
+	public bool TogglePaused(int playerIndex)
 	{
 		isPaused = !isPaused;
 		menuPanel.SetActive (isPaused);
-
+		playerNumberText.text = "Player" + (playerIndex+1);
+		lastPlayerIndex = playerIndex;
 		EventSystem.current.SetSelectedGameObject(null);
 		if (isPaused)
 			EventSystem.current.SetSelectedGameObject(resumeButton);
@@ -60,10 +64,12 @@ public class PauseMenu : MonoBehaviour {
 		return isPaused;
 	}
 
-	public bool SetPaused(bool state)
+	public bool SetPaused(bool state, int playerIndex)
 	{
 		isPaused = state;
 		menuPanel.SetActive(state);
+		lastPlayerIndex = playerIndex;
+		playerNumberText.text = "Player" + (playerIndex+1);
 
 		EventSystem.current.SetSelectedGameObject(null);
 		if (state)
@@ -128,7 +134,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void ResumeGame()
 	{
-		SetPaused(false);
+		SetPaused(false, lastPlayerIndex);
 	}
 
 
@@ -166,6 +172,7 @@ public class PauseMenu : MonoBehaviour {
 	void EndGame(string sceneName) // Calls when surrender
 	{
 		isGameOver = true;
+		GameMaster.Instance.playerIndex = lastPlayerIndex == 0 ? 1 : 0;
 		GameMaster.Instance.IsGameOver = true;
 
 		newGameButton.SetActive(true);
@@ -194,7 +201,7 @@ public class PauseMenu : MonoBehaviour {
 	IEnumerator SetPauseWithDelay(bool state, float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		SetPaused(state);
+		SetPaused(state, lastPlayerIndex);
 	}
 
 	public void QuitGame() //Call from quit button

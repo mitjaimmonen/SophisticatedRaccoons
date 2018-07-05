@@ -8,15 +8,22 @@ public class HudHandler : MonoBehaviour {
 	public Text playerTurnText;
 	public Text winText;
 
-    public Text aText, bText, yText, xText, cant;
+    public Text aText, bText, yText, xText, cantPushText;
 
 	void Start ()
 	{
 		playerTurnText.gameObject.SetActive(true);
 		winText.gameObject.SetActive(false);
 		GameMaster.Instance.hudHandler = this;
-        cant.enabled = false;
+        cantPushText.enabled = false;
 
+     }
+
+     public void Reset()
+     {
+         winText.gameObject.SetActive(false);
+         cantPushText.enabled = false;
+         playerTurnText.gameObject.SetActive(true);
      }
 
 	public void SetPlayerTurn(string playerName)
@@ -24,11 +31,11 @@ public class HudHandler : MonoBehaviour {
 		playerTurnText.text = playerName + " turn";
 	}
 
-	public void GameOver(string winnerName)
+	public void GameOver(int winnerIndex)
 	{
 		winText.gameObject.SetActive(true);
 		playerTurnText.gameObject.SetActive(false);
-		winText.text = winnerName + " won!";
+		winText.text = "Player " + (winnerIndex+1) + " won!";
 	}
 
     public void SetInstructions(string button, string instruction)
@@ -85,8 +92,8 @@ public class HudHandler : MonoBehaviour {
     public IEnumerator FailPush()
     {
         float timer = 0;
-
-        cant.enabled = true;
+        Debug.Log("CANT PUSH???");
+        cantPushText.enabled = true;
      
 
         while (timer < 0.4f)
@@ -95,7 +102,7 @@ public class HudHandler : MonoBehaviour {
             yield return null;
         }
         
-        cant.enabled = false; 
+        cantPushText.enabled = false; 
       
     }
 
