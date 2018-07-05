@@ -23,6 +23,7 @@ public class TacticsMove : MonoBehaviour
     public Tile currentTile;
 
     public Vector3 startPos;
+    public Vector3 startForward;
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
     public ArrowHolder arrowHolder;

@@ -26,6 +26,7 @@ public class PlayerMove : TacticsMove
         Init();
 
         startPos = transform.position;
+        startForward = transform.forward;
         GameObject aHolder = Instantiate(arrowHolderPrefab, transform.position, Quaternion.identity);
         daddy = GetComponentInParent<PlayerHolder>();
         arrowHolder = aHolder.AddComponent<ArrowHolder>();
@@ -304,6 +305,7 @@ public class PlayerMove : TacticsMove
                             if (!inBoard)
                             {
                                 transform.position = startPos;
+                                transform.forward = startForward;
                             }
                             Deactivate(false);
                         }
@@ -826,10 +828,10 @@ public class PlayerMove : TacticsMove
     {
         inBoard = false;
         transform.position = startPos;
-        currentTile = null;
+        transform.forward = startForward;
+       currentTile = null;
 
     }
-
 
     public void Activate()
     {
@@ -847,7 +849,5 @@ public class PlayerMove : TacticsMove
             GameMaster.Instance.EntryModeToggle(false);
         }
     }
-
-
 
 }
