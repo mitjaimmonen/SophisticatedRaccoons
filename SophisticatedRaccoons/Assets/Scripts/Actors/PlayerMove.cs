@@ -53,7 +53,7 @@ public class PlayerMove : TacticsMove
 
                     if (!turnPhase)
                     {
-                        GameMaster.Instance.MovePhaseInstructions(currentSelectedTile,inBoard, currentTile.isCorner);
+                        GameMaster.Instance.MovePhaseInstructions(currentSelectedTile, inBoard, currentTile.isCorner);
 
                         if (currentSelectedTile && currentSelectedTile.thingOnTopOfIt)
                         {
@@ -64,7 +64,7 @@ public class PlayerMove : TacticsMove
                             GameMaster.Instance.MovePhaseInstructions(currentSelectedTile, inBoard, currentTile.isCorner);
                         }
 
-                      
+
                     }
                     else
                     {
@@ -724,7 +724,7 @@ public class PlayerMove : TacticsMove
             if (pushableTiles.Count > 0)
             {
                 if (CalculatePush(pushableTiles))
-                {                    
+                {
                     foreach (Tile t in pushableTiles)
                     {
                         GameObject obstacle = t.thingOnTopOfIt;
@@ -832,7 +832,7 @@ public class PlayerMove : TacticsMove
         inBoard = false;
         transform.position = startPos;
         transform.forward = startForward;
-       currentTile = null;
+        currentTile = null;
 
     }
 

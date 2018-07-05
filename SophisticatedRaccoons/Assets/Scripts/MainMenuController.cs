@@ -48,7 +48,7 @@ public class MainMenuController : MonoBehaviour
         {
             t = (Time.time-time)/fadeinTime;
             directionalLight.gameObject.transform.eulerAngles = Vector3.Lerp(startLightRotation, endLightRotation, t);
-            directionalLight.intensity = Mathf.Lerp(0.5f, 1f, t);
+            directionalLight.intensity = Mathf.Lerp(0.25f, 1f, t);
             yield return null;
         }
         
@@ -88,6 +88,7 @@ public class MainMenuController : MonoBehaviour
             bIcons[i].SetActive(false);
             joinTexts[i].text = "Join";
         }
+        countdownText.text = "";
 
         amountJoined = 0;
         amountReady = 0;

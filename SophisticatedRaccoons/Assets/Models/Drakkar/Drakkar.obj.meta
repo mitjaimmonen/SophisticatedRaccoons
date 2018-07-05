@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: b5cacc205ad8fac44ad4adc62a1ea842
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: DrakkarBoards_Cylinder.002_DrakkarBoards_Cylinder.002
+    100004: DrakkarHull_Cylinder.010_DrakkarHull_Cylinder.010
+    100006: KeelGoat_Cylinder.004_KeelGoat_Cylinder.004
+    100008: KeelWolf_Cylinder.005_KeelWolf_Cylinder.005
+    100010: Mast_Cylinder.001_Mast_Cylinder.001
+    100012: Ropes_Cylinder.007_Ropes_Cylinder.007
+    100014: rUDDER_Cylinder.003_rUDDER_Cylinder.003
+    100016: Sail_Cylinder.006_Sail_Cylinder.006
+    100018: Shield,Paddle_Cylinder.009_Shield,Paddle_Cylinder.009
+    400000: //RootNode
+    400002: DrakkarBoards_Cylinder.002_DrakkarBoards_Cylinder.002
+    400004: DrakkarHull_Cylinder.010_DrakkarHull_Cylinder.010
+    400006: KeelGoat_Cylinder.004_KeelGoat_Cylinder.004
+    400008: KeelWolf_Cylinder.005_KeelWolf_Cylinder.005
+    400010: Mast_Cylinder.001_Mast_Cylinder.001
+    400012: Ropes_Cylinder.007_Ropes_Cylinder.007
+    400014: rUDDER_Cylinder.003_rUDDER_Cylinder.003
+    400016: Sail_Cylinder.006_Sail_Cylinder.006
+    400018: Shield,Paddle_Cylinder.009_Shield,Paddle_Cylinder.009
+    2100000: DrakkarBoardsTextureMaterial
+    2100002: DrakkarTextureMaterial
+    2100004: KeelTextureMaterial
+    2100006: MastTextureMaterial
+    2100008: RopeTextureMaterial
+    2100010: RudderTextureMaterial
+    2100012: SailTextureMaterial
+    2100014: ShieldPaddleTextureMaterial
+    2300000: DrakkarBoards_Cylinder.002_DrakkarBoards_Cylinder.002
+    2300002: DrakkarHull_Cylinder.010_DrakkarHull_Cylinder.010
+    2300004: KeelGoat_Cylinder.004_KeelGoat_Cylinder.004
+    2300006: KeelWolf_Cylinder.005_KeelWolf_Cylinder.005
+    2300008: Mast_Cylinder.001_Mast_Cylinder.001
+    2300010: Ropes_Cylinder.007_Ropes_Cylinder.007
+    2300012: rUDDER_Cylinder.003_rUDDER_Cylinder.003
+    2300014: Sail_Cylinder.006_Sail_Cylinder.006
+    2300016: Shield,Paddle_Cylinder.009_Shield,Paddle_Cylinder.009
+    3300000: DrakkarBoards_Cylinder.002_DrakkarBoards_Cylinder.002
+    3300002: DrakkarHull_Cylinder.010_DrakkarHull_Cylinder.010
+    3300004: KeelGoat_Cylinder.004_KeelGoat_Cylinder.004
+    3300006: KeelWolf_Cylinder.005_KeelWolf_Cylinder.005
+    3300008: Mast_Cylinder.001_Mast_Cylinder.001
+    3300010: Ropes_Cylinder.007_Ropes_Cylinder.007
+    3300012: rUDDER_Cylinder.003_rUDDER_Cylinder.003
+    3300014: Sail_Cylinder.006_Sail_Cylinder.006
+    3300016: Shield,Paddle_Cylinder.009_Shield,Paddle_Cylinder.009
+    4300000: DrakkarBoards_Cylinder.002_DrakkarBoards_Cylinder.002
+    4300002: DrakkarHull_Cylinder.010_DrakkarHull_Cylinder.010
+    4300004: KeelGoat_Cylinder.004_KeelGoat_Cylinder.004
+    4300006: KeelWolf_Cylinder.005_KeelWolf_Cylinder.005
+    4300008: Mast_Cylinder.001_Mast_Cylinder.001
+    4300010: Ropes_Cylinder.007_Ropes_Cylinder.007
+    4300012: rUDDER_Cylinder.003_rUDDER_Cylinder.003
+    4300014: Sail_Cylinder.006_Sail_Cylinder.006
+    4300016: Shield,Paddle_Cylinder.009_Shield,Paddle_Cylinder.009
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DrakkarBoardsTextureMaterial
+    second: {fileID: 2100000, guid: 7f02cd4158d6dfb47b65dcd0aa8c1a9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DrakkarTextureMaterial
+    second: {fileID: 2100000, guid: 8197cca8b4d5f4e4b91d077b6a5c6c8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KeelTextureMaterial
+    second: {fileID: 2100000, guid: a16e46206a5d7114dbbf5e860ec88310, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MastTextureMaterial
+    second: {fileID: 2100000, guid: 331fc68c3fee9894695d11da74ed27ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RopeTextureMaterial
+    second: {fileID: 2100000, guid: bcd6445c3b4472846ba8baf75e1f3dd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RudderTextureMaterial
+    second: {fileID: 2100000, guid: 97f9c8cb4147ade448b1957b8130a437, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SailTextureMaterial
+    second: {fileID: 2100000, guid: d12f85c1a73806c46a7b7230598c4fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShieldPaddleTextureMaterial
+    second: {fileID: 2100000, guid: f69f326dc28f1cb4198307a06bfee220, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

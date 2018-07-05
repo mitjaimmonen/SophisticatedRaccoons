@@ -11,7 +11,12 @@ ModelImporter:
     2300000: Sword_Cube_Sword_Cube
     3300000: Sword_Cube_Sword_Cube
     4300000: Sword_Cube_Sword_Cube
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SwordTextureMaterial
+    second: {fileID: 2100000, guid: 9d048e05f3d7f094a82b45d2ac360cb4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
