@@ -45,6 +45,7 @@ public class GameMaster : MonoBehaviour
     bool startSoundPlayed = false;
     bool isGameOver = false;
     public bool isPaused = false;
+    public int winnerIndex = 0;
 
     public bool IsGameOver
     {
@@ -62,7 +63,7 @@ public class GameMaster : MonoBehaviour
     void GameOver()
     {
         // TODO: Hud text to show who won
-        hudHandler.GameOver(playerIndex);
+        hudHandler.GameOver(winnerIndex);
         pauseMenu.GameOver();
     }
 
@@ -179,7 +180,7 @@ public class GameMaster : MonoBehaviour
     void EndGame()
     {
         Debug.Log("The Game may not continue as it is over!!!!");
-        hudHandler.GameOver(playerIndex);
+        hudHandler.GameOver(winnerIndex);
     }
     void OnLevelLoaded(Scene scene, LoadSceneMode mode)
     {

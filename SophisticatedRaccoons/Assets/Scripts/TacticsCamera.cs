@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TacticsCamera : MonoBehaviour {
+public class TacticsCamera : MonoBehaviour
+{
 
     float lerpTime = 2f;
     bool rotationDone = false;
 
+    public GameObject sailOne, sailTwo;
+
+    private void Start()
+    {
+        sailOne.SetActive(false);
+        sailTwo.SetActive(true);
+    }
     public void ChangePlayer(bool p1)
     {
         StartCoroutine(ChangeCamera(p1));
@@ -21,11 +29,29 @@ public class TacticsCamera : MonoBehaviour {
         Vector3 newAngle = oldAngle;
         newAngle.y = playerOne ? 0 : 180f;
 
-        while (time+lerpTime > Time.time)
+        while (time + lerpTime > Time.time)
         {
-            t = (Time.time-time)/lerpTime;
-            smoothLerp = t*t * (3f - 2f*t);
+            t = (Time.time - time) / lerpTime;
+            smoothLerp = t * t * (3f - 2f * t);
             transform.eulerAngles = Vector3.Lerp(oldAngle, newAngle, smoothLerp);
+
+            if (playerOne)
+            {
+                if (t > 0.3f)
+                    sailTwo.SetActive(true);
+                if (t > 0.65f)
+                    sailOne.SetActive(false);
+
+            }
+            else
+            {
+                if (t > 0.3f)
+                    sailOne.SetActive(true);
+                if (t > 0.65f)
+                    sailTwo.SetActive(false);
+
+            }
+
             yield return null;
         }
 
@@ -42,5 +68,5 @@ public class TacticsCamera : MonoBehaviour {
     {
         transform.Rotate(Vector3.up, -90, Space.Self);
     }
-	
+
 }

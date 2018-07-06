@@ -41,7 +41,7 @@ public class PlayerHolder : MonoBehaviour {
 			if (selectionIndicator)
 			{
 				Vector3 pos = characters[characterIndex].transform.position;
-				pos.y += 2f;                
+				pos.y += 1.5f;                
 				selectionIndicator.transform.position = pos;
 				selectionIndicator.transform.Rotate(new Vector3(0f,1f,0),Space.World);
 			}

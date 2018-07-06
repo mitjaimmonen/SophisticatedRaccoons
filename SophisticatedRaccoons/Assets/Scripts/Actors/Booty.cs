@@ -54,7 +54,6 @@ public class Booty : MonoBehaviour
         //get current tile
         if (GetTargetTile(gameObject).isSpawn)
         {
-            GameMaster.Instance.IsGameOver = true;
             PlayerHolder winnerHolder = pusher.GetComponentInParent<PlayerHolder>();
             int winner = 0;
             if (winnerHolder.playerOne)
@@ -65,7 +64,8 @@ public class Booty : MonoBehaviour
             {
                 winner = 1;
             }
-
+            GameMaster.Instance.winnerIndex = winner;
+            GameMaster.Instance.IsGameOver = true;
             Debug.Log("Game Ended! Player " +(winner + 1) + " won!");
         }
         //is spawn tile, game ends

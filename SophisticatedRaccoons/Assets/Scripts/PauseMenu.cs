@@ -53,7 +53,8 @@ public class PauseMenu : MonoBehaviour {
 	{
 		isPaused = !isPaused;
 		menuPanel.SetActive (isPaused);
-		playerNumberText.text = "Player" + (playerIndex+1);
+        if (!GameMaster.Instance.IsGameOver)
+            playerNumberText.text = "Player" + (playerIndex+1);
 		lastPlayerIndex = playerIndex;
 		EventSystem.current.SetSelectedGameObject(null);
 		if (isPaused)
@@ -69,7 +70,8 @@ public class PauseMenu : MonoBehaviour {
 		isPaused = state;
 		menuPanel.SetActive(state);
 		lastPlayerIndex = playerIndex;
-		playerNumberText.text = "Player" + (playerIndex+1);
+        if (!GameMaster.Instance.IsGameOver)
+		    playerNumberText.text = "Player" + (playerIndex+1);
 
 		EventSystem.current.SetSelectedGameObject(null);
 		if (state)
@@ -189,6 +191,7 @@ public class PauseMenu : MonoBehaviour {
 			isGameOver = true;
 			newGameButton.SetActive(true);
 			resumeButton.SetActive(false);
+            playerNumberText.text = "End Menu";
 			StartCoroutine(SetPauseWithDelay(true, 2f));
 		}
 	}
