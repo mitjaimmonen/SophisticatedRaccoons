@@ -84,6 +84,8 @@ public class GamepadStateHandler : MonoBehaviour {
 		}
 	}
 
+	#if UDITY_EDITOR
+
     void OnGUI()
     {
 		string text = "";
@@ -106,4 +108,6 @@ public class GamepadStateHandler : MonoBehaviour {
 		GUI.Label(new Rect(0, 0, Screen.width, Screen.height), text);
 
     }
+
+	#endif
 }
