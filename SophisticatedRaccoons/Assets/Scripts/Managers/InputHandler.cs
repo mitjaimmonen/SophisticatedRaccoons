@@ -12,6 +12,8 @@ public class InputHandler : MonoBehaviour {
 
 	public PlayerHolder[] playerHolders = new PlayerHolder[2];
 
+	bool[] ready = new bool[2];
+
 	public bool inputDebug = false;
 	public bool playerOneTurn = true;
 	int pausedController = 0;
@@ -20,6 +22,7 @@ public class InputHandler : MonoBehaviour {
 	{
 		gamepad = GetComponent<GamepadStateHandler>();
 		gameMaster = GetComponent<GameMaster>();
+		Reset();
 	}
 
 	public void Reset()
@@ -28,6 +31,8 @@ public class InputHandler : MonoBehaviour {
 		inputDebug = false;
 		playerOneTurn = true;
 		pausedController = 0;
+		for(int i = 0; i < 2; i++)
+			ready[i] = false;
 	}
 	public PlayerGamepadData HandleInput(PlayerGamepadData gamepadData)
 	{
@@ -79,57 +84,84 @@ public class InputHandler : MonoBehaviour {
 			{
 				gameMaster.menuControl.StartJoining();
 			}
+
+			if (gamepadData.prevState.Buttons.B == ButtonState.Released && gamepadData.state.Buttons.B == ButtonState.Pressed)
+			{
+				Debug.Log("Quit");
+				Application.Quit();
+			}
 		}
 		else
 		{
 			//Handle player (gamepad) activation - check if Y-button was pressed in this gamepad in this frame
 			if (gamepadData.prevState.Buttons.Y == ButtonState.Released && gamepadData.state.Buttons.Y == ButtonState.Pressed)
 			{
-				//Invert active bool
-
-				gamepadData.active = !gamepadData.active;
-
-				if (gamepadData.active)
-				{
-					bool firstJoined = false, secondJoined = false;
-					for(int j = 0; j < gamepad.playerGamepadData.Length; j++)
-					{
-						if (gamepad.playerGamepadData[j].characterIndex == 0)
-							firstJoined = true;
-						if (gamepad.playerGamepadData[j].characterIndex == 1)
-							secondJoined = true;
-
-					}
-					
-					if (firstJoined && secondJoined)
-					{
-						gamepadData.active = false;
-						return gamepadData;
-					}
-
-					gamepadData.characterIndex = firstJoined ? 1 : 0;			
-					gameMaster.menuControl.AddPlayer(gamepadData.characterIndex);
-				}
-				else
-				{
-					gameMaster.menuControl.RemovePlayer(gamepadData.characterIndex);
-					gamepadData.characterIndex = -1;
-				}
+				
 			}
 
-			if (gamepadData.active && gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
+			if (gamepadData.prevState.Buttons.A == ButtonState.Released && gamepadData.state.Buttons.A == ButtonState.Pressed)
 			{
-				gameMaster.menuControl.ToggleReady(gamepadData.characterIndex);
+				if (!gamepadData.active)
+					gamepadData = ToggleActivate(gamepadData, true);
+				else if (!ready[gamepadData.characterIndex])
+					ready[gamepadData.characterIndex] = gameMaster.menuControl.ToggleReady(gamepadData.characterIndex, true);
 			}
 
 			if (gamepadData.prevState.Buttons.B == ButtonState.Released && gamepadData.state.Buttons.B == ButtonState.Pressed)
 			{
-				gameMaster.menuControl.BackToTitle();
-				gameMaster.Reset();
+				if (gamepadData.active)
+				{
+					if (!ready[gamepadData.characterIndex])
+						gamepadData = ToggleActivate(gamepadData, false);
+					else
+						ready[gamepadData.characterIndex] = gameMaster.menuControl.ToggleReady(gamepadData.characterIndex, false);
+				}
+				else
+				{
+					gameMaster.menuControl.BackToTitle();
+					gameMaster.Reset();
+				}
 			}
 
 		}
 
 		return gamepadData;
 	}
+
+	PlayerGamepadData ToggleActivate(PlayerGamepadData gamepadData, bool state)
+	{
+		//Invert active bool
+
+		gamepadData.active = state;
+
+		if (gamepadData.active)
+		{
+			bool firstJoined = false, secondJoined = false;
+			for(int j = 0; j < gamepad.playerGamepadData.Length; j++)
+			{
+				if (gamepad.playerGamepadData[j].characterIndex == 0)
+					firstJoined = true;
+				if (gamepad.playerGamepadData[j].characterIndex == 1)
+					secondJoined = true;
+
+			}
+			
+			if (firstJoined && secondJoined)
+			{
+				Debug.Log("Joining list full");
+				gamepadData.active = false;
+				return gamepadData;
+			}
+
+			gamepadData.characterIndex = firstJoined ? 1 : 0;			
+			gameMaster.menuControl.AddPlayer(gamepadData.characterIndex);
+		}
+		else
+		{
+			gameMaster.menuControl.RemovePlayer(gamepadData.characterIndex);
+			gamepadData.characterIndex = -1;
+		}
+		return gamepadData;
+	}
+
 }

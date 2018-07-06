@@ -746,7 +746,10 @@ public class PlayerMove : TacticsMove
                 }
             }
         }
-
+        else
+        {
+            GameMaster.Instance.FailPush();
+        }
 
     }
 
